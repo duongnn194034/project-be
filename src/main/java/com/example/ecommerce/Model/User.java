@@ -1,8 +1,5 @@
-package com.example.ecommeren.Model;
+package com.example.ecommerce.Model;
 
-import org.springframework.boot.autoconfigure.domain.EntityScan;
-
-import javax.annotation.Generated;
 import javax.persistence.*;
 import java.sql.Date;
 

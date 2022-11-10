@@ -1,6 +1,4 @@
-package com.example.ecommeren.Model;
-
-import org.springframework.data.convert.ThreeTenBackPortConverters;
+package com.example.ecommerce.Model;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -34,7 +32,7 @@ public class Product {
     private String material;
 
     @Column(name = "brand_id")
-    private int brandId;
+    private Long brandId;
 
     @Column(name = "product_type")
     private String productType;
@@ -114,11 +112,11 @@ public class Product {
         this.material = material;
     }
 
-    public int getBrandId() {
+    public Long getBrandId() {
         return brandId;
     }
 
-    public void setBrandId(int brandId) {
+    public void setBrandId(Long brandId) {
         this.brandId = brandId;
     }
 
