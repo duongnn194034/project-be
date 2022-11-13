@@ -7,7 +7,7 @@ import java.sql.Date;
 @Table(name = "users")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(nullable = false, unique = true, length = 45)
@@ -29,10 +29,10 @@ public class User {
     private String role;
 
     @Column(name = "created_at")
-    private Date createAt;
+    private Date createdAt;
 
     public User() {
-
+        this.createdAt = new Date(System.currentTimeMillis());
     }
 
     public Long getId() {
