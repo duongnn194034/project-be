@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @Controller
 public class UserController {
 
@@ -25,14 +27,11 @@ public class UserController {
     }
 
     @PostMapping("/checklogin")
-    public String checkLogin(@RequestParam("username") String username,
+    public String checkLogin(@RequestParam("email") String email,
                              @RequestParam("password") String password) {
-        if (_userBean.getEmail().equals(username) &&
-        _userBean.getPassword().equals(password)) {
-            System.out.println("Success");
+        User u = userService.findByEmail(email).orElse(null);
+        if (u != null && u.getPassword().equals(password)) {
             return "index";
-        } else {
-            System.out.println("Failed");
         }
         return "login";
     }
