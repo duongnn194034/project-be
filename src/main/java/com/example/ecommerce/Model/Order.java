@@ -2,6 +2,7 @@ package com.example.ecommerce.Model;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -15,15 +16,15 @@ public class Order {
     @Column(name = "total_amount")
     private int totalAmount;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private User user;
-
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
-    private Collection<OrderItem> orderItemList;
-
     @Column(name = "total_cost")
     private int totalCost;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL, mappedBy = "order")
+    private List<OrderItem> orderItemList = new ArrayList<>();
 
     @Column(name = "created_at")
     private Date createdAt;
@@ -36,7 +37,7 @@ public class Order {
         this.user = user;
     }
 
-    public Collection<OrderItem> getOrderItemList() {
+    public List<OrderItem> getOrderItemList() {
         return orderItemList;
     }
 
