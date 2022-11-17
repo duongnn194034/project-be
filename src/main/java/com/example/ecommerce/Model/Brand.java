@@ -5,7 +5,7 @@ import java.sql.Date;
 
 @Entity
 @Table(name = "brands")
-public class Brands {
+public class Brand {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
@@ -20,7 +20,7 @@ public class Brands {
     @Column(name = "created_at")
     private Date createdAt;
 
-    public Brands() {
+    public Brand() {
     }
 
     public String getBrandName() {

@@ -31,8 +31,9 @@ public class Product {
     @Column
     private String material;
 
-    @Column(name = "brand_id")
-    private Long brandId;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "brand_id", referencedColumnName = "id")
+    private Brand brand;
 
     @Column(name = "product_type")
     private String productType;
@@ -112,12 +113,12 @@ public class Product {
         this.material = material;
     }
 
-    public Long getBrandId() {
-        return brandId;
+    public Brand getBrand() {
+        return brand;
     }
 
-    public void setBrandId(Long brandId) {
-        this.brandId = brandId;
+    public void setBrand(Brand brand) {
+        this.brand = brand;
     }
 
     public String getProductType() {

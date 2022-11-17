@@ -5,17 +5,19 @@ import java.sql.Date;
 
 @Entity
 @Table(name = "cart_items")
-public class CartItems {
+public class CartItem {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "cart_session_id")
-    private Long cartSessionId;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "cart_sesstion_id", referencedColumnName = "id")
+    private CartSession cartSession;
 
-    @Column(name = "product_id")
-    private Long productId;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "product_id", referencedColumnName = "id")
+    private Product product;
 
     @Column
     private int quantity;
@@ -23,23 +25,23 @@ public class CartItems {
     @Column
     private Date createdAt;
 
-    public CartItems() {
+    public CartItem() {
     }
 
-    public Long getCartSessionId() {
-        return cartSessionId;
+    public CartSession getCartSession() {
+        return cartSession;
     }
 
-    public void setCartSessionId(Long cartSessionId) {
-        this.cartSessionId = cartSessionId;
+    public void setCartSession(CartSession cartSession) {
+        this.cartSession = cartSession;
     }
 
-    public Long getProductId() {
-        return productId;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setProductId(Long productId) {
-        this.productId = productId;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     public int getQuantity() {
