@@ -28,6 +28,10 @@ public class Comment {
     @Column
     private Date createdAt;
 
+    public Comment() {
+        this.createdAt = new Date(System.currentTimeMillis());
+    }
+
     public User getUser() {
         return user;
     }

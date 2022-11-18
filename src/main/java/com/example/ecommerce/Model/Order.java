@@ -68,4 +68,21 @@ public class Order {
     public void setId(Long id) {
         this.id = id;
     }
+
+    public void addItem(OrderItem item) {
+        this.orderItemList.add(item);
+    }
+
+    public void addItems(List<OrderItem> items) {
+        this.orderItemList.addAll(items);
+    }
+
+    public void removeItem(OrderItem item) {
+        this.orderItemList.remove(item);
+    }
+
+    public void removeItems(List<OrderItem> items) {
+        this.orderItemList.removeAll(items);
+    }
+
 }

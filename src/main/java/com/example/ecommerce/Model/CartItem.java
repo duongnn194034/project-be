@@ -26,6 +26,7 @@ public class CartItem {
     private Date createdAt;
 
     public CartItem() {
+        this.createdAt = new Date(System.currentTimeMillis());
     }
 
     public CartSession getCartSession() {

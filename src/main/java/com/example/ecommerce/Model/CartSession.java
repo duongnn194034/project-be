@@ -20,6 +20,10 @@ public class CartSession {
     @Column(name = "created_at")
     private Date createdAt;
 
+    public CartSession() {
+        this.createdAt = new Date(System.currentTimeMillis());
+    }
+
     public Long getId() {
         return id;
     }

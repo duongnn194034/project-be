@@ -47,7 +47,9 @@ public class Product {
     @Column(name = "created_at")
     private Date createdAt;
 
-    public Product() {}
+    public Product() {
+        this.createdAt = new Date(System.currentTimeMillis());
+    }
 
     public Long getId() {
         return id;

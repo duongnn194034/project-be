@@ -25,6 +25,10 @@ public class OrderItem {
     @Column
     private int quantity;
 
+    public OrderItem() {
+        this.createdAt = new Date(System.currentTimeMillis());
+    }
+
     public Order getOrder() {
         return order;
     }

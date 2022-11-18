@@ -21,6 +21,7 @@ public class Brand {
     private Date createdAt;
 
     public Brand() {
+        this.createdAt = new Date(System.currentTimeMillis());
     }
 
     public String getBrandName() {
