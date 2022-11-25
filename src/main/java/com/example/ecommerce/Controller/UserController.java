@@ -7,8 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
-
 @Controller
 public class UserController {
 
@@ -31,12 +29,11 @@ public class UserController {
     public String checkLogin(@RequestParam("email") String email,
                              @RequestParam("password") String password,
                              Model model) {
-        User u = userService.findByEmail(email).orElse(null);
-        if (u != null && u.getPassword().equals(String.valueOf(password.hashCode()))) {
-            model.addAttribute("name", u.getFullname());
+        if (userService.checkLogin(email, password)) {
+            model.addAttribute("name", userService.findByEmail(email).get().getFullname());
             return "index";
         }
-        return "login";
+        return "redirect:/login";
     }
 
     @PostMapping("/adduser")
@@ -56,7 +53,24 @@ public class UserController {
 
     @GetMapping("/logout")
     public String logout() {
-        return "login";
+        return "redirect:/login";
     }
+
+    @GetMapping("/sign_up")
+    public String signUp() {
+        return "sign_up";
+    }
+
+    @PostMapping("/register")
+    public String register(User user) {
+        try {
+            userService.save(user);
+            return "user_index";
+        } catch (Exception e) {
+            return "redirect:/sign_up";
+        }
+    }
+
+//    @GetMapping()
 
 }

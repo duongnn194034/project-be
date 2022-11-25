@@ -2,6 +2,8 @@ package com.example.ecommerce.Model;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "cart_sessions")
@@ -14,6 +16,9 @@ public class CartSession {
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
+    @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL, mappedBy = "cartSession", fetch = FetchType.LAZY)
+    private List<CartItem> cartItemList;
+
     @Column(name = "total_amount")
     private int totalAmount;
 
@@ -22,6 +27,12 @@ public class CartSession {
 
     public CartSession() {
         this.createdAt = new Date(System.currentTimeMillis());
+    }
+
+    public CartSession(List<CartItem> items, Integer quantity, User user) {
+        this.totalAmount = quantity;
+        this.user = user;
+        this.cartItemList = items;
     }
 
     public Long getId() {
@@ -50,5 +61,9 @@ public class CartSession {
 
     public Date getCreatedAt() {
         return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 }

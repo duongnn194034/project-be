@@ -23,8 +23,8 @@ public class Order {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL, mappedBy = "order")
-    private List<OrderItem> orderItemList = new ArrayList<>();
+    @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL, mappedBy = "order", fetch = FetchType.LAZY)
+    private List<OrderItem> orderItemList;
 
     @Column(name = "created_at")
     private Date createdAt;
