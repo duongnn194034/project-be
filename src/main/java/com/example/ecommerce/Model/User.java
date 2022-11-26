@@ -1,5 +1,7 @@
 package com.example.ecommerce.Model;
 
+import com.example.ecommerce.Enums.Role;
+
 import javax.persistence.*;
 import java.sql.Date;
 
@@ -25,14 +27,22 @@ public class User {
     @Column(nullable = false)
     private String address;
 
-    @Column(nullable = false)
-    private String role;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role")
+    private Role role;
 
     @Column(name = "created_at")
     private Date createdAt;
 
     public User() {
         this.createdAt = new Date(System.currentTimeMillis());
+    }
+
+    public User(String fullname, String email, Role role, String encryptedPassword) {
+        this.fullname = fullname;
+        this.email = email;
+        this.role = role;
+        this.password = encryptedPassword;
     }
 
     public Long getId() {
@@ -83,11 +93,11 @@ public class User {
         this.address = address;
     }
 
-    public String getRole() {
+    public Role getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(Role role) {
         this.role = role;
     }
 }

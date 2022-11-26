@@ -1,21 +1,23 @@
 package com.example.ecommerce.Dto.Cart;
 
+import com.example.ecommerce.Model.CartItem;
+
 import java.util.List;
 
 public class CartDto {
-    private List<CartItemDto> cartItems;
+    private List<CartItem> cartItems;
     private double totalCost;
 
-    public CartDto(List<CartItemDto> cartItemDtoList, double totalCost) {
-        this.cartItems = cartItemDtoList;
+    public CartDto(List<CartItem> cartItemList, double totalCost) {
+        this.cartItems = cartItemList;
         this.totalCost = totalCost;
     }
 
-    public List<CartItemDto> getcartItems() {
+    public List<CartItem> getcartItems() {
         return cartItems;
     }
 
-    public void setCartItems(List<CartItemDto> cartItemDtoList) {
+    public void setCartItems(List<CartItem> cartItemDtoList) {
         this.cartItems = cartItemDtoList;
     }
 

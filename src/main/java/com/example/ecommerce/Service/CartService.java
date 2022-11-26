@@ -5,10 +5,9 @@ import com.example.ecommerce.Dto.Cart.CartDto;
 import com.example.ecommerce.Dto.Cart.CartItemDto;
 import com.example.ecommerce.Exception.CartItemNotExistException;
 import com.example.ecommerce.Model.CartItem;
-import com.example.ecommerce.Model.CartSession;
 import com.example.ecommerce.Model.Product;
 import com.example.ecommerce.Model.User;
-import com.example.ecommerce.Repository.CartSessionRepository;
+import com.example.ecommerce.Repository.CartItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,43 +21,38 @@ import java.util.List;
 public class CartService {
 
     @Autowired
-    private CartSessionRepository cartRepository;
+    private CartItemRepository cartRepository;
 
     public CartService(){}
 
-    public CartService(CartSessionRepository cartRepository) {
+    public CartService(CartItemRepository cartRepository) {
         this.cartRepository = cartRepository;
     }
 
-    public void addToCart(AddToCartDto addToCartDto, List<CartItem> items, User user){
-        CartSession cart = new CartSession(items, addToCartDto.getQuantity(), user);
+    public void addToCart(AddToCartDto addToCartDto, Product product, User user){
+        CartItem cart = new CartItem(product, addToCartDto.getQuantity(), user);
         cartRepository.save(cart);
     }
 
 
     public CartDto listCartItems(User user) {
-        List<CartSession> cartList = cartRepository.findAllByUserOrderByCreatedDateDesc(user);
-        List<CartItemDto> cartItems = new ArrayList<>();
-        for (CartSession cart:cartList){
-            CartItemDto cartItemDto = getDtoFromCart(cart);
-            cartItems.add(cartItemDto);
-        }
+        List<CartItem> cartList = cartRepository.findAllByUserOrderByCreatedDateDesc(user);
         double totalCost = 0;
-        for (CartItemDto cartItemDto :cartItems){
-            totalCost += (cartItemDto.getProduct().getPrice()* cartItemDto.getQuantity());
+        for (CartItem cartItem : cartList){
+            totalCost += (cartItem.getProduct().getPrice()* cartItem.getQuantity());
         }
-        return new CartDto(cartItems,totalCost);
+        return new CartDto(cartList, totalCost);
     }
 
 
-    public static CartItemDto getDtoFromCart(CartSession cart) {
-        return new CartItemDto(cart);
-    }
+//    public static CartItem getDtoFromCart(CartItem cart) {
+//        return new CartItem(cart);
+//    }
 
 
     public void updateCartItem(AddToCartDto cartDto, User user, Product product){
-        CartSession cart = cartRepository.getReferenceById(cartDto.getId());
-        cart.setTotalAmount(cartDto.getQuantity());
+        CartItem cart = cartRepository.getReferenceById(cartDto.getId());
+        cart.setQuantity(cartDto.getQuantity());
         cart.setCreatedAt((java.sql.Date) new Date());
         cartRepository.save(cart);
     }

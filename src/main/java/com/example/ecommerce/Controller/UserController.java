@@ -1,5 +1,7 @@
 package com.example.ecommerce.Controller;
 
+import com.example.ecommerce.Dto.User.SignupDto;
+import com.example.ecommerce.Enums.Role;
 import com.example.ecommerce.Model.User;
 import com.example.ecommerce.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,13 +10,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
+@RequestMapping("/user")
 public class UserController {
 
     @Autowired
     private final UserService userService;
-
-    @Autowired
-    User _userBean;
 
     public UserController(UserService userService) {
         this.userService = userService;
@@ -45,7 +45,7 @@ public class UserController {
         user.setPassword(String.valueOf(password.hashCode()));
         user.setAddress("Hanoi");
         user.setFullname("Duong");
-        user.setRole("User");
+        user.setRole(Role.USER);
         user.setPhoneNumber(phonenumber);
         this.userService.save(user);
         return "Saved";
@@ -62,9 +62,9 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public String register(User user) {
+    public String register(@RequestBody SignupDto signupDto) {
         try {
-            userService.save(user);
+            userService.signUp(signupDto);
             return "user_index";
         } catch (Exception e) {
             return "redirect:/sign_up";

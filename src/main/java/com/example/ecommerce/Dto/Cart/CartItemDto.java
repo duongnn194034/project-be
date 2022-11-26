@@ -1,6 +1,6 @@
 package com.example.ecommerce.Dto.Cart;
 
-import com.example.ecommerce.Model.CartSession;
+import com.example.ecommerce.Model.CartItem;
 import com.example.ecommerce.Model.Product;
 import com.sun.istack.NotNull;
 
@@ -12,9 +12,9 @@ public class CartItemDto {
     public CartItemDto() {
     }
 
-    public CartItemDto(CartSession cart) {
+    public CartItemDto(CartItem cart) {
         this.setId(cart.getId());
-        this.setQuantity(cart.getTotalAmount());
+        this.setQuantity(cart.getQuantity());
     }
 
     @Override

@@ -12,8 +12,8 @@ public class CartItem {
     private Long id;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "cart_sesstion_id", referencedColumnName = "id")
-    private CartSession cartSession;
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "product_id", referencedColumnName = "id")
@@ -29,12 +29,32 @@ public class CartItem {
         this.createdAt = new Date(System.currentTimeMillis());
     }
 
-    public CartSession getCartSession() {
-        return cartSession;
+    public CartItem(Product product, Integer quantity, User user) {
+        this.product = product;
+        this.quantity = quantity;
+        this.user = user;
     }
 
-    public void setCartSession(CartSession cartSession) {
-        this.cartSession = cartSession;
+//    public CartItem(CartSession cartSession) {
+//        this.cartSession = cartSession;
+//        this.createdAt = new Date(System.currentTimeMillis());
+//    }
+//
+//    public CartSession getCartSession() {
+//        return cartSession;
+//    }
+//
+//    public void setCartSession(CartSession cartSession) {
+//        this.cartSession = cartSession;
+//    }
+
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Product getProduct() {
@@ -63,5 +83,9 @@ public class CartItem {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public void setCreatedAt(Date date) {
+        this.createdAt = date;
     }
 }
