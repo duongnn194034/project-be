@@ -25,8 +25,27 @@ public class OrderItem {
     @Column
     private int quantity;
 
+    @Column
+    private int price;
+
     public OrderItem() {
         this.createdAt = new Date(System.currentTimeMillis());
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
     }
 
     public Order getOrder() {
@@ -59,5 +78,9 @@ public class OrderItem {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public void setCreatedDate(Date date) {
+        this.createdAt = date;
     }
 }

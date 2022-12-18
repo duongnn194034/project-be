@@ -1,5 +1,7 @@
 package com.example.ecommerce.Model;
 
+import com.example.ecommerce.Dto.Product.ProductDto;
+
 import javax.persistence.*;
 import java.sql.Date;
 
@@ -43,6 +45,14 @@ public class Product {
 
     @Column
     private int quantity;
+
+    public Product(ProductDto productDto, Brand brand) {
+        this.productName = productDto.getName();
+        this.imageUrl = productDto.getImageURL();
+        this.productDescription = productDto.getDescription();
+        this.price = productDto.getPrice();
+        this.brand = brand;
+    }
 
     @Column(name = "created_at")
     private Date createdAt;

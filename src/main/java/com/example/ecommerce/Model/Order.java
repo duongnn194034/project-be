@@ -26,8 +26,34 @@ public class Order {
     @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL, mappedBy = "order", fetch = FetchType.LAZY)
     private List<OrderItem> orderItemList;
 
+    @Column(name = "session_id")
+    private String sessionId;
+
     @Column(name = "created_at")
     private Date createdAt;
+
+    @Column
+    private int totalPrice;
+
+    public String getSessionId() {
+        return sessionId;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public int getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(int totalPrice) {
+        this.totalPrice = totalPrice;
+    }
 
     public User getUser() {
         return user;
@@ -85,4 +111,10 @@ public class Order {
         this.orderItemList.removeAll(items);
     }
 
+    public void setCreatedDate(Date date) {
+        this.createdAt = date;
+    }
+
+    public void setSessionId(String sessionId) {
+    }
 }

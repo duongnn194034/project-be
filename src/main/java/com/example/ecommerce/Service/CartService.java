@@ -37,11 +37,13 @@ public class CartService {
 
     public CartDto listCartItems(User user) {
         List<CartItem> cartList = cartRepository.findAllByUserOrderByCreatedDateDesc(user);
-        double totalCost = 0;
-        for (CartItem cartItem : cartList){
-            totalCost += (cartItem.getProduct().getPrice()* cartItem.getQuantity());
+        List<CartItemDto> cartItemDtoList = new ArrayList<>();
+        int totalCost = 0;
+        for (CartItem cartItem : cartList) {
+            cartItemDtoList.add(new CartItemDto(cartItem));
+            totalCost += (cartItem.getProduct().getPrice() * cartItem.getQuantity());
         }
-        return new CartDto(cartList, totalCost);
+        return new CartDto(cartItemDtoList, totalCost);
     }
 
 

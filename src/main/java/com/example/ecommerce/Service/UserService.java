@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import javax.transaction.Transactional;
 import java.security.NoSuchAlgorithmException;
 import java.util.Optional;
 
@@ -29,7 +30,7 @@ public class UserService {
     }
 
     public User save(User user) {
-        return (User) this.userRepository.save(user);
+        return this.userRepository.save(user);
     }
 
 

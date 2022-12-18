@@ -44,7 +44,7 @@ public class CartController {
     public ResponseEntity<CartDto> getCartItems(@RequestParam("id") Long id) {
         User user = userService.getUserById(id);
         CartDto cartDto = cartService.listCartItems(user);
-        return new ResponseEntity<CartDto>(cartDto, HttpStatus.OK);
+        return new ResponseEntity<>(cartDto, HttpStatus.OK);
     }
     @PutMapping("/update/{cartItemId}")
     public ResponseEntity<ApiResponse> updateCartItem(@RequestBody @Valid AddToCartDto cartDto,

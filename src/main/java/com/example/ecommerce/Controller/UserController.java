@@ -10,7 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/user")
 public class UserController {
 
     @Autowired
@@ -56,7 +55,7 @@ public class UserController {
         return "redirect:/login";
     }
 
-    @GetMapping("/sign_up")
+    @GetMapping("/signup")
     public String signUp() {
         return "sign_up";
     }
@@ -70,7 +69,5 @@ public class UserController {
             return "redirect:/sign_up";
         }
     }
-
-//    @GetMapping()
 
 }
