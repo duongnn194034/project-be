@@ -45,7 +45,7 @@ public class UserService {
     }
 
 
-    public User getUserById(Long id) {
+    public User getUserById(long id) {
         Optional<User> u = userRepository.findById(id);
         return u.isEmpty() ? new User() : u.get();
     }

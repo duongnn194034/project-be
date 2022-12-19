@@ -40,7 +40,7 @@ public class OrderController {
 
     // place order after checkout
     @PostMapping("/add")
-    public ResponseEntity<ApiResponse> placeOrder(@RequestParam("id") Long id, @RequestParam("sessionId") String sessionId) {
+    public ResponseEntity<ApiResponse> placeOrder(@RequestParam("id") long id, @RequestParam("sessionId") String sessionId) {
         // retrieve user
         User user = userService.getUserById(id);
         // place the order
@@ -50,7 +50,7 @@ public class OrderController {
 
     // get all orders
     @GetMapping("/")
-    public ResponseEntity<List<Order>> getAllOrders(@RequestParam("id") Long id) throws AuthenticationFailException {
+    public ResponseEntity<List<Order>> getAllOrders(@RequestParam("id") long id) throws AuthenticationFailException {
         User user = userService.getUserById(id);
         // get orders
         List<Order> orderDtoList = orderService.listOrders(user);
@@ -61,7 +61,7 @@ public class OrderController {
 
     // get orderitems for an order
     @GetMapping("/{id}")
-    public ResponseEntity<Object> getOrderById(@PathVariable("id") Long id, @RequestParam("token") String token) {
+    public ResponseEntity<Object> getOrderById(@PathVariable("id") long id, @RequestParam("token") String token) {
         // validate token
         try {
             Order order = orderService.getOrder(id);

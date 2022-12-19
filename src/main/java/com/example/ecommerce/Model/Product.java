@@ -10,7 +10,7 @@ import java.sql.Date;
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private long id;
 
     @Column(nullable = false, name = "product_name")
     private String productName;
@@ -46,26 +46,27 @@ public class Product {
     @Column
     private int quantity;
 
+    @Column(name = "created_at")
+    private Date createdAt;
+
     public Product(ProductDto productDto, Brand brand) {
         this.productName = productDto.getName();
         this.imageUrl = productDto.getImageURL();
         this.productDescription = productDto.getDescription();
         this.price = productDto.getPrice();
         this.brand = brand;
+        this.createdAt = new Date(System.currentTimeMillis());
     }
-
-    @Column(name = "created_at")
-    private Date createdAt;
 
     public Product() {
         this.createdAt = new Date(System.currentTimeMillis());
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 

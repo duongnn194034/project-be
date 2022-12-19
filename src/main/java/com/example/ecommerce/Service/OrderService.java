@@ -127,7 +127,7 @@ public class OrderService {
     }
 
 
-    public Order getOrder(Long orderId) throws OrderNotFoundException {
+    public Order getOrder(long orderId) throws OrderNotFoundException {
         Optional<Order> order = orderRepository.findById(orderId);
         if (order.isPresent()) {
             return order.get();

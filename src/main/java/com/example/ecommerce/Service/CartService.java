@@ -59,7 +59,7 @@ public class CartService {
         cartRepository.save(cart);
     }
 
-    public void deleteCartItem(Long id, Long userId) throws CartItemNotExistException {
+    public void deleteCartItem(long id, long userId) throws CartItemNotExistException {
         if (!cartRepository.existsById(id))
             throw new CartItemNotExistException("Cart id is invalid : " + id);
         cartRepository.deleteById(id);

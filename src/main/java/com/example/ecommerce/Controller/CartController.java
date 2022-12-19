@@ -32,7 +32,7 @@ public class CartController {
     private ProductService productService;
 
     @PostMapping("/add")
-    public ResponseEntity<ApiResponse> addToCart(@RequestBody AddToCartDto addToCartDto, Long id) throws ProductNotExistException {
+    public ResponseEntity<ApiResponse> addToCart(@RequestBody AddToCartDto addToCartDto, long id) throws ProductNotExistException {
         User user = userService.getUserById(id);
         Product product = productService.getProductById(addToCartDto.getProductId());
         System.out.println("product to add" + product.getProductName());
@@ -41,14 +41,14 @@ public class CartController {
 
     }
     @GetMapping("/")
-    public ResponseEntity<CartDto> getCartItems(@RequestParam("id") Long id) {
+    public ResponseEntity<CartDto> getCartItems(@RequestParam("id") long id) {
         User user = userService.getUserById(id);
         CartDto cartDto = cartService.listCartItems(user);
         return new ResponseEntity<>(cartDto, HttpStatus.OK);
     }
     @PutMapping("/update/{cartItemId}")
     public ResponseEntity<ApiResponse> updateCartItem(@RequestBody @Valid AddToCartDto cartDto,
-                                                      @RequestParam("id") Long id, @PathVariable String cartItemId) throws ProductNotExistException {
+                                                      @RequestParam("id") long id, @PathVariable String cartItemId) throws ProductNotExistException {
         User user = userService.getUserById(id);
         Product product = productService.getProductById(cartDto.getProductId());
         cartService.updateCartItem(cartDto, user,product);
@@ -56,8 +56,8 @@ public class CartController {
     }
 
     @DeleteMapping("/delete/{cartItemId}")
-    public ResponseEntity<ApiResponse> deleteCartItem(@PathVariable("cartItemId") Long itemId,@RequestParam("id") Long id) throws CartItemNotExistException {
-        Long userId = userService.getUserById(id).getId();
+    public ResponseEntity<ApiResponse> deleteCartItem(@PathVariable("cartItemId") long itemId,@RequestParam("id") long id) throws CartItemNotExistException {
+        long userId = userService.getUserById(id).getId();
         cartService.deleteCartItem(itemId, userId);
         return new ResponseEntity<ApiResponse>(new ApiResponse(true, "Item has been removed"), HttpStatus.OK);
     }

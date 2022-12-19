@@ -5,7 +5,7 @@ import com.example.ecommerce.Model.Product;
 import com.sun.istack.NotNull;
 
 public class CartItemDto {
-    private Long id;
+    private long id;
     private @NotNull Integer quantity;
     private @NotNull Product product;
 
@@ -15,6 +15,7 @@ public class CartItemDto {
     public CartItemDto(CartItem cart) {
         this.setId(cart.getId());
         this.setQuantity(cart.getQuantity());
+        this.product = cart.getProduct();
     }
 
     @Override
@@ -26,11 +27,11 @@ public class CartItemDto {
                 '}';
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 

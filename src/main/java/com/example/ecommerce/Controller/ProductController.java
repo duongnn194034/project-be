@@ -40,7 +40,7 @@ public class ProductController {
     }
 
     @PostMapping("/update/{productID}")
-    public ResponseEntity<ApiResponse> updateProduct(@PathVariable("productID") Long productID, @RequestBody @Valid ProductDto productDto) {
+    public ResponseEntity<ApiResponse> updateProduct(@PathVariable("productID") long productID, @RequestBody @Valid ProductDto productDto) {
         Optional<Brand> optionalbrand = brandService.readBrand(productDto.getBrandId());
         if (!optionalbrand.isPresent()) {
             return new ResponseEntity<ApiResponse>(new ApiResponse(false, "brand is invalid"), HttpStatus.CONFLICT);

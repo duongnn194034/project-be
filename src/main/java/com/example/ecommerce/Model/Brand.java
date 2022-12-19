@@ -9,7 +9,7 @@ public class Brand {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
-    private Long id;
+    private long id;
 
     @Column(name = "brand_name", length = 50)
     private String brandName;
@@ -40,11 +40,11 @@ public class Brand {
         this.imageUrl = imageUrl;
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 

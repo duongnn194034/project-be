@@ -19,7 +19,7 @@ public class ProductService {
     @Autowired
     ProductRepository productRepository;
 
-    public Product getProductById(Long productId) {
+    public Product getProductById(long productId) {
         Optional<Product> product = productRepository.findById(productId);
         return product.isEmpty() ? new Product() : product.get();
     }
@@ -38,7 +38,7 @@ public class ProductService {
         productRepository.save(product);
     }
 
-    public void updateProduct(Long productID, ProductDto productDto, Brand brand) {
+    public void updateProduct(long productID, ProductDto productDto, Brand brand) {
         Product product = new Product(productDto, brand);
         productRepository.updateById(productID, product);
     }

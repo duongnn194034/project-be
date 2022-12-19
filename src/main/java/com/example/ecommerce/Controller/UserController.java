@@ -51,7 +51,7 @@ public class UserController {
         user.setFullname("Duong");
         user.setRole(Role.USER);
         user.setPhoneNumber(phonenumber);
-        this.userService.save(user);
+        userService.save(user);
         return "Saved";
     }
 
