@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import javax.transaction.Transactional;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -68,5 +69,9 @@ public class UserService {
             // handle signup error
             throw new CustomException(e.getMessage());
         }
+    }
+
+    public List<User> findAll() {
+        return userRepository.findAll();
     }
 }

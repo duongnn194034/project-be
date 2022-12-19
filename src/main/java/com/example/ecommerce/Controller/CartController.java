@@ -37,7 +37,7 @@ public class CartController {
         Product product = productService.getProductById(addToCartDto.getProductId());
         System.out.println("product to add" + product.getProductName());
         cartService.addToCart(addToCartDto, product, user);
-        return new ResponseEntity<ApiResponse>(new ApiResponse(true, "Added to cart"), HttpStatus.CREATED);
+        return new ResponseEntity<>(new ApiResponse(true, "Added to cart"), HttpStatus.CREATED);
 
     }
     @GetMapping("/")

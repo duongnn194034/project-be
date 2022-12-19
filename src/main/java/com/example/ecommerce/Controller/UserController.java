@@ -1,13 +1,18 @@
 package com.example.ecommerce.Controller;
 
+import com.example.ecommerce.Common.ApiResponse;
 import com.example.ecommerce.Dto.User.SignupDto;
 import com.example.ecommerce.Enums.Role;
 import com.example.ecommerce.Model.User;
 import com.example.ecommerce.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 public class UserController {
@@ -68,6 +73,17 @@ public class UserController {
         } catch (Exception e) {
             return "redirect:/sign_up";
         }
+    }
+
+    @GetMapping("/all")
+    public List<User> findAllUser(){
+        return userService.findAll();
+    }
+
+    @GetMapping("/echo")
+    public ResponseEntity<User> testEcho(@RequestBody User user) {
+        user.setFullname("test");
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
 }
