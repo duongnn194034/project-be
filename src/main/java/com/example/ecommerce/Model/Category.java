@@ -4,15 +4,15 @@ import javax.persistence.*;
 import java.sql.Date;
 
 @Entity
-@Table(name = "brands")
-public class Brand {
+@Table(name = "categories")
+public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     private long id;
 
-    @Column(name = "brand_name", length = 50)
-    private String brandName;
+    @Column(name = "category_name", length = 50)
+    private String categoryName;
 
     @Column(name = "image_url",  length = 200)
     private String imageUrl;
@@ -20,16 +20,16 @@ public class Brand {
     @Column(name = "created_at")
     private Date createdAt;
 
-    public Brand() {
+    public Category() {
         this.createdAt = new Date(System.currentTimeMillis());
     }
 
-    public String getBrandName() {
-        return brandName;
+    public String getCategoryName() {
+        return categoryName;
     }
 
-    public void setBrandName(String brandName) {
-        this.brandName = brandName;
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 
     public String getImageUrl() {

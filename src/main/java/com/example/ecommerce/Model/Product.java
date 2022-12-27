@@ -34,8 +34,8 @@ public class Product {
     private String material;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "brand_id", referencedColumnName = "id")
-    private Brand brand;
+    @JoinColumn(name = "category_id", referencedColumnName = "id")
+    private Category category;
 
     @Column(name = "product_type")
     private String productType;
@@ -49,12 +49,12 @@ public class Product {
     @Column(name = "created_at")
     private Date createdAt;
 
-    public Product(ProductDto productDto, Brand brand) {
+    public Product(ProductDto productDto, Category category) {
         this.productName = productDto.getName();
         this.imageUrl = productDto.getImageURL();
         this.productDescription = productDto.getDescription();
         this.price = productDto.getPrice();
-        this.brand = brand;
+        this.category = category;
         this.createdAt = new Date(System.currentTimeMillis());
     }
 
@@ -126,12 +126,12 @@ public class Product {
         this.material = material;
     }
 
-    public Brand getBrand() {
-        return brand;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setBrand(Brand brand) {
-        this.brand = brand;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     public String getProductType() {

@@ -1,7 +1,7 @@
 package com.example.ecommerce.Service;
 
 import com.example.ecommerce.Dto.Product.ProductDto;
-import com.example.ecommerce.Model.Brand;
+import com.example.ecommerce.Model.Category;
 import com.example.ecommerce.Model.Product;
 import com.example.ecommerce.Repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,13 +33,13 @@ public class ProductService {
         return productDtoList;
     }
 
-    public void addProduct(ProductDto productDto, Brand brand) {
-        Product product = new Product(productDto, brand);
+    public void addProduct(ProductDto productDto, Category category) {
+        Product product = new Product(productDto, category);
         productRepository.save(product);
     }
 
-    public void updateProduct(long productID, ProductDto productDto, Brand brand) {
-        Product product = new Product(productDto, brand);
+    public void updateProduct(long productID, ProductDto productDto, Category category) {
+        Product product = new Product(productDto, category);
         productRepository.updateById(productID, product);
     }
 }
