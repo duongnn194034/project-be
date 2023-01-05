@@ -1,6 +1,8 @@
 package com.example.ecommerce.Service;
 
 import com.example.ecommerce.Dto.ResponseDto;
+import com.example.ecommerce.Dto.User.SignInDto;
+import com.example.ecommerce.Dto.User.SignInResponseDto;
 import com.example.ecommerce.Dto.User.SignupDto;
 import com.example.ecommerce.Enums.Response;
 import com.example.ecommerce.Enums.Role;
@@ -12,6 +14,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import javax.transaction.Transactional;
+import javax.xml.bind.DatatypeConverter;
+import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.Optional;
@@ -35,12 +39,12 @@ public class UserService {
     }
 
 
-    public boolean checkLogin(String email, String password) {
-        User u = userRepository.findByEmail(email);
-        if (u != null && u.getPassword().equals(String.valueOf(password.hashCode()))) {
-            return true;
+    public SignInResponseDto signIn(SignInDto signInDto) throws NoSuchAlgorithmException {
+        User u = userRepository.findByEmail(signInDto.getEmail());
+        if (u != null && u.getPassword().equals(hashPassword(String.valueOf(signInDto.getPassword())))) {
+            return new SignInResponseDto("success");
         } else {
-            return false;
+            return new SignInResponseDto("failed");
         }
     }
 
@@ -56,7 +60,7 @@ public class UserService {
             throw new CustomException("User already exists");
         }
         // first encrypt the password
-        String encryptedPassword = String.valueOf(signupDto.getPassword().hashCode());
+        String encryptedPassword = String.valueOf(hashPassword(signupDto.getPassword()));
 
 
         User user = new User(signupDto.getFullName(), signupDto.getEmail(), Role.USER, encryptedPassword );
@@ -73,5 +77,14 @@ public class UserService {
 
     public List<User> findAll() {
         return userRepository.findAll();
+    }
+
+    protected String hashPassword(String password) throws NoSuchAlgorithmException {
+        MessageDigest md = MessageDigest.getInstance("MD5");
+        md.update(password.getBytes());
+        byte[] digest = md.digest();
+        String myHash = DatatypeConverter
+                .printHexBinary(digest).toUpperCase();
+        return myHash;
     }
 }

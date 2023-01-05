@@ -33,6 +33,7 @@ public class CartItem {
         this.product = product;
         this.quantity = quantity;
         this.user = user;
+        this.createdAt = new Date(System.currentTimeMillis());
     }
 
 //    public CartItem(CartSession cartSession) {

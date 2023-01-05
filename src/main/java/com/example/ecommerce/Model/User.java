@@ -21,10 +21,10 @@ public class User {
     @Column(nullable = false)
     private String fullname;
 
-    @Column(nullable = false, unique = true, length = 15)
+    @Column(unique = true, length = 15)
     private String phoneNumber;
 
-    @Column(nullable = false)
+    @Column
     private String address;
 
     @Enumerated(EnumType.STRING)
@@ -43,6 +43,7 @@ public class User {
         this.email = email;
         this.role = role;
         this.password = encryptedPassword;
+        this.createdAt = new Date(System.currentTimeMillis());
     }
 
     public long getId() {
