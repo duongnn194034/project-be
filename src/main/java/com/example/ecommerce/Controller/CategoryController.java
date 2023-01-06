@@ -28,10 +28,10 @@ public class CategoryController {
 	@PostMapping("/create")
 	public ResponseEntity<ApiResponse> createcategory(@Valid @RequestBody Category category) {
 		if (categoryService.readCategory(category.getCategoryName()).isPresent()) {
-			return new ResponseEntity<ApiResponse>(new ApiResponse(false, "category already exists"), HttpStatus.CONFLICT);
+			return new ResponseEntity<>(new ApiResponse(false, "category already exists"), HttpStatus.CONFLICT);
 		}
 		categoryService.createCategory(category);
-		return new ResponseEntity<ApiResponse>(new ApiResponse(true, "created the category"), HttpStatus.CREATED);
+		return new ResponseEntity<>(new ApiResponse(true, "created the category"), HttpStatus.CREATED);
 	}
 
 	@PostMapping("/update/{categoryID}")
