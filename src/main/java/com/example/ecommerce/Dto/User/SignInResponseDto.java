@@ -11,7 +11,7 @@ public class SignInResponseDto {
         this.status = status;
     }
 
-    public SignInResponseDto(String status) {
+    public SignInResponseDto(String status, String token) {
         this.status = status;
     }
 }

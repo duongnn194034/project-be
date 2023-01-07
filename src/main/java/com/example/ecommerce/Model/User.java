@@ -1,9 +1,11 @@
 package com.example.ecommerce.Model;
 
 import com.example.ecommerce.Enums.Role;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -30,6 +32,11 @@ public class User {
     @Enumerated(EnumType.STRING)
     @Column(name = "role")
     private Role role;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "user",
+            fetch = FetchType.LAZY)
+    private List<Order> orders;
 
     @Column(name = "created_at")
     private Date createdAt;

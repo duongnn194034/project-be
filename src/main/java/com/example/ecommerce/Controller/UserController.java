@@ -5,8 +5,10 @@ import com.example.ecommerce.Dto.ResponseDto;
 import com.example.ecommerce.Dto.User.SignInDto;
 import com.example.ecommerce.Dto.User.SignInResponseDto;
 import com.example.ecommerce.Dto.User.SignupDto;
+import com.example.ecommerce.Exception.AuthenticationFailException;
 import com.example.ecommerce.Exception.CustomException;
 import com.example.ecommerce.Model.User;
+import com.example.ecommerce.Service.AuthenticationService;
 import com.example.ecommerce.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -18,12 +20,15 @@ import java.util.List;
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 public class UserController {
+    @Autowired
+    AuthenticationService authenticationService;
 
     @Autowired
     UserService userService;
 
     @GetMapping("/all")
-    public List<User> findAllUser() {
+    public List<User> findAllUser(@RequestParam("token") String token) throws AuthenticationFailException {
+        authenticationService.authenticate(token);
         return userService.findAll();
     }
 
