@@ -21,7 +21,7 @@ public class User {
     private String password;
 
     @Column(nullable = false)
-    private String fullname;
+    private String fullName;
 
     @Column(unique = true, length = 15)
     private String phoneNumber;
@@ -45,8 +45,8 @@ public class User {
         this.createdAt = new Date(System.currentTimeMillis());
     }
 
-    public User(String fullname, String email, Role role, String encryptedPassword) {
-        this.fullname = fullname;
+    public User(String fullName, String email, Role role, String encryptedPassword) {
+        this.fullName = fullName;
         this.email = email;
         this.role = role;
         this.password = encryptedPassword;
@@ -78,11 +78,11 @@ public class User {
     }
 
     public String getFullname() {
-        return fullname;
+        return fullName;
     }
 
-    public void setFullname(String fullname) {
-        this.fullname = fullname;
+    public void setFullname(String fullName) {
+        this.fullName = fullName;
     }
 
     public String getPhoneNumber() {
