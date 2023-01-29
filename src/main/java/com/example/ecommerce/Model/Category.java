@@ -14,8 +14,11 @@ public class Category {
     @Column(name = "category_name", length = 50)
     private String categoryName;
 
-    @Column(name = "image_url",  length = 200)
+    @Column(name = "image_url")
     private String imageUrl;
+
+    @Column
+    private String description;
 
     @Column(name = "created_at")
     private Date createdAt;
@@ -50,5 +53,17 @@ public class Category {
 
     public Date getCreatedAt() {
         return createdAt;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 }

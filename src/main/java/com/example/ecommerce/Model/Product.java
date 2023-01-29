@@ -58,6 +58,15 @@ public class Product {
         this.createdAt = new Date(System.currentTimeMillis());
     }
 
+    public Product(Product product) {
+        this.id = product.getId();
+        this.productName = product.getProductName();
+        this.productDescription = product.getProductDescription();
+        this.category = product.getCategory();
+        this.price = product.getPrice();
+        this.imageUrl = product.getImageUrl();
+    }
+
     public Product() {
         this.createdAt = new Date(System.currentTimeMillis());
     }

@@ -7,6 +7,4 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface ProductRepository extends JpaRepository<Product, Long> {
-    @Query("update Product p set p = ?2 where p.id = ?1")
-    void updateById(long id, Product product);
 }

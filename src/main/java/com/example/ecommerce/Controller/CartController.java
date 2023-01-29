@@ -66,4 +66,11 @@ public class CartController {
         cartService.deleteCartItem(itemId, userId);
         return new ResponseEntity<ApiResponse>(new ApiResponse(true, "Item has been removed"), HttpStatus.OK);
     }
+
+    @GetMapping("/count")
+    public int count(@RequestParam("token") String token) throws AuthenticationFailException {
+        authenticationService.authenticate(token);
+        User user = authenticationService.getUser(token);
+        return cartService.count(user);
+    }
 }

@@ -11,10 +11,12 @@ public class ProductDto {
     private @NotNull String imageURL;
     private @NotNull int price;
     private @NotNull String description;
-    private String color;
-    private String size;
     private @NotNull long categoryId;
 
+
+    public ProductDto() {
+
+    }
     public ProductDto(Product product) {
         this.setId(product.getId());
         this.setName(product.getProductName());

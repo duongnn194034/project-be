@@ -13,4 +13,7 @@ public interface CartItemRepository extends JpaRepository<CartItem, Long> {
 
     @Query("delete from CartItem c where c.user = ?1")
     void deleteByUser(User user);
+
+    @Query("select count(c) from CartItem c")
+    int countAll(User user);
 }

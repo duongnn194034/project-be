@@ -40,6 +40,7 @@ public class ProductService {
 
     public void updateProduct(long productID, ProductDto productDto, Category category) {
         Product product = new Product(productDto, category);
-        productRepository.updateById(productID, product);
+        product.setId(productID);
+        productRepository.save(product);
     }
 }

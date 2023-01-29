@@ -40,7 +40,7 @@ public class ProductController {
     }
 
     @PostMapping("/update/{productID}")
-    public ResponseEntity<ApiResponse> updateProduct(@PathVariable("productID") long productID, @RequestBody @Valid ProductDto productDto) {
+    public ResponseEntity<ApiResponse> updateProduct(@PathVariable("productID") long productID, @RequestBody ProductDto productDto) {
         Optional<Category> optionalcategory = categoryService.readCategory(productDto.getCategoryId());
         if (!optionalcategory.isPresent()) {
             return new ResponseEntity<ApiResponse>(new ApiResponse(false, "category is invalid"), HttpStatus.CONFLICT);

@@ -73,6 +73,10 @@ public class CartService {
     public void deleteUserCartItems(User user) {
         cartRepository.deleteByUser(user);
     }
+
+    public int count(User user) {
+        return cartRepository.countAll(user);
+    }
 }
 
 

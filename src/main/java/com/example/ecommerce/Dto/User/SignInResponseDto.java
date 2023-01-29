@@ -2,6 +2,7 @@ package com.example.ecommerce.Dto.User;
 
 public class SignInResponseDto {
     private String status;
+    private String token;
 
     public String getStatus() {
         return status;
@@ -11,7 +12,16 @@ public class SignInResponseDto {
         this.status = status;
     }
 
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
     public SignInResponseDto(String status, String token) {
         this.status = status;
+        this.token = token;
     }
 }
