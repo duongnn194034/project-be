@@ -52,12 +52,11 @@ public class CategoryController {
 	}
 
 	@GetMapping("/show/{categoryID}")
-	public ResponseEntity<List<Product>> showCategory(@PathVariable("categoryID") long categoryID) {
+	public ResponseEntity<Category> showCategory(@PathVariable("categoryID") long categoryID) {
 		Optional<Category> category = categoryService.readCategory(categoryID);
 		if (category.isEmpty()) {
-			return new ResponseEntity<>(new ArrayList<>(), HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(new Category(), HttpStatus.NOT_FOUND);
 		}
-		List<Product> products = productRepository.getProductsByCategory(category.get());
-		return new ResponseEntity<>(products, HttpStatus.OK);
+		return new ResponseEntity<>(category.get(), HttpStatus.OK);
 	}
 }
