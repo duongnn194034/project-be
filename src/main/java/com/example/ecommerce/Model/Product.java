@@ -1,6 +1,7 @@
 package com.example.ecommerce.Model;
 
 import com.example.ecommerce.Dto.Product.ProductDto;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -33,7 +34,8 @@ public class Product {
     @Column
     private String material;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @JsonIgnore
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "category_id", referencedColumnName = "id")
     private Category category;
 

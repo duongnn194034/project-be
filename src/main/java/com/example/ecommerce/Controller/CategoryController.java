@@ -51,12 +51,19 @@ public class CategoryController {
 		return new ResponseEntity<>(new ApiResponse(false, "category does not exist"), HttpStatus.NOT_FOUND);
 	}
 
-	@GetMapping("/show/{categoryID}")
-	public ResponseEntity<Category> showCategory(@PathVariable("categoryID") long categoryID) {
-		Optional<Category> category = categoryService.readCategory(categoryID);
-		if (category.isEmpty()) {
-			return new ResponseEntity<>(new Category(), HttpStatus.NOT_FOUND);
-		}
-		return new ResponseEntity<>(category.get(), HttpStatus.OK);
-	}
+//	@GetMapping("/show/{categoryID}")
+//	public ResponseEntity<Category> showCategory(@PathVariable("categoryID") long categoryID) {
+//		Optional<Category> category = categoryService.readCategory(categoryID);
+//		if (category.isEmpty()) {
+//			return new ResponseEntity<>(new Category(), HttpStatus.NOT_FOUND);
+//		}
+//		List<Product> products = productService.getProductsByCategory(category.get());
+//			Product[] productSet = new Product[products.size()];
+//			for (int i = 0; i < products.size(); i++) {
+//				productSet[i] = products.get(i);
+//			}
+//		Category category1 = category.get();
+//		category1.setProducts(products);
+//		return new ResponseEntity<>(category1, HttpStatus.OK);
+//	}
 }

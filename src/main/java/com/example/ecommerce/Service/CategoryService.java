@@ -33,6 +33,10 @@ public class CategoryService {
     }
 
     public void updateCategory(long categoryID, Category category) {
-        categoryRepository.updateById(categoryID, category);
+        Category category1 = categoryRepository.getCategoryById(categoryID).get();
+        category1.setCategoryName(category.getCategoryName());
+        category1.setDescription(category.getDescription());
+        category1.setImageUrl(category1.getImageUrl());
+        categoryRepository.save(category1);
     }
 }

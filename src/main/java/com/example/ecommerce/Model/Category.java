@@ -1,7 +1,11 @@
 package com.example.ecommerce.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "categories")
@@ -19,6 +23,10 @@ public class Category {
 
     @Column
     private String description;
+
+    @OneToMany(mappedBy = "category", fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
+    List<Product> products;
 
     @Column(name = "created_at")
     private Date createdAt;
@@ -65,5 +73,13 @@ public class Category {
 
     public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
 }
