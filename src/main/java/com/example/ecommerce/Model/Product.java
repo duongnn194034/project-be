@@ -17,7 +17,7 @@ public class Product {
     private String productName;
 
     @Column(name = "product_description")
-    private String productDescription;
+    private String description;
 
     @Column
     private int price;
@@ -53,8 +53,8 @@ public class Product {
 
     public Product(ProductDto productDto, Category category) {
         this.productName = productDto.getName();
-        this.imageUrl = productDto.getImageURL();
-        this.productDescription = productDto.getDescription();
+        this.imageUrl = productDto.getImageUrl();
+        this.description = productDto.getDescription();
         this.price = productDto.getPrice();
         this.category = category;
         this.createdAt = new Date(System.currentTimeMillis());
@@ -63,7 +63,7 @@ public class Product {
     public Product(Product product) {
         this.id = product.getId();
         this.productName = product.getProductName();
-        this.productDescription = product.getProductDescription();
+        this.description = product.getDescription();
         this.category = product.getCategory();
         this.price = product.getPrice();
         this.imageUrl = product.getImageUrl();
@@ -89,12 +89,12 @@ public class Product {
         this.productName = productName;
     }
 
-    public String getProductDescription() {
-        return productDescription;
+    public String getDescription() {
+        return description;
     }
 
-    public void setProductDescription(String productDescription) {
-        this.productDescription = productDescription;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public int getPrice() {

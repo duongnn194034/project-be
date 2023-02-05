@@ -28,8 +28,8 @@ public class CategoryService {
         return categoryRepository.findAll();
     }
 
-    public void createCategory(Category category) {
-        categoryRepository.save(category);
+    public Category createCategory(Category category) {
+        return categoryRepository.save(category);
     }
 
     public void updateCategory(long categoryID, Category category) {

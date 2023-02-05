@@ -25,7 +25,7 @@ public class ProductController {
     @GetMapping("/")
     public ResponseEntity<List<ProductDto>> getProducts() {
         List<ProductDto> body = productService.listProducts();
-        return new ResponseEntity<List<ProductDto>>(body, HttpStatus.OK);
+        return new ResponseEntity<>(body, HttpStatus.OK);
     }
 
     @PostMapping("/add")
