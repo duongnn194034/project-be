@@ -50,7 +50,7 @@ public class OrderService {
                 .setUnitAmount((long)(checkoutItemDto.getPrice()*100))
                 .setProductData(
                         SessionCreateParams.LineItem.PriceData.ProductData.builder()
-                                .setName(checkoutItemDto.getProductName())
+                                .setName(checkoutItemDto.getName())
                                 .build())
                 .build();
     }

@@ -14,7 +14,7 @@ public class Product {
     private long id;
 
     @Column(nullable = false, name = "product_name")
-    private String productName;
+    private String name;
 
     @Column(name = "product_description")
     private String description;
@@ -52,7 +52,7 @@ public class Product {
     private Date createdAt;
 
     public Product(ProductDto productDto, Category category) {
-        this.productName = productDto.getName();
+        this.name = productDto.getName();
         this.imageUrl = productDto.getImageUrl();
         this.description = productDto.getDescription();
         this.price = productDto.getPrice();
@@ -62,7 +62,7 @@ public class Product {
 
     public Product(Product product) {
         this.id = product.getId();
-        this.productName = product.getProductName();
+        this.name = product.getName();
         this.description = product.getDescription();
         this.category = product.getCategory();
         this.price = product.getPrice();
@@ -81,12 +81,12 @@ public class Product {
         this.id = id;
     }
 
-    public String getProductName() {
-        return productName;
+    public String getName() {
+        return name;
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getDescription() {

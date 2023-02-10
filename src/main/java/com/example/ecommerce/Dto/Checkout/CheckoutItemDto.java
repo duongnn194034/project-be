@@ -2,7 +2,7 @@ package com.example.ecommerce.Dto.Checkout;
 
 public class CheckoutItemDto {
 
-    private String productName;
+    private String name;
     private int  quantity;
     private double price;
     private long productId;
@@ -10,20 +10,20 @@ public class CheckoutItemDto {
 
     public CheckoutItemDto() {}
 
-    public CheckoutItemDto(String productName, int quantity, double price, long productId, int userId) {
-        this.productName = productName;
+    public CheckoutItemDto(String name, int quantity, double price, long productId, int userId) {
+        this.name = name;
         this.quantity = quantity;
         this.price = price;
         this.productId = productId;
         this.userId = userId;
     }
 
-    public String getProductName() {
-        return productName;
+    public String getName() {
+        return name;
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getQuantity() {

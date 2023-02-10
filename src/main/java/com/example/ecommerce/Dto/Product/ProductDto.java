@@ -19,7 +19,7 @@ public class ProductDto {
     }
     public ProductDto(Product product) {
         this.setId(product.getId());
-        this.setName(product.getProductName());
+        this.setName(product.getName());
         this.setImageUrl(product.getImageUrl());
         this.setDescription(product.getDescription());
         this.setPrice(product.getPrice());
