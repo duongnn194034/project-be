@@ -33,12 +33,12 @@ public class UserController {
     }
 
     @PostMapping("/signup")
-    public ResponseDto Signup(@RequestBody SignupDto signupDto) throws Exception {
+    public ResponseDto signUp(@RequestBody SignupDto signupDto) throws Exception {
         return userService.signUp(signupDto);
     }
 
     @PostMapping("/signIn")
-    public SignInResponseDto Signup(@RequestBody SignInDto signInDto) throws CustomException, NoSuchAlgorithmException {
+    public SignInResponseDto signIn(@RequestBody SignInDto signInDto) throws CustomException, NoSuchAlgorithmException {
         return userService.signIn(signInDto);
     }
 }

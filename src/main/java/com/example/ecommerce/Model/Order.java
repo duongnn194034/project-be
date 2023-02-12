@@ -33,6 +33,9 @@ public class Order {
     private Date createdAt;
 
     @Column
+    private String status;
+
+    @Column
     private int totalPrice;
 
     public String getSessionId() {

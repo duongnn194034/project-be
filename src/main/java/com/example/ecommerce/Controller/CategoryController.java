@@ -29,7 +29,7 @@ public class CategoryController {
     }
 
 	@PostMapping("/create")
-	public ResponseEntity<ApiResponse> createcategory(@Valid @RequestBody Category category) {
+	public ResponseEntity<ApiResponse> createCategory(@Valid @RequestBody Category category) {
 		if (categoryService.readCategory(category.getCategoryName()).isPresent()) {
 			return new ResponseEntity<>(new ApiResponse(false, "category already exists"), HttpStatus.CONFLICT);
 		}
@@ -38,7 +38,7 @@ public class CategoryController {
 	}
 
 	@PostMapping("/update/{categoryID}")
-	public ResponseEntity<ApiResponse> updatecategory(@PathVariable("categoryID") long categoryID, @Valid @RequestBody Category category) {
+	public ResponseEntity<ApiResponse> updateCategory(@PathVariable("categoryID") long categoryID, @Valid @RequestBody Category category) {
 		if (categoryService.readCategory(categoryID) != null) {
 			categoryService.updateCategory(categoryID, category);
 			return new ResponseEntity<>(new ApiResponse(true, "updated the category"), HttpStatus.OK);
