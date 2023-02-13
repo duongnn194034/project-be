@@ -32,6 +32,12 @@ public class UserController {
         return userService.findAll();
     }
 
+    @GetMapping("/get")
+    public User getCurrentUser(@RequestParam("token") String token) throws AuthenticationFailException {
+        authenticationService.authenticate(token);
+        return authenticationService.getUser(token);
+    }
+
     @PostMapping("/signup")
     public ResponseDto signUp(@RequestBody SignupDto signupDto) throws Exception {
         return userService.signUp(signupDto);
