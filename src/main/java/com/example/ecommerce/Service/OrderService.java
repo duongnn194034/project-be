@@ -69,8 +69,8 @@ public class OrderService {
     public Session createSession(List<CheckoutItemDto> checkoutItemDtoList) throws StripeException {
 
         // supply success and failure url for stripe
-        String successURL = baseURL + "payment/success";
-        String failedURL = baseURL + "payment/failed";
+        String successURL = baseURL + "/payment/success";
+        String failedURL = baseURL + "/payment/failed";
 
         // set the private key
         Stripe.apiKey = apiKey;

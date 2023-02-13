@@ -13,6 +13,8 @@ public class ProductDto {
     private @NotNull String description;
     private @NotNull long categoryId;
 
+    private @NotNull long userId;
+
 
     public ProductDto() {
 
@@ -24,6 +26,7 @@ public class ProductDto {
         this.setDescription(product.getDescription());
         this.setPrice(product.getPrice());
         this.setCategoryId(product.getCategory().getId());
+        this.setUserId(product.getUser().getId());
     }
 
     public ProductDto(@NotNull String name, @NotNull String imageUrl, @NotNull int price, @NotNull String description, @NotNull long categoryId) {
@@ -80,5 +83,13 @@ public class ProductDto {
 
     public void setCategoryId(long categoryId) {
         this.categoryId = categoryId;
+    }
+
+    public long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(long userId) {
+        this.userId = userId;
     }
 }
