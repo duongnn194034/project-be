@@ -1,9 +1,9 @@
 package com.example.ecommerce.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.sql.Date;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 @Entity
@@ -13,12 +13,11 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     private long id;
-    @Column(name = "total_amount")
-    private int totalAmount;
 
     @Column(name = "total_cost")
     private int totalCost;
 
+    @JsonIgnore
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private User user;
@@ -30,32 +29,21 @@ public class Order {
     private String sessionId;
 
     @Column(name = "created_at")
-    private Date createdAt;
+    private java.sql.Date createdAt;
 
     @Column
     private String status;
-
-    @Column
-    private int totalPrice;
 
     public String getSessionId() {
         return sessionId;
     }
 
-    public Date getCreatedAt() {
+    public java.sql.Date getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
+    public void setCreatedAt(java.sql.Date createdAt) {
         this.createdAt = createdAt;
-    }
-
-    public int getTotalPrice() {
-        return totalPrice;
-    }
-
-    public void setTotalPrice(int totalPrice) {
-        this.totalPrice = totalPrice;
     }
 
     public User getUser() {
@@ -72,14 +60,6 @@ public class Order {
 
     public void setOrderItemList(List<OrderItem> orderItemList) {
         this.orderItemList = orderItemList;
-    }
-
-    public int getTotalAmount() {
-        return totalAmount;
-    }
-
-    public void setTotalAmount(int totalAmount) {
-        this.totalAmount = totalAmount;
     }
 
     public int getTotalCost() {
@@ -119,5 +99,14 @@ public class Order {
     }
 
     public void setSessionId(String sessionId) {
+        this.sessionId = sessionId;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

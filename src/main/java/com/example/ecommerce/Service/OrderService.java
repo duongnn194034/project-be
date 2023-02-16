@@ -69,8 +69,8 @@ public class OrderService {
     public Session createSession(List<CheckoutItemDto> checkoutItemDtoList) throws StripeException {
 
         // supply success and failure url for stripe
-        String successURL = baseURL + "/payment/success";
-        String failedURL = baseURL + "/payment/failed";
+        String successURL = baseURL + "/payment/success?session_id={CHECKOUT_SESSION_ID}";
+        String failedURL = baseURL + "/payment/failed?session_id={CHECKOUT_SESSION_ID}";
 
         // set the private key
         Stripe.apiKey = apiKey;
@@ -101,16 +101,17 @@ public class OrderService {
 
         // create the order and save it
         Order newOrder = new Order();
-        newOrder.setCreatedDate((java.sql.Date) new Date());
+        newOrder.setCreatedDate(new java.sql.Date(System.currentTimeMillis()));
         newOrder.setSessionId(sessionId);
         newOrder.setUser(user);
-        newOrder.setTotalPrice(cartDto.getTotalCost());
+        newOrder.setTotalCost(cartDto.getTotalCost());
+        newOrder.setStatus("unpaid");
         orderRepository.save(newOrder);
 
         for (CartItemDto cartItemDto : cartItemDtoList) {
             // create orderItem and save each one
             OrderItem orderItem = new OrderItem();
-            orderItem.setCreatedDate((java.sql.Date) new Date());
+            orderItem.setCreatedDate(new java.sql.Date(System.currentTimeMillis()));
             orderItem.setPrice(cartItemDto.getProduct().getPrice());
             orderItem.setProduct(cartItemDto.getProduct());
             orderItem.setQuantity(cartItemDto.getQuantity());
@@ -133,6 +134,16 @@ public class OrderService {
             return order.get();
         }
         throw new OrderNotFoundException("Order not found");
+    }
+
+    public void updateOrderStatus(long orderId, String status) {
+        Order order = getOrder(orderId);
+        order.setStatus(status);
+        orderRepository.save(order);
+    }
+
+    public Order getOrderBySessionId(String sessionId) {
+        return orderRepository.findOneBySessionId(sessionId);
     }
 }
 

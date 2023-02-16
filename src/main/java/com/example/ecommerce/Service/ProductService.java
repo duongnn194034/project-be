@@ -3,7 +3,9 @@ package com.example.ecommerce.Service;
 import com.example.ecommerce.Dto.Product.ProductDto;
 import com.example.ecommerce.Model.Category;
 import com.example.ecommerce.Model.Product;
+import com.example.ecommerce.Model.User;
 import com.example.ecommerce.Repository.ProductRepository;
+import com.example.ecommerce.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +20,9 @@ public class ProductService {
 
     @Autowired
     ProductRepository productRepository;
+
+    @Autowired
+    UserRepository userRepository;
 
     public Product getProductById(long productId) {
         Optional<Product> product = productRepository.findById(productId);
@@ -35,6 +40,10 @@ public class ProductService {
 
     public void addProduct(ProductDto productDto, Category category) {
         Product product = new Product(productDto, category);
+        Optional<User> user = userRepository.findById(productDto.getUserId());
+        if (user.isPresent()) {
+            product.setUser(user.get());
+        }
         productRepository.save(product);
     }
 
