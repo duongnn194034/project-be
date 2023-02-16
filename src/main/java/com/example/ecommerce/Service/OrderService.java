@@ -93,7 +93,7 @@ public class OrderService {
         return Session.create(params);
     }
 
-    public void placeOrder(User user, String sessionId) {
+    public void placeOrder(User user, String sessionId, String status) {
         // first let get cart items for the user
         CartDto cartDto = cartService.listCartItems(user);
 
@@ -105,7 +105,7 @@ public class OrderService {
         newOrder.setSessionId(sessionId);
         newOrder.setUser(user);
         newOrder.setTotalCost(cartDto.getTotalCost());
-        newOrder.setStatus("unpaid");
+        newOrder.setStatus(status);
         orderRepository.save(newOrder);
 
         for (CartItemDto cartItemDto : cartItemDtoList) {

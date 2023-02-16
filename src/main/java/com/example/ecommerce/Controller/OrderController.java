@@ -39,7 +39,7 @@ public class OrderController {
         authenticationService.authenticate(token);
         User user = authenticationService.getUser(token);
         // place the order
-        orderService.placeOrder(user, session.getId());
+        orderService.placeOrder(user, session.getId(), session.getPaymentStatus());
         // send the stripe session id in response
         return new ResponseEntity<>(stripeResponse, HttpStatus.OK);
     }
@@ -51,7 +51,7 @@ public class OrderController {
         authenticationService.authenticate(token);
         User user = authenticationService.getUser(token);
         // place the order
-        orderService.placeOrder(user, sessionId);
+        orderService.placeOrder(user, sessionId, "unpaid");
         return new ResponseEntity<>(new ApiResponse(true, "Order has been placed"), HttpStatus.CREATED);
     }
 
