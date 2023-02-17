@@ -32,10 +32,14 @@ public class OrderController {
 
     // stripe create session API
     @PostMapping("/create-checkout-session")
-    public ResponseEntity<StripeResponse> checkoutList(@RequestBody List<CheckoutItemDto> checkoutItemDtoList) throws StripeException {
+    public ResponseEntity<StripeResponse> checkoutList(@RequestBody List<CheckoutItemDto> checkoutItemDtoList, @RequestParam("token") String token) throws StripeException {
         // create the stripe session
         Session session = orderService.createSession(checkoutItemDtoList);
         StripeResponse stripeResponse = new StripeResponse(session.getId());
+        authenticationService.authenticate(token);
+        User user = authenticationService.getUser(token);
+        // place the order
+        orderService.placeOrder(user, session.getId(), session.getPaymentStatus());
         // send the stripe session id in response
         return new ResponseEntity<>(stripeResponse, HttpStatus.OK);
     }
@@ -47,7 +51,7 @@ public class OrderController {
         authenticationService.authenticate(token);
         User user = authenticationService.getUser(token);
         // place the order
-        orderService.placeOrder(user, sessionId);
+        orderService.placeOrder(user, sessionId, "unpaid");
         return new ResponseEntity<>(new ApiResponse(true, "Order has been placed"), HttpStatus.CREATED);
     }
 

@@ -1,5 +1,7 @@
 package com.example.ecommerce.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.sql.Date;
 
@@ -11,6 +13,7 @@ public class OrderItem {
     @Column(name = "id", nullable = false)
     private long id;
 
+    @JsonIgnore
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")
     private Order order;

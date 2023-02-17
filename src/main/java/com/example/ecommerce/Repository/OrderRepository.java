@@ -10,4 +10,5 @@ import java.util.List;
 public interface OrderRepository extends JpaRepository<Order, Long> {
     @Query("select o from Order o order by o.createdAt desc")
     List<Order> findAllByUserOrderByCreatedDateDesc(User user);
+    Order findOneBySessionId(String sessionId);
 }
