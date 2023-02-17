@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
-@RequestMapping("user")
+@RequestMapping("/user")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 public class UserController {
