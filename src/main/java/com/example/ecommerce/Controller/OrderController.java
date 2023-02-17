@@ -36,10 +36,10 @@ public class OrderController {
         // create the stripe session
         Session session = orderService.createSession(checkoutItemDtoList);
         StripeResponse stripeResponse = new StripeResponse(session.getId());
-        authenticationService.authenticate(token);
-        User user = authenticationService.getUser(token);
-        // place the order
-        orderService.placeOrder(user, session.getId(), session.getPaymentStatus());
+//        authenticationService.authenticate(token);
+//        User user = authenticationService.getUser(token);
+//        // place the order
+//        orderService.placeOrder(user, session.getId(), session.getPaymentStatus());
         // send the stripe session id in response
         return new ResponseEntity<>(stripeResponse, HttpStatus.OK);
     }
