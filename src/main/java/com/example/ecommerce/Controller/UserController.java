@@ -1,6 +1,7 @@
 package com.example.ecommerce.Controller;
 
 
+import com.example.ecommerce.Common.ApiResponse;
 import com.example.ecommerce.Dto.ResponseDto;
 import com.example.ecommerce.Dto.User.SignInDto;
 import com.example.ecommerce.Dto.User.SignInResponseDto;
@@ -46,5 +47,15 @@ public class UserController {
     @PostMapping("/signIn")
     public SignInResponseDto signIn(@RequestBody SignInDto signInDto) throws CustomException, NoSuchAlgorithmException {
         return userService.signIn(signInDto);
+    }
+
+    @PostMapping("/changePassword")
+    public ApiResponse changePassword(@RequestParam("token") String token,
+                                      @RequestParam("password") String password,
+                                      @RequestParam("newPassword") String newPassword)
+            throws AuthenticationFailException, NoSuchAlgorithmException {
+        authenticationService.authenticate(token);
+        User user = authenticationService.getUser(token);
+        return userService.changePassword(user, password, newPassword);
     }
 }

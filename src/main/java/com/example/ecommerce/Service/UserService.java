@@ -1,5 +1,6 @@
 package com.example.ecommerce.Service;
 
+import com.example.ecommerce.Common.ApiResponse;
 import com.example.ecommerce.Dto.ResponseDto;
 import com.example.ecommerce.Dto.User.SignInDto;
 import com.example.ecommerce.Dto.User.SignInResponseDto;
@@ -119,5 +120,17 @@ public class UserService {
         String myHash = DatatypeConverter
                 .printHexBinary(digest).toUpperCase();
         return myHash;
+    }
+
+    public ApiResponse changePassword(User user, String password, String newPassword) throws NoSuchAlgorithmException {
+        if (user == null) {
+            return new ApiResponse(false, "Error while authenticating user!");
+        }
+        if (!hashPassword(user.getPassword()).equals(password)) {
+            return new ApiResponse(false, "Wrong password!");
+        }
+        user.setPassword(newPassword);
+        userRepository.save(user);
+        return new ApiResponse(true, "Change password successfully!");
     }
 }
