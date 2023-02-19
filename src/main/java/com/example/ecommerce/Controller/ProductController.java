@@ -41,12 +41,18 @@ public class ProductController {
 
     @PostMapping("/update/{productID}")
     public ResponseEntity<ApiResponse> updateProduct(@PathVariable("productID") long productID, @RequestBody ProductDto productDto) {
-        Optional<Category> optionalcategory = categoryService.readCategory(productDto.getCategoryId());
-        if (!optionalcategory.isPresent()) {
+        Optional<Category> optionalCategory = categoryService.readCategory(productDto.getCategoryId());
+        if (!optionalCategory.isPresent()) {
             return new ResponseEntity<ApiResponse>(new ApiResponse(false, "category is invalid"), HttpStatus.CONFLICT);
         }
-        Category category = optionalcategory.get();
+        Category category = optionalCategory.get();
         productService.updateProduct(productID, productDto, category);
         return new ResponseEntity<>(new ApiResponse(true, "Product has been updated"), HttpStatus.OK);
+    }
+
+    @PostMapping("/delete/{productID}")
+    public ResponseEntity<ApiResponse> deleteProduct(@PathVariable("productID") long productID) {
+        productService.deleteProduct(productID);
+        return new ResponseEntity<>(new ApiResponse(true, "Product has been deleted"), HttpStatus.OK);
     }
 }

@@ -45,8 +45,15 @@ public class OrderController {
             throws AuthenticationFailException {
         authenticationService.authenticate(token);
         User user = authenticationService.getUser(token);
+        String status = "unpaid";
+        try {
+            Session session = Session.retrieve(sessionId);
+            status = session.getPaymentStatus();
+        } catch (Exception e) {
+            System.out.println("Error while retrieving sessionId");
+        }
         // place the order
-        orderService.placeOrder(user, sessionId, "paid");
+        orderService.placeOrder(user, sessionId, status);
         return new ResponseEntity<>(new ApiResponse(true, "Order has been placed"), HttpStatus.CREATED);
     }
 
@@ -63,13 +70,27 @@ public class OrderController {
 
 
     @GetMapping("/{id}")
-    public ResponseEntity<Object> getOrderById(@PathVariable("id") Integer id, @RequestParam("token") String token)
+    public ResponseEntity<Object> getOrderById(@PathVariable("id") long id, @RequestParam("token") String token)
             throws AuthenticationFailException {
         // validate token
         authenticationService.authenticate(token);
         try {
             Order order = orderService.getOrder(id);
             return new ResponseEntity<>(order, HttpStatus.OK);
+        }
+        catch (OrderNotFoundException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> deleteOrderById(@PathVariable("id") long id, @RequestParam("token") String token)
+            throws AuthenticationFailException {
+        // validate token
+        authenticationService.authenticate(token);
+        try {
+            orderService.deleteOrderById(id);
+            return new ResponseEntity<>("OK", HttpStatus.OK);
         }
         catch (OrderNotFoundException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);

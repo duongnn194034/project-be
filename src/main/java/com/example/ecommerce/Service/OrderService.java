@@ -143,6 +143,10 @@ public class OrderService {
     public Order getOrderBySessionId(String sessionId) {
         return orderRepository.findOneBySessionId(sessionId);
     }
+
+    public void deleteOrderById(long orderId) {
+        orderRepository.deleteOrdersById(orderId);
+    }
 }
 
 

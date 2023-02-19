@@ -46,4 +46,10 @@ public class CategoryController {
 
 		return new ResponseEntity<>(new ApiResponse(false, "category does not exist"), HttpStatus.NOT_FOUND);
 	}
+
+	@PostMapping("/delete/{categoryID}")
+	public ResponseEntity<ApiResponse> deleteCategory(@PathVariable("categoryID") long categoryID) {
+		categoryService.deleteCategory(categoryID);
+		return new ResponseEntity<>(new ApiResponse(true, "category has been deleted"), HttpStatus.OK);
+	}
 }
