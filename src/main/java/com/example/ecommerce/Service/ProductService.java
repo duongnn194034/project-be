@@ -1,6 +1,7 @@
 package com.example.ecommerce.Service;
 
 import com.example.ecommerce.Dto.Product.ProductDto;
+import com.example.ecommerce.Model.CartItem;
 import com.example.ecommerce.Model.Category;
 import com.example.ecommerce.Model.Product;
 import com.example.ecommerce.Model.User;
@@ -55,5 +56,8 @@ public class ProductService {
 
     public void deleteProduct(long productID) {
         productRepository.deleteProductById(productID);
+    }
+    public void deleteProduct(Category category) {
+        productRepository.getProductsByCategory(category);
     }
 }

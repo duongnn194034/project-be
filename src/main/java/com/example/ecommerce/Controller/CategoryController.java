@@ -2,8 +2,6 @@ package com.example.ecommerce.Controller;
 
 import com.example.ecommerce.Common.ApiResponse;
 import com.example.ecommerce.Model.Category;
-import com.example.ecommerce.Model.Product;
-import com.example.ecommerce.Repository.ProductRepository;
 import com.example.ecommerce.Service.CategoryService;
 import com.example.ecommerce.Service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;

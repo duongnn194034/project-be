@@ -47,11 +47,6 @@ public class CartService {
     }
 
 
-//    public static CartItem getDtoFromCart(CartItem cart) {
-//        return new CartItem(cart);
-//    }
-
-
     public void updateCartItem(AddToCartDto cartDto, User user, Product product){
         CartItem cart = cartRepository.getReferenceById(cartDto.getId());
         cart.setQuantity(cartDto.getQuantity());
@@ -76,6 +71,10 @@ public class CartService {
 
     public int count(User user) {
         return cartRepository.countAll(user);
+    }
+
+    public void deleteCartItemsByProduct(Product product) {
+        cartRepository.deleteAllByProduct(product);
     }
 }
 
