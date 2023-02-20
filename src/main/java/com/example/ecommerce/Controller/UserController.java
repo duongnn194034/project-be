@@ -6,6 +6,7 @@ import com.example.ecommerce.Dto.ResponseDto;
 import com.example.ecommerce.Dto.User.SignInDto;
 import com.example.ecommerce.Dto.User.SignInResponseDto;
 import com.example.ecommerce.Dto.User.SignupDto;
+import com.example.ecommerce.Dto.User.UserUpdateDto;
 import com.example.ecommerce.Exception.AuthenticationFailException;
 import com.example.ecommerce.Exception.CustomException;
 import com.example.ecommerce.Model.User;
@@ -57,5 +58,12 @@ public class UserController {
         authenticationService.authenticate(token);
         User user = authenticationService.getUser(token);
         return userService.changePassword(user, password, newPassword);
+    }
+
+    @PatchMapping("/update")
+    public ApiResponse updateUser(@RequestParam("token") String token, @RequestBody UserUpdateDto userUpdateDto) throws AuthenticationFailException {
+        authenticationService.authenticate(token);
+        long id = authenticationService.getUser(token).getId();
+        return userService.updateUser(id, userUpdateDto);
     }
 }

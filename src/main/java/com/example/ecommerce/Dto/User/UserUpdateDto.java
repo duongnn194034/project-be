@@ -4,33 +4,24 @@ import com.example.ecommerce.Enums.Role;
 
 public class UserUpdateDto {
     // skipping updating passord as of now
-    private Integer id;
-    private String firstName;
-    private String lastName;
+    private String fullname;
+    private String address;
+    private String phonenumber;
+    private String email;
     private Role role;
 
-    public Integer getId() {
-        return id;
+    public UserUpdateDto(String fullname, String address, String phonenumber, String email, Role role) {
+        this.fullname = fullname;
+        this.address = address;
+        this.phonenumber = phonenumber;
+        this.email = email;
+        this.role = role;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public UserUpdateDto(String fullname, String email, Role role) {
+        this.fullname = fullname;
+        this.email = email;
+        this.role = role;
     }
 
     public Role getRole() {
@@ -39,5 +30,37 @@ public class UserUpdateDto {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public String getFullname() {
+        return fullname;
+    }
+
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getPhonenumber() {
+        return phonenumber;
+    }
+
+    public void setPhonenumber(String phonenumber) {
+        this.phonenumber = phonenumber;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

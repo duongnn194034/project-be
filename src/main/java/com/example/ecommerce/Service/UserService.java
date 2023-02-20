@@ -5,6 +5,7 @@ import com.example.ecommerce.Dto.ResponseDto;
 import com.example.ecommerce.Dto.User.SignInDto;
 import com.example.ecommerce.Dto.User.SignInResponseDto;
 import com.example.ecommerce.Dto.User.SignupDto;
+import com.example.ecommerce.Dto.User.UserUpdateDto;
 import com.example.ecommerce.Enums.Response;
 import com.example.ecommerce.Enums.Role;
 import com.example.ecommerce.Exception.AuthenticationFailException;
@@ -132,5 +133,20 @@ public class UserService {
         user.setPassword(newPassword);
         userRepository.save(user);
         return new ApiResponse(true, "Change password successfully!");
+    }
+
+    public ApiResponse updateUser(long id, UserUpdateDto userUpdateDto) {
+        Optional<User> user = userRepository.findById(id);
+        if (user.isEmpty()) {
+            return new ApiResponse(false, "User is not exist");
+        }
+        User user1 = user.get();
+        user1.setId(id);
+        user1.setEmail(userUpdateDto.getEmail());
+        user1.setAddress(userUpdateDto.getAddress() != null ? userUpdateDto.getAddress(): user1.getAddress());
+        user1.setPhoneNumber(userUpdateDto.getPhonenumber() != null ? userUpdateDto.getPhonenumber() : user1.getPhoneNumber());
+        user1.setRole(userUpdateDto.getRole());
+        userRepository.save(user1);
+        return new ApiResponse(true, "User has been updated");
     }
 }
