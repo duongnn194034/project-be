@@ -6,14 +6,14 @@ public class UserUpdateDto {
     // skipping updating passord as of now
     private String fullname;
     private String address;
-    private String phonenumber;
+    private String phoneNumber;
     private String email;
     private Role role;
 
-    public UserUpdateDto(String fullname, String address, String phonenumber, String email, Role role) {
+    public UserUpdateDto(String fullname, String address, String phoneNumber, String email, Role role) {
         this.fullname = fullname;
         this.address = address;
-        this.phonenumber = phonenumber;
+        this.phoneNumber = phoneNumber;
         this.email = email;
         this.role = role;
     }
@@ -22,6 +22,10 @@ public class UserUpdateDto {
         this.fullname = fullname;
         this.email = email;
         this.role = role;
+    }
+
+    public UserUpdateDto() {
+
     }
 
     public Role getRole() {
@@ -48,12 +52,12 @@ public class UserUpdateDto {
         this.address = address;
     }
 
-    public String getPhonenumber() {
-        return phonenumber;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setPhonenumber(String phonenumber) {
-        this.phonenumber = phonenumber;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public String getEmail() {
