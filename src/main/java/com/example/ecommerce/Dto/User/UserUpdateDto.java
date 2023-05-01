@@ -3,7 +3,6 @@ package com.example.ecommerce.Dto.User;
 import com.example.ecommerce.Enums.Role;
 
 public class UserUpdateDto {
-    // skipping updating passord as of now
     private String fullname;
     private String address;
     private String phoneNumber;
