@@ -143,7 +143,6 @@ public class UserService {
         User user1 = user.get();
         user1.setId(id);
         user1.setEmail(userUpdateDto.getEmail());
-        user1.setAddress(userUpdateDto.getAddress() != null ? userUpdateDto.getAddress(): user1.getAddress());
         user1.setPhoneNumber(userUpdateDto.getPhoneNumber() != null ? userUpdateDto.getPhoneNumber() : user1.getPhoneNumber());
         user1.setRole(userUpdateDto.getRole());
         userRepository.save(user1);

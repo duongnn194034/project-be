@@ -4,8 +4,7 @@ import com.example.ecommerce.Enums.Role;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import java.sql.Date;
-import java.util.List;
+import java.util.Date;
 
 @Entity
 @Table(name = "users")
@@ -27,17 +26,9 @@ public class User {
     @Column(unique = true, length = 15)
     private String phoneNumber;
 
-    @Column
-    private String address;
-
     @Enumerated(EnumType.STRING)
     @Column(name = "role")
     private Role role;
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "user",
-            fetch = FetchType.LAZY)
-    private List<Order> orders;
 
     @Column(name = "created_at")
     private Date createdAt;
@@ -92,14 +83,6 @@ public class User {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
     }
 
     public Role getRole() {
