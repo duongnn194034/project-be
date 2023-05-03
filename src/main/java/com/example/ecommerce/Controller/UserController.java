@@ -24,7 +24,6 @@ import java.util.List;
 public class UserController {
     @Autowired
     AuthenticationService authenticationService;
-
     @Autowired
     UserService userService;
 
