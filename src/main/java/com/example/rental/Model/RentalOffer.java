@@ -15,57 +15,7 @@ public class RentalOffer {
     private double latPos;
     private double lngPos;
     private double price;
-
-    @Column(name = "damage_insurance")
-    private boolean damageInsurance;
-    @Column(name = "stolen_insurance")
-    private boolean stolenInsurance;
-    @Column(name = "order_canceling")
-    private boolean orderCanceling;
-    @Column(name = "fuel_cost")
-    private boolean fuelCost;
-    @Column(name = "adjust")
-    private boolean adjust;
-
-    public boolean isDamageInsurance() {
-        return damageInsurance;
-    }
-
-    public void setDamageInsurance(boolean damageInsurance) {
-        this.damageInsurance = damageInsurance;
-    }
-
-    public boolean isStolenInsurance() {
-        return stolenInsurance;
-    }
-
-    public void setStolenInsurance(boolean stolenInsurance) {
-        this.stolenInsurance = stolenInsurance;
-    }
-
-    public boolean isOrderCanceling() {
-        return orderCanceling;
-    }
-
-    public void setOrderCanceling(boolean orderCanceling) {
-        this.orderCanceling = orderCanceling;
-    }
-
-    public boolean isFuelCost() {
-        return fuelCost;
-    }
-
-    public void setFuelCost(boolean fuelCost) {
-        this.fuelCost = fuelCost;
-    }
-
-    public boolean isAdjust() {
-        return adjust;
-    }
-
-    public void setAdjust(boolean adjust) {
-        this.adjust = adjust;
-    }
+    private String note;
 
     public long getId() {
         return id;
@@ -93,5 +43,21 @@ public class RentalOffer {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public Motor getMotor() {
+        return motor;
+    }
+
+    public void setMotor(Motor motor) {
+        this.motor = motor;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
     }
 }

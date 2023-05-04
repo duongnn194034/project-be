@@ -12,8 +12,9 @@ public class Car extends Vehicle {
     private String radio;
     @Column(name = "cruise_control")
     private boolean cruiseControl;
-    private boolean automatic;
     private boolean bluetooth;
+    @Column(name = "air_bag")
+    private boolean airBag;
 
     public int getStorages() {
         return storages;
@@ -45,14 +46,6 @@ public class Car extends Vehicle {
 
     public void setCruiseControl(boolean cruiseControl) {
         this.cruiseControl = cruiseControl;
-    }
-
-    public boolean isAutomatic() {
-        return automatic;
-    }
-
-    public void setAutomatic(boolean automatic) {
-        this.automatic = automatic;
     }
 
     public boolean isBluetooth() {

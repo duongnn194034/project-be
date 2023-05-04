@@ -22,6 +22,9 @@ public abstract class Vehicle {
     @Column(name = "image_url")
     protected String imageUrl;
     protected String summary;
+    @Column(name = "engine_size")
+    protected int engineSize;
+
 
     public long getId() {
         return id;
@@ -57,5 +60,29 @@ public abstract class Vehicle {
 
     public void setType(VehicleType type) {
         this.type = type;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public String getSummary() {
+        return summary;
+    }
+
+    public void setSummary(String summary) {
+        this.summary = summary;
+    }
+
+    public int getEngineSize() {
+        return engineSize;
+    }
+
+    public void setEngineSize(int engineSize) {
+        this.engineSize = engineSize;
     }
 }
