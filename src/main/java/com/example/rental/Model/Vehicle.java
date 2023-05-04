@@ -19,6 +19,9 @@ public abstract class Vehicle {
     protected User owner;
     @Enumerated(EnumType.STRING)
     protected VehicleType type;
+    @Column(name = "image_url")
+    protected String imageUrl;
+    protected String summary;
 
     public long getId() {
         return id;
