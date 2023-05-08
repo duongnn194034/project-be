@@ -18,5 +18,5 @@ public interface UserService {
 
     ApiResponse changePassword(User user, ChangePasswordDto changePasswordDto) throws NoSuchAlgorithmException;
 
-    ApiResponse updateUser(long id, UserUpdateDto userUpdateDto);
+    ApiResponse updateUser(String id, UserUpdateDto userUpdateDto);
 }

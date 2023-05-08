@@ -9,7 +9,7 @@ import java.util.UUID;
 public class AuthenticationToken {
 
     @Id
-    private long id;
+    private String id;
     private String token;
     private Date createdDate;
     private User user;
@@ -20,11 +20,11 @@ public class AuthenticationToken {
         this.token = UUID.randomUUID().toString();
     }
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -52,7 +52,7 @@ public class AuthenticationToken {
         this.user = user;
     }
 
-    public AuthenticationToken(Integer id, String Token, Date createdDate, User user) {
+    public AuthenticationToken(String id, String Token, Date createdDate, User user) {
         this.id = id;
         this.token = Token;
         this.createdDate = createdDate;

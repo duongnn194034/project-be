@@ -10,7 +10,7 @@ import java.util.Date;
 @Document("User")
 public class User {
     @Id
-    private long id;
+    private String id;
     private String email;
     @JsonIgnore
     private String password;
@@ -31,11 +31,11 @@ public class User {
         this.createdAt = new Date(System.currentTimeMillis());
     }
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

@@ -7,13 +7,13 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document
 public class RentalOffer {
     @Id
-    private long id;
+    private String id;
     private Motor motor;
     private double price;
     private String note;
     private double rating;
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 

@@ -58,7 +58,7 @@ public class UserController {
     @PatchMapping("/update")
     public ApiResponse updateUser(@RequestHeader("token") String token, @RequestBody UserUpdateDto userUpdateDto) throws AuthenticationFailException {
         authenticationService.authenticate(token);
-        long id = authenticationService.getUser(token).getId();
+        String id = authenticationService.getUser(token).getId();
         return userService.updateUser(id, userUpdateDto);
     }
 }

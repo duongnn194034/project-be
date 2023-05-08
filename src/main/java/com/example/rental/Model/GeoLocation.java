@@ -4,7 +4,7 @@ import org.springframework.data.annotation.Id;
 
 public class GeoLocation {
     @Id
-    private long id;
+    private String id;
     private double latPos;
     private double lngPos;
 

@@ -47,7 +47,7 @@ public class UserServiceImpl implements UserService {
         return this.userRepository.save(user);
     }
 
-    public User getUserById(long id) {
+    public User getUserById(String id) {
         Optional<User> u = userRepository.findById(id);
         return u.isEmpty() ? new User() : u.get();
     }
@@ -137,7 +137,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ApiResponse updateUser(long id, UserUpdateDto userUpdateDto) {
+    public ApiResponse updateUser(String id, UserUpdateDto userUpdateDto) {
         Optional<User> user = userRepository.findById(id);
         if (user.isEmpty()) {
             return new ApiResponse(false, "User is not exist");

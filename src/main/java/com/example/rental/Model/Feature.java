@@ -5,7 +5,7 @@ import java.time.Duration;
 import java.util.Date;
 
 public class Feature implements Serializable {
-    private long id;
+    private String id;
     private boolean damageInsurance;
     private boolean stolenInsurance;
     private boolean orderCanceling;

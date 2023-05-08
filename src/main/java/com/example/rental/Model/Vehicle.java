@@ -6,7 +6,7 @@ import org.springframework.data.annotation.Id;
 
 public abstract class Vehicle {
     @Id
-    protected long id;
+    protected String id;
     protected String name;
     protected String model;
     @JsonIgnore
@@ -17,7 +17,7 @@ public abstract class Vehicle {
     protected int engineSize;
 
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 

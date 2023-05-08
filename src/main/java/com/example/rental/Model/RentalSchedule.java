@@ -6,7 +6,7 @@ import java.util.Date;
 
 public class RentalSchedule {
     @Id
-    private long id;
+    private String id;
     private RentalOffer rentalOffer;
     private Date startTime;
 
