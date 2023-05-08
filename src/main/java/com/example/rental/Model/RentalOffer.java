@@ -10,31 +10,15 @@ public class RentalOffer {
     @Column(nullable = false, updatable = false)
     private long id;
     @OneToOne(targetEntity = Motor.class)
-    @JoinColumn(name = "motor_id", referencedColumnName = "id")
+    @JoinColumn(name = "motor_id", referencedColumnName = "id", unique = true)
     private Motor motor;
-    private double latPos;
-    private double lngPos;
     private double price;
     private String note;
 
+    private double rating;
+
     public long getId() {
         return id;
-    }
-
-    public double getLatPos() {
-        return latPos;
-    }
-
-    public void setLatPos(double latPos) {
-        this.latPos = latPos;
-    }
-
-    public double getLngPos() {
-        return lngPos;
-    }
-
-    public void setLngPos(double lngPos) {
-        this.lngPos = lngPos;
     }
 
     public double getPrice() {
