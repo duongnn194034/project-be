@@ -1,19 +1,15 @@
 package com.example.rental.Model;
 
-import javax.persistence.*;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@Entity
-@Table
+@Document
 public class Car extends Vehicle {
     private int seats;
     private int storages;
-    @Column(name = "air_conditioner")
     private boolean airConditioner;
     private String radio;
-    @Column(name = "cruise_control")
     private boolean cruiseControl;
     private boolean bluetooth;
-    @Column(name = "air_bag")
     private boolean airBag;
 
     public int getStorages() {

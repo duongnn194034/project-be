@@ -1,24 +1,19 @@
 package com.example.rental.Model;
 
-import javax.persistence.*;
+import org.springframework.data.annotation.Id;
+
 import java.util.Date;
 
-@Table
-@Entity
 public class RentalSchedule {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "offer_id", referencedColumnName = "id")
-    private RentalOffer offerId;
-    @Column(name = "start_time")
+    private RentalOffer rentalOffer;
     private Date startTime;
-    @Column(name = "end_time")
+
     private Date endTime;
 
-    public RentalOffer getOfferId() {
-        return offerId;
+    public RentalOffer getRentalOffer() {
+        return rentalOffer;
     }
 
     public Date getStartTime() {

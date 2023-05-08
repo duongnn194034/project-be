@@ -1,13 +1,9 @@
 package com.example.rental.Model;
 
-import javax.persistence.*;
+import org.springframework.data.annotation.Id;
 
-@Entity
-@Table(name = "geo_loc")
 public class GeoLocation {
     @Id
-    @OneToOne(targetEntity = RentalOffer.class)
-    @JoinColumn(name = "id", referencedColumnName = "id")
     private long id;
     private double latPos;
     private double lngPos;

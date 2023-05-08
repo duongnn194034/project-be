@@ -1,25 +1,17 @@
 package com.example.rental.Model;
-import javax.persistence.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.util.Date;
 import java.util.UUID;
 
-@Entity
-@Table(name = "Token")
+@Document("Token")
 public class AuthenticationToken {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Integer id;
-
-
+    private long id;
     private String token;
-
-    @Column(name = "created_date")
     private Date createdDate;
-
-    @OneToOne(targetEntity = User.class, fetch = FetchType.EAGER)
-    @JoinColumn(nullable = false, name = "user_id")
     private User user;
 
     public AuthenticationToken(User user) {
@@ -28,11 +20,11 @@ public class AuthenticationToken {
         this.token = UUID.randomUUID().toString();
     }
 
-    public Integer getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(long id) {
         this.id = id;
     }
 

@@ -1,13 +1,11 @@
 package com.example.rental.Repository;
 
 import com.example.rental.Model.User;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;
 
-public interface UserRepository extends JpaRepository<User, Long> {
-    @Query(value = "SELECT u from User u where u.email = ?1")
+public interface UserRepository extends MongoRepository<User, Long> {
     User findByEmail(String email);
 
     List<User> findAll();

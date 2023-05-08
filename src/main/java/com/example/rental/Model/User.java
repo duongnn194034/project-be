@@ -2,35 +2,21 @@ package com.example.rental.Model;
 
 import com.example.rental.Enums.Role;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.*;
 import java.util.Date;
 
-@Entity
-@Table(name = "User")
+@Document("User")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-
-    @Column(nullable = false, unique = true, length = 45)
     private String email;
-
     @JsonIgnore
-    @Column(nullable = false, length = 64)
     private String password;
-
-    @Column(nullable = false)
     private String fullName;
-
-    @Column(unique = true, length = 15)
     private String phoneNumber;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "role")
     private Role role;
-
-    @Column(name = "created_at")
     private Date createdAt;
 
     public User() {

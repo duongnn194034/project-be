@@ -2,27 +2,18 @@ package com.example.rental.Model;
 
 import com.example.rental.Enums.VehicleType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.data.annotation.Id;
 
-import javax.persistence.*;
-
-@MappedSuperclass
 public abstract class Vehicle {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", updatable = false, nullable = false)
     protected long id;
     protected String name;
     protected String model;
     @JsonIgnore
-    @ManyToOne
-    @JoinColumn(name = "owner_id", referencedColumnName = "id")
     protected User owner;
-    @Enumerated(EnumType.STRING)
     protected VehicleType type;
-    @Column(name = "image_url")
     protected String imageUrl;
     protected String summary;
-    @Column(name = "engine_size")
     protected int engineSize;
 
 

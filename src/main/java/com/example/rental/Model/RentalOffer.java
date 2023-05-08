@@ -1,20 +1,16 @@
 package com.example.rental.Model;
 
-import javax.persistence.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@Entity
-@Table
+
+@Document
 public class RentalOffer {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(nullable = false, updatable = false)
     private long id;
-    @OneToOne(targetEntity = Motor.class)
-    @JoinColumn(name = "motor_id", referencedColumnName = "id", unique = true)
     private Motor motor;
     private double price;
     private String note;
-
     private double rating;
 
     public long getId() {

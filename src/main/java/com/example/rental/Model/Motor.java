@@ -1,11 +1,9 @@
 package com.example.rental.Model;
 
 import com.example.rental.Enums.VehicleType;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.*;
-
-@Entity
-@Table(name = "Motor")
+@Document("Motor")
 public class Motor extends Vehicle {
 
     public Motor(String name, String model, int cylinder, User owner, VehicleType type) {
