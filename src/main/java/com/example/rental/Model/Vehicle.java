@@ -7,7 +7,7 @@ import org.springframework.data.annotation.Id;
 public abstract class Vehicle {
     @Id
     protected String id;
-    protected String name;
+    protected String production;
     protected String model;
     @JsonIgnore
     protected User owner;
@@ -21,12 +21,12 @@ public abstract class Vehicle {
         return id;
     }
 
-    public String getName() {
-        return name;
+    public String getProduction() {
+        return production;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setProduction(String production) {
+        this.production = production;
     }
 
     public String getModel() {

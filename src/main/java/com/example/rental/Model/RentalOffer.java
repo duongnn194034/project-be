@@ -1,17 +1,36 @@
 package com.example.rental.Model;
 
+import com.mongodb.client.model.geojson.Point;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.GeoSpatialIndexed;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.util.Date;
 
 
 @Document
 public class RentalOffer {
     @Id
     private String id;
-    private Motor motor;
+    private Vehicle vehicle;
     private double price;
     private String note;
     private double rating;
+    @GeoSpatialIndexed
+    private Point location;
+
+    private Date startTime;
+
+    private Date endTime;
+
+    public RentalOffer(Vehicle vehicle, double price, String note, Point location, Date startTime, Date endTime) {
+        this.vehicle = vehicle;
+        this.price = price;
+        this.note = note;
+        this.location = location;
+        this.startTime = startTime;
+        this.endTime = endTime;
+    }
 
     public String getId() {
         return id;
@@ -25,12 +44,28 @@ public class RentalOffer {
         this.price = price;
     }
 
-    public Motor getMotor() {
-        return motor;
+    public Vehicle getVehicle() {
+        return vehicle;
     }
 
-    public void setMotor(Motor motor) {
-        this.motor = motor;
+    public void setVehicle(Vehicle vehicle) {
+        this.vehicle = vehicle;
+    }
+
+    public double getRating() {
+        return rating;
+    }
+
+    public void setRating(double rating) {
+        this.rating = rating;
+    }
+
+    public Point getLocation() {
+        return location;
+    }
+
+    public void setLocation(Point location) {
+        this.location = location;
     }
 
     public String getNote() {

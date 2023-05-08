@@ -3,17 +3,19 @@ package com.example.rental.Dto.Vehicle;
 import com.example.rental.Enums.VehicleType;
 
 public class MotorDto {
-    private String name;
+    private String production;
     private String model;
     private int cylinder;
     private VehicleType type;
+    private String imageUrl;
+    private String summary;
 
-    public String getName() {
-        return name;
+    public String getProduction() {
+        return production;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setProduction(String production) {
+        this.production = production;
     }
 
     public String getModel() {
@@ -38,5 +40,21 @@ public class MotorDto {
 
     public void setType(VehicleType type) {
         this.type = type;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public String getSummary() {
+        return summary;
+    }
+
+    public void setSummary(String summary) {
+        this.summary = summary;
     }
 }

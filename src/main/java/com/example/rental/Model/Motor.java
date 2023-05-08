@@ -6,12 +6,14 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document("Motor")
 public class Motor extends Vehicle {
 
-    public Motor(String name, String model, int cylinder, User owner, VehicleType type) {
-        this.name = name;
+    public Motor(String production, String model, int engineSize, VehicleType type, String imageUrl, String summary,  User owner) {
+        this.production = production;
         this.model = model;
-        this.engineSize = cylinder;
+        this.engineSize = engineSize;
         this.owner = owner;
         this.type = type;
+        this.imageUrl = imageUrl;
+        this.summary = summary;
     }
 
 }

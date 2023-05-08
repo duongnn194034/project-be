@@ -15,7 +15,8 @@ public class MotorServiceImpl implements MotorService {
 
     @Override
     public Motor save(MotorDto motorDto, User owner) {
-        Motor motor = new Motor(motorDto.getName(), motorDto.getModel(), motorDto.getCylinder(), owner, motorDto.getType());
+        Motor motor = new Motor(motorDto.getProduction(), motorDto.getModel(), motorDto.getCylinder(), motorDto.getType(),
+                motorDto.getImageUrl(), motorDto.getSummary(), owner);
         return motorRepository.save(motor);
     }
 }
