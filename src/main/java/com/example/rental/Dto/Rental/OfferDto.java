@@ -1,12 +1,24 @@
 package com.example.rental.Dto.Rental;
 
+import com.example.rental.Model.Feature;
+
 public class OfferDto {
+    private String id;
     private double price;
     private String note;
     private double lng;
     private double lat;
     private long start;
     private long end;
+    private Feature feature;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public double getPrice() {
         return price;
@@ -54,5 +66,13 @@ public class OfferDto {
 
     public void setEnd(long end) {
         this.end = end;
+    }
+
+    public Feature getFeature() {
+        return feature;
+    }
+
+    public void setFeature(Feature feature) {
+        this.feature = feature;
     }
 }
