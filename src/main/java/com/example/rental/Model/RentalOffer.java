@@ -1,14 +1,14 @@
 package com.example.rental.Model;
 
-import com.mongodb.client.model.geojson.Point;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.geo.Point;
 import org.springframework.data.mongodb.core.index.GeoSpatialIndexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
 
 
-@Document
+@Document("RentalOffer")
 public class RentalOffer {
     @Id
     private String id;
@@ -22,6 +22,7 @@ public class RentalOffer {
     private Date startTime;
 
     private Date endTime;
+    private Feature feature;
 
     public RentalOffer(Vehicle vehicle, double price, String note, Point location, Date startTime, Date endTime) {
         this.vehicle = vehicle;
