@@ -46,7 +46,7 @@ public class RentalMotorServiceImpl implements RentalMotorService {
             throw new RentalOfferException("Motor Id is not exist.");
         }
         RentalOffer rentalOffer = new RentalOffer(motor.get(), offerDto.getPrice(), offerDto.getNote(),
-                location, new Date(offerDto.getStart()), new Date(offerDto.getEnd()));
+                location, new Date(offerDto.getStart()), new Date(offerDto.getEnd()), offerDto.getFeature());
         return rentalOfferRepository.save(rentalOffer);
     }
 

@@ -27,13 +27,14 @@ public class RentalOffer {
     private Date endTime;
     private Feature feature;
 
-    public RentalOffer(Vehicle vehicle, double price, String note, Point location, Date startTime, Date endTime) {
+    public RentalOffer(Vehicle vehicle, double price, String note, Point location, Date startTime, Date endTime, Feature feature) {
         this.vehicle = vehicle;
         this.price = price;
         this.note = note;
         this.location = location;
         this.startTime = startTime;
         this.endTime = endTime;
+        this.feature = feature;
     }
 
     public String getId() {
