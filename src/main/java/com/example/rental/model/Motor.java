@@ -10,7 +10,7 @@ public class Motor extends Vehicle {
      public static Motor getInstance(MotorDto motorDto, User owner) {
          Motor motor = new Motor();
          motor.setOwner(owner);
-         motor.setProduction(motorDto.getModel());
+         motor.setProduction(motorDto.getProduction());
          motor.setModel(motorDto.getModel());
          motor.setPrice(motorDto.getPrice());
          motor.setEngineSize(motorDto.getEngineSize());

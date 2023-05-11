@@ -5,6 +5,7 @@ import com.example.rental.dto.vehicle.MotorDto;
 import com.example.rental.exception.AuthenticationFailException;
 import com.example.rental.exception.MotorException;
 import com.example.rental.model.Motor;
+import com.example.rental.model.Rate;
 import com.example.rental.model.User;
 import com.example.rental.service.AuthenticationService;
 import com.example.rental.service.MotorService;
@@ -44,8 +45,8 @@ public class MotorController {
     }
 
     @GetMapping("")
-    public ResponseEntity<Page<Motor>> getByRating() {
-        Page<Motor> motors = motorService.getTopRating();
+    public ResponseEntity<Page<Motor>> getByRating(@RequestParam("page") int index) {
+        Page<Motor> motors = motorService.getTopRating(index);
         return new ResponseEntity<>(motors, HttpStatus.OK);
     }
 
@@ -56,11 +57,13 @@ public class MotorController {
     }
 
     @PatchMapping("/{id}")
-    public ApiResponse rateMotor(@PathVariable("id") String id, @RequestHeader("token") String token, @RequestParam("rating") double rate) {
+    public ApiResponse rateMotor(@PathVariable("id") String id, @RequestHeader("token") String token, @RequestBody Rate rate) {
         try {
             authenticationService.authenticate(token);
-            double rating = motorService.rateMotor(id, rate);
-            return new ApiResponse(true, String.valueOf(rating));
+            User user = authenticationService.getUser(token);
+            rate.setUser(user);
+            motorService.rateMotor(id, rate);
+            return new ApiResponse(true, "Rated.");
         } catch (Exception e) {
             e.printStackTrace();
             return new ApiResponse(false, e.getMessage());

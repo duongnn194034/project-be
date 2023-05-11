@@ -13,7 +13,7 @@ public class MotorDto {
     private VehicleType type;
     private String imageUrl;
     private String note;
-    private int engineSize;
+    private String engineSize;
     private double price;
     private double lng;
     private double lat;
@@ -59,11 +59,11 @@ public class MotorDto {
         this.note = note;
     }
 
-    public int getEngineSize() {
+    public String getEngineSize() {
         return engineSize;
     }
 
-    public void setEngineSize(int engineSize) {
+    public void setEngineSize(String engineSize) {
         this.engineSize = engineSize;
     }
 

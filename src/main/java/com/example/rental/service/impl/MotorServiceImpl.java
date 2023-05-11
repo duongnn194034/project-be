@@ -3,6 +3,7 @@ package com.example.rental.service.impl;
 import com.example.rental.dto.vehicle.MotorDto;
 import com.example.rental.exception.MotorException;
 import com.example.rental.model.Motor;
+import com.example.rental.model.Rate;
 import com.example.rental.model.User;
 import com.example.rental.repository.MotorRepository;
 import com.example.rental.service.MotorService;
@@ -24,7 +25,6 @@ public class MotorServiceImpl implements MotorService {
     MotorRepository motorRepository;
 
     private static final int PAGE_LIMIT = 3;
-    private static final int PAGE_NO = 3;
     private static final double MAX_DIST = 10.0;
 
     @Override
@@ -42,8 +42,8 @@ public class MotorServiceImpl implements MotorService {
     }
 
     @Override
-    public Page<Motor> getTopRating() {
-        return motorRepository.findAll(PageRequest.of(PAGE_NO, PAGE_LIMIT, Sort.by(Sort.Direction.DESC, "rating")));
+    public Page<Motor> getTopRating(int index) {
+        return motorRepository.findAll(PageRequest.of(index, PAGE_LIMIT, Sort.by(Sort.Direction.DESC, "rating")));
     }
 
     @Override
@@ -52,11 +52,10 @@ public class MotorServiceImpl implements MotorService {
     }
 
     @Override
-    public double rateMotor(String id, double rate) throws MotorException {
+    public void rateMotor(String id, Rate rate) throws MotorException {
         Motor motor = getById(id);
-        double rating = motor.updateRating(rate);
+        motor.addRating(rate);
         motor.setId(id);
         motorRepository.save(motor);
-        return rating;
     }
 }
