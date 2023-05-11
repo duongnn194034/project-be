@@ -1,6 +1,6 @@
 package com.example.rental;
 
-import com.example.rental.Model.User;
+import com.example.rental.model.User;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
