@@ -3,6 +3,7 @@ package com.example.rental.service.impl;
 import com.example.rental.dto.vehicle.MotorDto;
 import com.example.rental.exception.MotorException;
 import com.example.rental.model.Motor;
+import com.example.rental.model.Rate;
 import com.example.rental.model.User;
 import com.example.rental.repository.MotorRepository;
 import com.example.rental.service.MotorService;
@@ -51,11 +52,10 @@ public class MotorServiceImpl implements MotorService {
     }
 
     @Override
-    public double rateMotor(String id, double rate) throws MotorException {
+    public void rateMotor(String id, Rate rate) throws MotorException {
         Motor motor = getById(id);
-        double rating = motor.updateRating(rate);
+        motor.addRating(rate);
         motor.setId(id);
         motorRepository.save(motor);
-        return rating;
     }
 }

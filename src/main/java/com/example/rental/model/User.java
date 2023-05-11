@@ -17,9 +17,16 @@ public class User {
     private String fullName;
     private String phoneNumber;
     private Role role;
+    private boolean verified;
     private Date createdAt;
 
     public User() {
+        this.createdAt = new Date(System.currentTimeMillis());
+    }
+
+    public User(String id, String fullName) {
+        this.id = id;
+        this.fullName = fullName;
         this.createdAt = new Date(System.currentTimeMillis());
     }
 
@@ -77,5 +84,21 @@ public class User {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public boolean isVerified() {
+        return verified;
+    }
+
+    public void setVerified(boolean verified) {
+        this.verified = verified;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 }
