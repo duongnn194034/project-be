@@ -11,7 +11,7 @@ public interface MotorService {
 
     Motor save(MotorDto motorDto, User owner);
 
-    Page<Motor> getTopRating();
+    Page<Motor> getTopRating(int index);
 
     GeoResults<Motor> findByLocNear(double lng, double lat);
 

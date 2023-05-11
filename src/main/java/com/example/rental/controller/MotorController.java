@@ -44,8 +44,8 @@ public class MotorController {
     }
 
     @GetMapping("")
-    public ResponseEntity<Page<Motor>> getByRating() {
-        Page<Motor> motors = motorService.getTopRating();
+    public ResponseEntity<Page<Motor>> getByRating(@RequestParam("page") int index) {
+        Page<Motor> motors = motorService.getTopRating(index);
         return new ResponseEntity<>(motors, HttpStatus.OK);
     }
 
