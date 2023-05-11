@@ -3,6 +3,7 @@ package com.example.rental.model;
 import java.io.Serializable;
 import java.time.Duration;
 import java.util.Date;
+import java.util.List;
 
 public class Feature implements Serializable {
     private boolean damageInsurance;
@@ -10,6 +11,7 @@ public class Feature implements Serializable {
     private boolean orderCanceling;
     private boolean fuelCost;
     private boolean adjust;
+    private List<String> others;
     private int minAge;
     private int minDriving;
     private Date startRent;
@@ -103,6 +105,22 @@ public class Feature implements Serializable {
 
     public void setMaxDur(Duration maxDur) {
         this.maxDur = maxDur;
+    }
+
+    public List<String> getOthers() {
+        return others;
+    }
+
+    public void setOthers(List<String> others) {
+        this.others = others;
+    }
+
+    public void setStartRent(Date startRent) {
+        this.startRent = startRent;
+    }
+
+    public void setEndRent(Date endRent) {
+        this.endRent = endRent;
     }
 
     @Override

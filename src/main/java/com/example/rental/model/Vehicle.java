@@ -16,7 +16,7 @@ public abstract class Vehicle {
     protected VehicleType type;
     protected String imageUrl;
     protected String note;
-    protected int engineSize;
+    protected String engineSize;
     protected double price;
     protected double rating;
     protected int ratingTotal;
@@ -68,11 +68,11 @@ public abstract class Vehicle {
         this.imageUrl = imageUrl;
     }
 
-    public int getEngineSize() {
+    public String getEngineSize() {
         return engineSize;
     }
 
-    public void setEngineSize(int engineSize) {
+    public void setEngineSize(String engineSize) {
         this.engineSize = engineSize;
     }
 
