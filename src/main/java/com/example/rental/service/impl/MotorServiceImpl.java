@@ -17,14 +17,13 @@ import org.springframework.data.geo.Metrics;
 import org.springframework.data.geo.Point;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
 public class MotorServiceImpl implements MotorService {
     @Autowired
     MotorRepository motorRepository;
-
-    private static final int PAGE_LIMIT = 3;
     private static final double MAX_DIST = 10.0;
 
     @Override
@@ -42,8 +41,9 @@ public class MotorServiceImpl implements MotorService {
     }
 
     @Override
-    public Page<Motor> getTopRating(int index) {
-        return motorRepository.findAll(PageRequest.of(index, PAGE_LIMIT, Sort.by(Sort.Direction.DESC, "rating")));
+    public List<Motor> getTopRating(int limit) {
+        List<Motor> motors = motorRepository.findAll(Sort.by(Sort.Direction.DESC, "rating"));
+        return motors.subList(0, Math.min(limit, motors.size()));
     }
 
     @Override

@@ -16,6 +16,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RequestMapping("/motor")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
@@ -45,8 +47,8 @@ public class MotorController {
     }
 
     @GetMapping("")
-    public ResponseEntity<Page<Motor>> getByRating(@RequestParam("page") int index) {
-        Page<Motor> motors = motorService.getTopRating(index);
+    public ResponseEntity<List<Motor>> getByRating(@RequestParam(name = "limit", defaultValue = "9") int limit) {
+        List<Motor> motors = motorService.getTopRating(limit);
         return new ResponseEntity<>(motors, HttpStatus.OK);
     }
 

@@ -7,12 +7,14 @@ import com.example.rental.model.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.geo.GeoResults;
 
+import java.util.List;
+
 public interface MotorService {
     Motor getById(String id);
 
     Motor save(MotorDto motorDto, User owner);
 
-    Page<Motor> getTopRating(int index);
+    List<Motor> getTopRating(int limit);
 
     GeoResults<Motor> findByLocNear(double lat, double lng);
 
