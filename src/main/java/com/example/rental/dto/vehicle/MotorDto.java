@@ -17,6 +17,7 @@ public class MotorDto {
     private double price;
     private double lng;
     private double lat;
+    private String address;
     private Feature feature;
 
     public String getProduction() {
@@ -97,5 +98,13 @@ public class MotorDto {
 
     public void setFeature(Feature feature) {
         this.feature = feature;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }
