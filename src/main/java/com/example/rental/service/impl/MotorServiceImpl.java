@@ -47,8 +47,8 @@ public class MotorServiceImpl implements MotorService {
     }
 
     @Override
-    public GeoResults<Motor> findByLocNear(double lat, double lng) {
-        return motorRepository.findByLocationNear(new Point(lat, lng), new Distance(MAX_DIST, Metrics.KILOMETERS));
+    public GeoResults<Motor> findByLocNear(double lng, double lat) {
+        return motorRepository.findByLocationNear(new Point(lng, lat), new Distance(MAX_DIST, Metrics.KILOMETERS));
     }
 
     @Override

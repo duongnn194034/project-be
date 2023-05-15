@@ -53,8 +53,8 @@ public class MotorController {
     }
 
     @GetMapping("/loc")
-    public ResponseEntity<GeoResults<Motor>> getGeoNear(@RequestParam("lat") double lat, @RequestParam("lng") double lng) {
-        GeoResults<Motor> motorGeoResults = motorService.findByLocNear(lat, lng);
+    public ResponseEntity<GeoResults<Motor>> getGeoNear(@RequestParam("lng") double lng, @RequestParam("lat") double lat) {
+        GeoResults<Motor> motorGeoResults = motorService.findByLocNear(lng, lat);
         return new ResponseEntity<>(motorGeoResults, HttpStatus.OK);
     }
 

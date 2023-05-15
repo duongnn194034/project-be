@@ -16,7 +16,7 @@ public interface MotorService {
 
     List<Motor> getTopRating(int limit);
 
-    GeoResults<Motor> findByLocNear(double lat, double lng);
+    GeoResults<Motor> findByLocNear(double lng, double lat);
 
     void rateMotor(String id, Rate rate);
 }
