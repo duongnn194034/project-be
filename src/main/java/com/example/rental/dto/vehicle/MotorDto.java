@@ -17,6 +17,7 @@ public class MotorDto {
     private double price;
     private double lng;
     private double lat;
+    private double radius;
     private String address;
     private Feature feature;
 
@@ -106,5 +107,13 @@ public class MotorDto {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public double getRadius() {
+        return radius;
+    }
+
+    public void setRadius(double radius) {
+        this.radius = radius;
     }
 }

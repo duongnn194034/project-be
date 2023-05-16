@@ -24,6 +24,7 @@ public abstract class Vehicle {
     protected List<Rate> ratings = new ArrayList<>();
     @GeoSpatialIndexed
     protected Point location;
+    protected double radius;
     protected String address;
     protected Feature feature;
 
@@ -148,5 +149,13 @@ public abstract class Vehicle {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public double getRadius() {
+        return radius;
+    }
+
+    public void setRadius(double radius) {
+        this.radius = radius;
     }
 }

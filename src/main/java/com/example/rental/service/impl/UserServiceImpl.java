@@ -100,7 +100,7 @@ public class UserServiceImpl implements UserService {
     public SignInResponseDto signIn(SignInDto signInDto) throws CustomException {
         // first find User by email
         User user = userRepository.findByEmail(signInDto.getEmail());
-        if(user == null) {
+        if (user == null) {
             throw new AuthenticationFailException("user not present");
         }
         try {

@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface TokenRepository extends MongoRepository<AuthenticationToken, Integer> {
+public interface TokenRepository extends MongoRepository<AuthenticationToken, String> {
     AuthenticationToken findTokenByUser(User user);
     AuthenticationToken findTokenByToken(String token);
 }
