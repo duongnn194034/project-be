@@ -17,15 +17,17 @@ public abstract class Vehicle {
     @JsonIgnore
     protected User owner;
     protected VehicleType type;
-    protected String imageUrl;
+    protected List<String> imageUrl = new ArrayList<>();
     protected String note;
     protected String engineSize;
+    protected String fuel;
     protected double price;
     protected List<Rate> ratings = new ArrayList<>();
     @GeoSpatialIndexed
     protected Point location;
     protected double radius;
     protected String address;
+    protected int year;
     protected Feature feature;
 
     public String getId() {
@@ -64,11 +66,11 @@ public abstract class Vehicle {
         this.type = type;
     }
 
-    public String getImageUrl() {
+    public List<String> getImageUrl() {
         return imageUrl;
     }
 
-    public void setImageUrl(String imageUrl) {
+    public void setImageUrl(List<String> imageUrl) {
         this.imageUrl = imageUrl;
     }
 
@@ -157,5 +159,21 @@ public abstract class Vehicle {
 
     public void setRadius(double radius) {
         this.radius = radius;
+    }
+
+    public String getFuel() {
+        return fuel;
+    }
+
+    public void setFuel(String fuel) {
+        this.fuel = fuel;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
     }
 }

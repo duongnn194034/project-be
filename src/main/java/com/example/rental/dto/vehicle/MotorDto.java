@@ -7,18 +7,23 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.geo.Point;
 import org.springframework.data.mongodb.core.index.GeoSpatialIndexed;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MotorDto {
     private String production;
     private String model;
     private VehicleType type;
-    private String imageUrl;
+    private List<String> imageUrl = new ArrayList<>();
     private String note;
     private String engineSize;
+    private String fuel;
     private double price;
     private double lng;
     private double lat;
     private double radius;
     private String address;
+    private int year;
     private Feature feature;
 
     public String getProduction() {
@@ -45,11 +50,11 @@ public class MotorDto {
         this.type = type;
     }
 
-    public String getImageUrl() {
+    public List<String> getImageUrl() {
         return imageUrl;
     }
 
-    public void setImageUrl(String imageUrl) {
+    public void setImageUrl(List<String> imageUrl) {
         this.imageUrl = imageUrl;
     }
 
@@ -115,5 +120,21 @@ public class MotorDto {
 
     public void setRadius(double radius) {
         this.radius = radius;
+    }
+
+    public String getFuel() {
+        return fuel;
+    }
+
+    public void setFuel(String fuel) {
+        this.fuel = fuel;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
     }
 }
