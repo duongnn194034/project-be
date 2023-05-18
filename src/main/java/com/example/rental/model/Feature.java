@@ -14,8 +14,6 @@ public class Feature implements Serializable {
     private List<String> others;
     private int minAge;
     private int minDriving;
-    private Date startRent;
-    private Date endRent;
     private Duration minDur;
     private Duration maxDur;
 
@@ -75,32 +73,16 @@ public class Feature implements Serializable {
         this.minDriving = minDriving;
     }
 
-    public Date getStartRent() {
-        return startRent;
-    }
-
-    public void setStartRent(long startRent) {
-        this.startRent = new Date(startRent);
-    }
-
-    public Date getEndRent() {
-        return endRent;
-    }
-
-    public void setEndRent(long endRent) {
-        this.endRent = new Date(endRent);
-    }
-
-    public Duration getMinDur() {
-        return minDur;
+    public String getMinDur() {
+        return durToString(minDur);
     }
 
     public void setMinDur(Duration minDur) {
         this.minDur = minDur;
     }
 
-    public Duration getMaxDur() {
-        return maxDur;
+    public String getMaxDur() {
+        return durToString(maxDur);
     }
 
     public void setMaxDur(Duration maxDur) {
@@ -115,14 +97,6 @@ public class Feature implements Serializable {
         this.others = others;
     }
 
-    public void setStartRent(Date startRent) {
-        this.startRent = startRent;
-    }
-
-    public void setEndRent(Date endRent) {
-        this.endRent = endRent;
-    }
-
     @Override
     public boolean equals(Object o) {
         return super.equals(o);
@@ -130,5 +104,25 @@ public class Feature implements Serializable {
     @Override
     public int hashCode() {
         return super.hashCode();
+    }
+
+    private String durToString(Duration duration) {
+        if (duration == null) {
+            return "0 hour";
+        }
+        StringBuilder stringBuilder = new StringBuilder();
+        long days = duration.toDays();
+        if (days > 1) {
+            stringBuilder.append(days).append(" days ");
+        } else if (days > 0) {
+            stringBuilder.append(days).append(" day ");
+        }
+        long hours = duration.minusDays(days).toHours();
+        if (hours > 1) {
+            stringBuilder.append(hours).append(" hours");
+        } else {
+            stringBuilder.append(hours).append(" hour");
+        }
+        return stringBuilder.toString();
     }
 }
