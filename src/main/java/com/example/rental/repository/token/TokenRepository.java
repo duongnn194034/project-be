@@ -1,4 +1,4 @@
-package com.example.rental.repository;
+package com.example.rental.repository.token;
 
 
 import com.example.rental.model.AuthenticationToken;

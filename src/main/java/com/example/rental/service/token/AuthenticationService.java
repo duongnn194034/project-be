@@ -1,4 +1,4 @@
-package com.example.rental.service;
+package com.example.rental.service.token;
 
 import com.example.rental.exception.AuthenticationFailException;
 import com.example.rental.model.AuthenticationToken;

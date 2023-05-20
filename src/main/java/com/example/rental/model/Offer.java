@@ -1,23 +1,25 @@
 package com.example.rental.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
 
 
-@Document("RentalOffer")
-public class RentalOffer {
+@Document("Offer")
+public class Offer {
     @Id
     private String id;
-    @Indexed(unique = true)
+    @JsonIgnore
+    private User user;
+    @JsonIgnore
     private Vehicle vehicle;
     private Date startTime;
 
     private Date endTime;
 
-    public RentalOffer(Vehicle vehicle, Date startTime, Date endTime) {
+    public Offer(Vehicle vehicle, Date startTime, Date endTime) {
         this.vehicle = vehicle;
         this.startTime = startTime;
         this.endTime = endTime;
@@ -29,6 +31,14 @@ public class RentalOffer {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Vehicle getVehicle() {

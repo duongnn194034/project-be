@@ -1,10 +1,9 @@
-package com.example.rental.service.impl;
+package com.example.rental.service.token;
 
 import com.example.rental.exception.AuthenticationFailException;
 import com.example.rental.model.AuthenticationToken;
 import com.example.rental.model.User;
-import com.example.rental.repository.TokenRepository;
-import com.example.rental.service.AuthenticationService;
+import com.example.rental.repository.token.TokenRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

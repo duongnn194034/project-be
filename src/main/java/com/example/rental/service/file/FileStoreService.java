@@ -1,4 +1,4 @@
-package com.example.rental.service;
+package com.example.rental.service.file;
 
 import com.example.rental.config.StorageProperties;
 import com.example.rental.exception.StorageException;

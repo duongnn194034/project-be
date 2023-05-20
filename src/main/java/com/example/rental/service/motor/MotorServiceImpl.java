@@ -1,15 +1,12 @@
-package com.example.rental.service.impl;
+package com.example.rental.service.motor;
 
 import com.example.rental.dto.vehicle.MotorDto;
 import com.example.rental.exception.MotorException;
 import com.example.rental.model.Motor;
 import com.example.rental.model.Rate;
 import com.example.rental.model.User;
-import com.example.rental.repository.MotorRepository;
-import com.example.rental.service.MotorService;
+import com.example.rental.repository.motor.MotorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.geo.Distance;
 import org.springframework.data.geo.GeoResults;

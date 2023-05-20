@@ -1,7 +1,7 @@
 package com.example.rental.controller;
 
 import com.example.rental.model.FileInfo;
-import com.example.rental.service.FileStoreService;
+import com.example.rental.service.file.FileStoreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;

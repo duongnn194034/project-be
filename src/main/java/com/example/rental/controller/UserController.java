@@ -7,8 +7,8 @@ import com.example.rental.dto.user.*;
 import com.example.rental.exception.AuthenticationFailException;
 import com.example.rental.exception.CustomException;
 import com.example.rental.model.User;
-import com.example.rental.service.AuthenticationService;
-import com.example.rental.service.UserService;
+import com.example.rental.service.token.AuthenticationService;
+import com.example.rental.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

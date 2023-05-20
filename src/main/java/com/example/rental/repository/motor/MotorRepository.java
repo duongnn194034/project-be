@@ -1,4 +1,4 @@
-package com.example.rental.repository;
+package com.example.rental.repository.motor;
 
 import com.example.rental.model.Motor;
 import org.springframework.data.geo.Distance;

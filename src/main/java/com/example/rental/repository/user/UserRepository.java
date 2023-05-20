@@ -1,4 +1,4 @@
-package com.example.rental.repository;
+package com.example.rental.repository.user;
 
 import com.example.rental.model.User;
 import org.springframework.data.mongodb.repository.MongoRepository;

@@ -1,4 +1,4 @@
-package com.example.rental.service;
+package com.example.rental.service.motor;
 
 import com.example.rental.dto.vehicle.MotorDto;
 import com.example.rental.model.Motor;
