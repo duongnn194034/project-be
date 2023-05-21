@@ -17,6 +17,7 @@ public class Motor extends Vehicle {
          motor.setNote(motorDto.getNote());
          motor.setImageUrl(motorDto.getImageUrl());
          motor.setFuel(motorDto.getFuel());
+         motor.setLicensePlate(motorDto.getLicense());
          motor.setLocation(new Point(motorDto.getLng(), motorDto.getLat()));
          motor.setAddress(motorDto.getAddress());
          motor.setYear(motorDto.getYear());

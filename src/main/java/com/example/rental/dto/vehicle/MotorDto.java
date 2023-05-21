@@ -18,6 +18,7 @@ public class MotorDto {
     private String note;
     private String engineSize;
     private String fuel;
+    private String license;
     private double price;
     private double lng;
     private double lat;
@@ -136,5 +137,13 @@ public class MotorDto {
 
     public void setYear(int year) {
         this.year = year;
+    }
+
+    public String getLicense() {
+        return license;
+    }
+
+    public void setLicense(String license) {
+        this.license = license;
     }
 }

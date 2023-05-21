@@ -23,6 +23,7 @@ public abstract class Vehicle {
     protected String engineSize;
     protected String fuel;
     protected double price;
+    protected String licensePlate;
     protected List<Rate> ratings = new ArrayList<>();
     @GeoSpatialIndexed
     protected Point location;
@@ -176,5 +177,13 @@ public abstract class Vehicle {
 
     public void setYear(int year) {
         this.year = year;
+    }
+
+    public String getLicensePlate() {
+        return licensePlate;
+    }
+
+    public void setLicensePlate(String licensePlate) {
+        this.licensePlate = licensePlate;
     }
 }
