@@ -2,6 +2,7 @@ package com.example.rental.service.file;
 
 import com.example.rental.config.StorageProperties;
 import com.example.rental.exception.StorageException;
+import com.example.rental.model.FileInfo;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -26,14 +27,14 @@ public class FileStoreService {
 
 
 
-    public String store(MultipartFile file) {
+    public FileInfo store(MultipartFile file) {
         try {
             if (file.isEmpty()) {
                 throw new StorageException("Failed to store empty file.");
             }
 
             String extension = FilenameUtils.getExtension(file.getOriginalFilename());
-            String uploadedFileName = UUID.randomUUID().toString() + "." + extension;
+            String uploadedFileName = UUID.randomUUID() + "." + extension;
 
             Path destinationFile = rootLocation.resolve(
                             Paths.get(uploadedFileName))
@@ -46,7 +47,7 @@ public class FileStoreService {
                 final String baseUrl =
                         ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
 
-                return baseUrl+"/fileUpload/files/"+uploadedFileName;
+                return new FileInfo(uploadedFileName, baseUrl+"/fileUpload/files/"+uploadedFileName);
             }
         }
         catch (IOException e) {

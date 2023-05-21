@@ -24,7 +24,7 @@ public class FileUploadController {
     FileStoreService fileStoreService;
 
     @PostMapping("/")
-    public String handleFileUpload(@RequestParam("file") MultipartFile file) {
+    public FileInfo handleFileUpload(@RequestParam("file") MultipartFile file) {
         return fileStoreService.store(file);
     }
 
