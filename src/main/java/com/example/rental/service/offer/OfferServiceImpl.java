@@ -24,15 +24,19 @@ public class OfferServiceImpl implements OfferService {
 
     @Override
     public Offer save(User user, OfferDto offerDto) {
-        Date startDate = new Date(offerDto.getStart());
-        Date endDate = new Date(offerDto.getEnd());
-        List<Offer> list = rentalOfferRepositoryUtil.findByDateBetween(startDate, endDate);
-        if (!list.isEmpty()) {
-            throw new OfferException("Vehicle is busy this time.");
-        }
         Optional<Motor> motor = motorRepository.findById(offerDto.getId());
         if (motor.isEmpty()) {
             throw new OfferException("Motor id is not found.");
+        }
+        long span = offerDto.getEnd() - offerDto.getStart();
+        if (span < motor.get().getFeature().toMinDur() || span > motor.get().getFeature().toMaxDur()) {
+            throw new OfferException("Duration length is not valid.");
+        }
+        Date startDate = new Date(offerDto.getStart());
+        Date endDate = new Date(offerDto.getEnd());
+        List<Offer> list = rentalOfferRepositoryUtil.findByDateBetween(motor.get(), startDate, endDate);
+        if (!list.isEmpty()) {
+            throw new OfferException("Vehicle is busy this time.");
         }
         Offer offer = new Offer(motor.get(),startDate, endDate);
         offer.setUser(user);

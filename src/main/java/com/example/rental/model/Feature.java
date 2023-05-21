@@ -125,4 +125,18 @@ public class Feature implements Serializable {
         }
         return stringBuilder.toString();
     }
+
+    public long toMinDur() {
+        if (minDur == null) {
+            return 0;
+        }
+        return minDur.toMillis();
+    }
+
+    public long toMaxDur() {
+        if (maxDur == null) {
+            return Long.MAX_VALUE;
+        }
+        return maxDur.toMillis();
+    }
 }
