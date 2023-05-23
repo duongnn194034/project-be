@@ -55,4 +55,9 @@ public class MotorServiceImpl implements MotorService {
         motor.setId(id);
         motorRepository.save(motor);
     }
+
+    @Override
+    public List<Motor> findByOwner(User owner) {
+        return motorRepository.findByOwner(owner);
+    }
 }

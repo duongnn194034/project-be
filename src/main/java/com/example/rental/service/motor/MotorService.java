@@ -19,4 +19,6 @@ public interface MotorService {
     GeoResults<Motor> findByLocNear(double lng, double lat);
 
     void rateMotor(String id, Rate rate);
+
+    List<Motor> findByOwner(User owner);
 }

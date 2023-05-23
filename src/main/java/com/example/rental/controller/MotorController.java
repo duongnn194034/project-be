@@ -71,6 +71,18 @@ public class MotorController {
         }
     }
 
-
+    @GetMapping("/list")
+    public ResponseEntity<Object> getByUser(@RequestHeader("token") String token) {
+        try {
+            User user = authenticationService.getUser(token);
+            List<Motor> motors = motorService.findByOwner(user);
+            if (motors.isEmpty()) {
+                return new ResponseEntity<>(motors, HttpStatus.NO_CONTENT);
+            }
+            return new ResponseEntity<>(motors, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>("You must log in first.", HttpStatus.BAD_REQUEST);
+        }
+    }
 
 }
