@@ -81,4 +81,13 @@ public class FileStoreService {
             throw new RuntimeException("Error: " + e.getMessage());
         }
     }
+
+    public void delete(String filename) {
+        try {
+            Path file = rootLocation.resolve(filename);
+            Files.delete(file);
+        } catch (Exception e) {
+            throw new RuntimeException("Error" + e.getMessage());
+        }
+    }
 }

@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.geo.Point;
 import org.springframework.data.mongodb.core.index.GeoSpatialIndexed;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,6 +27,11 @@ public class MotorDto {
     private String address;
     private int year;
     private Feature feature;
+
+    private int minAge;
+    private int minDriving;
+    private long minDur;
+    private long maxDur;
 
     public String getProduction() {
         return production;
@@ -145,5 +151,37 @@ public class MotorDto {
 
     public void setLicense(String license) {
         this.license = license;
+    }
+
+    public int getMinAge() {
+        return minAge;
+    }
+
+    public void setMinAge(int minAge) {
+        this.minAge = minAge;
+    }
+
+    public int getMinDriving() {
+        return minDriving;
+    }
+
+    public void setMinDriving(int minDriving) {
+        this.minDriving = minDriving;
+    }
+
+    public long getMinDur() {
+        return minDur;
+    }
+
+    public void setMinDur(long minDur) {
+        this.minDur = minDur;
+    }
+
+    public long getMaxDur() {
+        return maxDur;
+    }
+
+    public void setMaxDur(long maxDur) {
+        this.maxDur = maxDur;
     }
 }

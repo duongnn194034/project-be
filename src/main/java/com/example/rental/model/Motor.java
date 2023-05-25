@@ -4,6 +4,8 @@ import com.example.rental.dto.vehicle.MotorDto;
 import org.springframework.data.geo.Point;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.Duration;
+
 @Document("Motor")
 public class Motor extends Vehicle {
 
@@ -24,6 +26,10 @@ public class Motor extends Vehicle {
          motor.setRadius(motorDto.getRadius());
          motor.setFeature(motorDto.getFeature());
          motor.setType(motorDto.getType());
+         motor.setMinAge(motorDto.getMinAge());
+         motor.setMinDriving(motorDto.getMinDriving());
+         motor.setMinDur(Duration.ofMillis(motorDto.getMinDur()));
+         motor.setMaxDur(Duration.ofMillis(motorDto.getMaxDur()));
          return motor;
      }
 }

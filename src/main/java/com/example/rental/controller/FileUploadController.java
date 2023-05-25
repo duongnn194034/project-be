@@ -1,5 +1,6 @@
 package com.example.rental.controller;
 
+import com.example.rental.common.ApiResponse;
 import com.example.rental.model.FileInfo;
 import com.example.rental.service.file.FileStoreService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/fileUpload")
 public class FileUploadController {
 
@@ -48,6 +50,14 @@ public class FileUploadController {
         Resource file = fileStoreService.load(filename);
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"").body(file);
+    }
+
+    @DeleteMapping("/files")
+    public ApiResponse deleteFiles(@RequestBody List<String> filenames) {
+        for (String filename : filenames) {
+            fileStoreService.delete(filename);
+        }
+        return new ApiResponse(true, "Files have been deleted.");
     }
 
 }
