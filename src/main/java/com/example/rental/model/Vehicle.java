@@ -4,6 +4,7 @@ import com.example.rental.enums.VehicleType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.geo.Point;
+import org.springframework.data.mongodb.core.index.GeoSpatialIndexType;
 import org.springframework.data.mongodb.core.index.GeoSpatialIndexed;
 import org.springframework.data.mongodb.core.index.Indexed;
 
@@ -26,7 +27,7 @@ public abstract class Vehicle {
     protected double price;
     protected String licensePlate;
     protected List<Rate> ratings = new ArrayList<>();
-    @GeoSpatialIndexed
+    @GeoSpatialIndexed(type = GeoSpatialIndexType.GEO_2DSPHERE)
     protected Point location;
     protected double radius;
     protected String address;
@@ -222,8 +223,10 @@ public abstract class Vehicle {
         long hours = duration.minusDays(days).toHours();
         if (hours > 1) {
             stringBuilder.append(hours).append(" hours");
-        } else {
+        } else if (hours > 0) {
             stringBuilder.append(hours).append(" hour");
+        } else if (days == 0) {
+            stringBuilder.append("0 hour");
         }
         return stringBuilder.toString();
     }
