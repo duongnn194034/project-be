@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 @RequestMapping("/offer")
@@ -36,11 +37,17 @@ public class OfferController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<List<Offer>> findOffer(@PathVariable("id") String id) throws OfferException {
+    public ResponseEntity<List<Offer>> getOffer(@PathVariable("id") String id) throws OfferException {
         List<Offer> offers = offerService.getOffer(id);
         if (offers.isEmpty()) {
             return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(offers, HttpStatus.OK);
+    }
+
+    @GetMapping("")
+    public ResponseEntity<List<Offer>> findOfferAvailable(@RequestParam(name = "start", defaultValue = "-1") long start,
+                                                          @RequestParam(name = "end", defaultValue = "-1") long end) {
+        return null;
     }
 }
