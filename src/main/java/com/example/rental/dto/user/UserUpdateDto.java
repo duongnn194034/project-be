@@ -7,6 +7,8 @@ public class UserUpdateDto {
     private String address;
     private String phoneNumber;
     private String email;
+    private String avatarUrl;
+    private String biography;
     private Role role;
 
     public UserUpdateDto(String fullname, String address, String phoneNumber, String email, Role role) {
@@ -65,5 +67,21 @@ public class UserUpdateDto {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getAvatarUrl() {
+        return avatarUrl;
+    }
+
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
+    }
+
+    public String getBiography() {
+        return biography;
+    }
+
+    public void setBiography(String biography) {
+        this.biography = biography;
     }
 }

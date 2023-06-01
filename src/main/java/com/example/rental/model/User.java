@@ -17,6 +17,8 @@ public class User {
     private String fullName;
     private String phoneNumber;
     private Role role;
+    private String avatarUrl;
+    private String biography;
     private boolean verified;
     private Date createdAt;
 
@@ -100,5 +102,21 @@ public class User {
 
     public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public String getAvatarUrl() {
+        return avatarUrl;
+    }
+
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
+    }
+
+    public String getBiography() {
+        return biography;
+    }
+
+    public void setBiography(String biography) {
+        this.biography = biography;
     }
 }
