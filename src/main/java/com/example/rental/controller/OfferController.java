@@ -45,9 +45,8 @@ public class OfferController {
         return new ResponseEntity<>(offers, HttpStatus.OK);
     }
 
-    @GetMapping("")
-    public ResponseEntity<List<Offer>> findOfferAvailable(@RequestParam(name = "start", defaultValue = "-1") long start,
-                                                          @RequestParam(name = "end", defaultValue = "-1") long end) {
-        return null;
+    @GetMapping("/test")
+    public ResponseEntity<Object> test(@RequestParam("start") long start, @RequestParam("end") long end) {
+        return new ResponseEntity<>(offerService.test(start, end), HttpStatus.OK);
     }
 }

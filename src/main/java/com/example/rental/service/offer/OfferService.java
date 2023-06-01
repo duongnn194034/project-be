@@ -10,4 +10,6 @@ public interface OfferService {
     Offer save(User user, OfferDto offerDto);
 
     List<Offer> getOffer(String motorId);
+
+    List<String> test(long start, long end);
 }

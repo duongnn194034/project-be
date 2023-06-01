@@ -4,7 +4,6 @@ import com.example.rental.dto.vehicle.MotorDto;
 import com.example.rental.model.Motor;
 import com.example.rental.model.Rate;
 import com.example.rental.model.User;
-import org.springframework.data.domain.Page;
 import org.springframework.data.geo.GeoResults;
 
 import java.util.List;
@@ -16,7 +15,7 @@ public interface MotorService {
 
     List<Motor> getTopRating(int limit);
 
-    GeoResults<Motor> findByLocNear(double lng, double lat);
+    GeoResults<Motor> findByLocNear(double lat, double lng, long start, long end);
 
     void rateMotor(String id, Rate rate);
 

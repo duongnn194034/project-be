@@ -18,7 +18,7 @@ public class OfferServiceImpl implements OfferService {
     @Autowired
     OfferRepository offerRepository;
     @Autowired
-    OfferRepositoryUtil rentalOfferRepositoryUtil;
+    OfferRepositoryUtil offerRepositoryUtil;
     @Autowired
     MotorRepository motorRepository;
 
@@ -29,12 +29,12 @@ public class OfferServiceImpl implements OfferService {
             throw new OfferException("Motor id is not found.");
         }
         long span = offerDto.getEnd() - offerDto.getStart();
-        if (span < motor.get().toMinDur() || span > motor.get().toMaxDur()) {
+        if (span < motor.get().toMinDur() || (motor.get().toMaxDur() > 0 && span > motor.get().toMaxDur())) {
             throw new OfferException("Duration length is not valid.");
         }
         Date startDate = new Date(offerDto.getStart());
         Date endDate = new Date(offerDto.getEnd());
-        List<Offer> list = rentalOfferRepositoryUtil.findByDateBetween(motor.get(), startDate, endDate);
+        List<Offer> list = offerRepositoryUtil.findByVehicleAndDateBetween(motor.get(), startDate, endDate);
         if (!list.isEmpty()) {
             throw new OfferException("Vehicle is busy this time.");
         }
@@ -47,5 +47,10 @@ public class OfferServiceImpl implements OfferService {
     public List<Offer> getOffer(String motorId) {
         Optional<Motor> motor = motorRepository.findById(motorId);
         return motor.map(value -> offerRepository.findAllByVehicle(value)).orElse(Collections.emptyList());
+    }
+
+    @Override
+    public List<String> test(long start, long end) {
+        return offerRepositoryUtil.findIdsByDateBetween(new Date(start), new Date(end));
     }
 }

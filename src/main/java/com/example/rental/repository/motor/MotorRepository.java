@@ -12,6 +12,5 @@ import java.util.List;
 
 @Repository
 public interface MotorRepository extends MongoRepository<Motor, String> {
-    GeoResults<Motor> findByLocationNear(Point point, Distance distance);
     List<Motor> findByOwner(User owner);
 }

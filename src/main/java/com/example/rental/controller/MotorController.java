@@ -46,14 +46,16 @@ public class MotorController {
     }
 
     @GetMapping("")
-    public ResponseEntity<List<Motor>> getByRating(@RequestParam(name = "limit", defaultValue = "9") int limit) {
+    public ResponseEntity<List<Motor>> getByRating(@RequestParam(name = "limit", defaultValue = "100") int limit) {
         List<Motor> motors = motorService.getTopRating(limit);
         return new ResponseEntity<>(motors, HttpStatus.OK);
     }
 
     @GetMapping("/loc")
-    public ResponseEntity<GeoResults<Motor>> getGeoNear(@RequestParam("lng") double lng, @RequestParam("lat") double lat) {
-        GeoResults<Motor> motorGeoResults = motorService.findByLocNear(lng, lat);
+    public ResponseEntity<GeoResults<Motor>> getGeoNear(@RequestParam("lat") double lat, @RequestParam("lng") double lng,
+                                                        @RequestParam(name = "start", required = false, defaultValue = "-1") long start,
+                                                        @RequestParam(name = "end", required = false, defaultValue = "-1") long end) {
+        GeoResults<Motor> motorGeoResults = motorService.findByLocNear(lat, lng, start, end);
         return new ResponseEntity<>(motorGeoResults, HttpStatus.OK);
     }
 

@@ -6,14 +6,15 @@ import com.example.rental.model.Motor;
 import com.example.rental.model.Rate;
 import com.example.rental.model.User;
 import com.example.rental.repository.motor.MotorRepository;
+import com.example.rental.repository.motor.MotorRepositoryUtil;
+import com.example.rental.repository.offer.OfferRepositoryUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.geo.Distance;
 import org.springframework.data.geo.GeoResults;
-import org.springframework.data.geo.Metrics;
-import org.springframework.data.geo.Point;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,7 +22,11 @@ import java.util.Optional;
 public class MotorServiceImpl implements MotorService {
     @Autowired
     MotorRepository motorRepository;
-    private static final double MAX_DIST = 10.0;
+    @Autowired
+    MotorRepositoryUtil motorRepositoryUtil;
+    @Autowired
+    OfferRepositoryUtil offerRepositoryUtil;
+
 
     @Override
     public Motor getById(String id) throws MotorException {
@@ -44,8 +49,14 @@ public class MotorServiceImpl implements MotorService {
     }
 
     @Override
-    public GeoResults<Motor> findByLocNear(double lng, double lat) {
-        return motorRepository.findByLocationNear(new Point(lng, lat), new Distance(MAX_DIST, Metrics.KILOMETERS));
+    public GeoResults<Motor> findByLocNear(double lat, double lng, long start, long end) {
+        List<String> ids = new ArrayList<>();
+        if (start >= 0 || end >= 0) {
+            Date startDate = new Date(start < 0 ? 0 : start);
+            Date endDate = new Date(end < 0 ? System.currentTimeMillis() : end);
+            ids.addAll(offerRepositoryUtil.findIdsByDateBetween(startDate, endDate));
+        }
+        return motorRepositoryUtil.findByQuery(lat, lng, ids);
     }
 
     @Override
