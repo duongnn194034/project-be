@@ -18,5 +18,5 @@ public interface UserService {
 
     ApiResponse changePassword(User user, ChangePasswordDto changePasswordDto) throws NoSuchAlgorithmException;
 
-    ApiResponse updateUser(String id, UserUpdateDto userUpdateDto);
+    ApiResponse updateUser(String token, UserUpdateDto userUpdateDto) throws CloneNotSupportedException;
 }

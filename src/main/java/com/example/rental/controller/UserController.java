@@ -56,9 +56,8 @@ public class UserController {
     }
 
     @PatchMapping("/update")
-    public ApiResponse updateUser(@RequestHeader("token") String token, @RequestBody UserUpdateDto userUpdateDto) throws AuthenticationFailException {
+    public ApiResponse updateUser(@RequestHeader("token") String token, @RequestBody UserUpdateDto userUpdateDto) throws AuthenticationFailException, CloneNotSupportedException {
         authenticationService.authenticate(token);
-        String id = authenticationService.getUser(token).getId();
-        return userService.updateUser(id, userUpdateDto);
+        return userService.updateUser(token, userUpdateDto);
     }
 }

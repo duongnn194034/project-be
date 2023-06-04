@@ -137,17 +137,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ApiResponse updateUser(String id, UserUpdateDto userUpdateDto) {
-        Optional<User> user = userRepository.findById(id);
-        if (user.isEmpty()) {
-            return new ApiResponse(false, "User is not exist");
-        }
-        User user1 = user.get();
-        user1.setId(id);
-        user1.setEmail(userUpdateDto.getEmail());
-        user1.setPhoneNumber(userUpdateDto.getPhoneNumber() != null ? userUpdateDto.getPhoneNumber() : user1.getPhoneNumber());
-        user1.setRole(userUpdateDto.getRole());
-        userRepository.save(user1);
+    public ApiResponse updateUser(String token, UserUpdateDto userUpdateDto) throws CloneNotSupportedException {
+        User user = authenticationService.getUser(token);
+        AuthenticationToken authenticationToken = authenticationService.getToken(user);
+        user.setEmail(userUpdateDto.getEmail() != null ? userUpdateDto.getEmail() : user.getEmail());
+        user.setPhoneNumber(userUpdateDto.getPhoneNumber() != null ? userUpdateDto.getPhoneNumber() : user.getPhoneNumber());
+        user.setRole(userUpdateDto.getRole() != null ? userUpdateDto.getRole() : user.getRole());
+        user.setAvatarUrl(userUpdateDto.getAvatarUrl() != null ? userUpdateDto.getAvatarUrl() : user.getAvatarUrl());
+        userRepository.save(user);
+        authenticationToken.setUser(user);
+        authenticationService.saveConfirmationToken(authenticationToken);
         return new ApiResponse(true, "User has been updated");
     }
 }
