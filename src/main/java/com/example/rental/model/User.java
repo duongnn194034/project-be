@@ -20,6 +20,10 @@ public class User {
     private String avatarUrl;
     private String biography;
     private boolean verified;
+    private Address address;
+    private License license;
+    private IdCard idCard;
+    private Bank bank;
     private Date createdAt;
 
     public User() {
@@ -118,5 +122,37 @@ public class User {
 
     public void setBiography(String biography) {
         this.biography = biography;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    public License getLicense() {
+        return license;
+    }
+
+    public void setLicense(License license) {
+        this.license = license;
+    }
+
+    public IdCard getIdCard() {
+        return idCard;
+    }
+
+    public void setIdCard(IdCard idCard) {
+        this.idCard = idCard;
+    }
+
+    public Bank getBank() {
+        return bank;
+    }
+
+    public void setBank(Bank bank) {
+        this.bank = bank;
     }
 }
