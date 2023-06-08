@@ -4,7 +4,6 @@ import com.example.rental.enums.Role;
 
 public class UserUpdateDto {
     private String fullname;
-    private String address;
     private String phoneNumber;
     private String email;
     private String avatarUrl;
@@ -13,7 +12,6 @@ public class UserUpdateDto {
 
     public UserUpdateDto(String fullname, String address, String phoneNumber, String email, Role role) {
         this.fullname = fullname;
-        this.address = address;
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.role = role;
@@ -43,14 +41,6 @@ public class UserUpdateDto {
 
     public void setFullname(String fullname) {
         this.fullname = fullname;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
     }
 
     public String getPhoneNumber() {

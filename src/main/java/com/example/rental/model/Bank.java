@@ -42,4 +42,8 @@ public class Bank implements Serializable {
         }
         this.sortCode[index] = code;
     }
+
+    public void setSortCode(String[] sortCode) {
+        this.sortCode = sortCode;
+    }
 }

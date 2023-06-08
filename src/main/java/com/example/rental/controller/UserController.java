@@ -6,7 +6,7 @@ import com.example.rental.dto.ResponseDto;
 import com.example.rental.dto.user.*;
 import com.example.rental.exception.AuthenticationFailException;
 import com.example.rental.exception.CustomException;
-import com.example.rental.model.User;
+import com.example.rental.model.*;
 import com.example.rental.service.token.AuthenticationService;
 import com.example.rental.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,8 +56,33 @@ public class UserController {
     }
 
     @PatchMapping("/update")
-    public ApiResponse updateUser(@RequestHeader("token") String token, @RequestBody UserUpdateDto userUpdateDto) throws AuthenticationFailException, CloneNotSupportedException {
+    public ApiResponse updateUser(@RequestHeader("token") String token, @RequestBody UserUpdateDto userUpdateDto) throws AuthenticationFailException {
         authenticationService.authenticate(token);
         return userService.updateUser(token, userUpdateDto);
     }
+
+    @PatchMapping("/update/address")
+    public ApiResponse updateUser(@RequestHeader("token") String token, @RequestBody Address address) throws AuthenticationFailException {
+        authenticationService.authenticate(token);
+        return userService.updateUser(token, address);
+    }
+
+    @PatchMapping("/update/bank")
+    public ApiResponse updateUser(@RequestHeader("token") String token, @RequestBody Bank bank) throws AuthenticationFailException {
+        authenticationService.authenticate(token);
+        return userService.updateUser(token, bank);
+    }
+
+    @PatchMapping("/update/card")
+    public ApiResponse updateUser(@RequestHeader("token") String token, @RequestBody IdCard idCard) throws AuthenticationFailException {
+        authenticationService.authenticate(token);
+        return userService.updateUser(token, idCard);
+    }
+
+    @PatchMapping("/update/license")
+    public ApiResponse updateUser(@RequestHeader("token") String token, @RequestBody License license) throws AuthenticationFailException {
+        authenticationService.authenticate(token);
+        return userService.updateUser(token, license);
+    }
+
 }

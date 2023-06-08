@@ -7,8 +7,7 @@ import com.example.rental.enums.Response;
 import com.example.rental.enums.Role;
 import com.example.rental.exception.AuthenticationFailException;
 import com.example.rental.exception.CustomException;
-import com.example.rental.model.AuthenticationToken;
-import com.example.rental.model.User;
+import com.example.rental.model.*;
 import com.example.rental.repository.user.UserRepository;
 import com.example.rental.service.token.AuthenticationServiceImpl;
 import org.slf4j.Logger;
@@ -137,16 +136,82 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ApiResponse updateUser(String token, UserUpdateDto userUpdateDto) throws CloneNotSupportedException {
-        User user = authenticationService.getUser(token);
-        AuthenticationToken authenticationToken = authenticationService.getToken(user);
-        user.setEmail(userUpdateDto.getEmail() != null ? userUpdateDto.getEmail() : user.getEmail());
-        user.setPhoneNumber(userUpdateDto.getPhoneNumber() != null ? userUpdateDto.getPhoneNumber() : user.getPhoneNumber());
-        user.setRole(userUpdateDto.getRole() != null ? userUpdateDto.getRole() : user.getRole());
-        user.setAvatarUrl(userUpdateDto.getAvatarUrl() != null ? userUpdateDto.getAvatarUrl() : user.getAvatarUrl());
-        userRepository.save(user);
-        authenticationToken.setUser(user);
-        authenticationService.saveConfirmationToken(authenticationToken);
-        return new ApiResponse(true, "User has been updated");
+    public ApiResponse updateUser(String token, UserUpdateDto userUpdateDto) {
+        try {
+            User user = authenticationService.getUser(token);
+            AuthenticationToken authenticationToken = authenticationService.getToken(user);
+            user.setEmail(userUpdateDto.getEmail() != null ? userUpdateDto.getEmail() : user.getEmail());
+            user.setPhoneNumber(userUpdateDto.getPhoneNumber() != null ? userUpdateDto.getPhoneNumber() : user.getPhoneNumber());
+            user.setRole(userUpdateDto.getRole() != null ? userUpdateDto.getRole() : user.getRole());
+            user.setAvatarUrl(userUpdateDto.getAvatarUrl() != null ? userUpdateDto.getAvatarUrl() : user.getAvatarUrl());
+            user.setRole(userUpdateDto.getRole() != null ? userUpdateDto.getRole() : user.getRole());
+            user.setBiography(userUpdateDto.getBiography() != null ? userUpdateDto.getBiography() : user.getBiography());
+            userRepository.save(user);
+            authenticationToken.setUser(user);
+            authenticationService.saveConfirmationToken(authenticationToken);
+            return new ApiResponse(true, "User has been updated");
+        } catch (Exception e) {
+            return new ApiResponse(false, e.getMessage());
+        }
+    }
+
+    @Override
+    public ApiResponse updateUser(String token, Address address) {
+        try {
+            User user = authenticationService.getUser(token);
+            AuthenticationToken authenticationToken = authenticationService.getToken(user);
+            user.setAddress(address);
+            userRepository.save(user);
+            authenticationToken.setUser(user);
+            authenticationService.saveConfirmationToken(authenticationToken);
+            return new ApiResponse(true, "User has been updated");
+        } catch (Exception e) {
+            return new ApiResponse(false, e.getMessage());
+        }
+    }
+
+    @Override
+    public ApiResponse updateUser(String token, Bank bank) {
+        try {
+            User user = authenticationService.getUser(token);
+            AuthenticationToken authenticationToken = authenticationService.getToken(user);
+            user.setBank(bank);
+            userRepository.save(user);
+            authenticationToken.setUser(user);
+            authenticationService.saveConfirmationToken(authenticationToken);
+            return new ApiResponse(true, "User has been updated");
+        } catch (Exception e) {
+            return new ApiResponse(false, e.getMessage());
+        }
+    }
+
+    @Override
+    public ApiResponse updateUser(String token, License license) {
+        try {
+            User user = authenticationService.getUser(token);
+            AuthenticationToken authenticationToken = authenticationService.getToken(user);
+            user.setLicense(license);
+            userRepository.save(user);
+            authenticationToken.setUser(user);
+            authenticationService.saveConfirmationToken(authenticationToken);
+            return new ApiResponse(true, "User has been updated");
+        } catch (Exception e) {
+            return new ApiResponse(false, e.getMessage());
+        }
+    }
+
+    @Override
+    public ApiResponse updateUser(String token, IdCard idCard) {
+        try {
+            User user = authenticationService.getUser(token);
+            AuthenticationToken authenticationToken = authenticationService.getToken(user);
+            user.setIdCard(idCard);
+            userRepository.save(user);
+            authenticationToken.setUser(user);
+            authenticationService.saveConfirmationToken(authenticationToken);
+            return new ApiResponse(true, "User has been updated");
+        } catch (Exception e) {
+            return new ApiResponse(false, e.getMessage());
+        }
     }
 }
