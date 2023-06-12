@@ -13,10 +13,11 @@ public class Offer {
     private String id;
     private String userId;
     private String vehicleId;
+    private long price;
     private String sessionId;
     private Date startTime;
-
     private Date endTime;
+    private Date createdDate;
 
     public Offer(String vehicleId, Date startTime, Date endTime) {
         this.vehicleId = vehicleId;
@@ -70,5 +71,21 @@ public class Offer {
 
     public void setEndTime(Date endTime) {
         this.endTime = endTime;
+    }
+
+    public long getPrice() {
+        return price;
+    }
+
+    public void setPrice(long price) {
+        this.price = price;
+    }
+
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
     }
 }

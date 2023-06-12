@@ -1,16 +1,26 @@
 package com.example.rental.dto.rental;
 
 public class OfferDto {
-    private String id;
+    private String vehicleId;
+    private String name;
     private long start;
     private long end;
+    private long price;
 
-    public String getId() {
-        return id;
+    public String getVehicleId() {
+        return vehicleId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setVehicleId(String vehicleId) {
+        this.vehicleId = vehicleId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public long getStart() {
@@ -27,5 +37,13 @@ public class OfferDto {
 
     public void setEnd(long end) {
         this.end = end;
+    }
+
+    public long getPrice() {
+        return price;
+    }
+
+    public void setPrice(long price) {
+        this.price = price;
     }
 }
