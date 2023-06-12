@@ -12,5 +12,5 @@ import java.util.List;
 
 @Repository
 public interface MotorRepository extends MongoRepository<Motor, String> {
-    List<Motor> findByOwner(User owner);
+    List<Motor> findByOwnerId(String ownerId);
 }

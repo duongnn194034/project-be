@@ -9,9 +9,9 @@ import java.time.Duration;
 @Document("Motor")
 public class Motor extends Vehicle {
 
-     public static Motor getInstance(MotorDto motorDto, User owner) {
+     public static Motor getInstance(MotorDto motorDto, String id) {
          Motor motor = new Motor();
-         motor.setOwner(owner);
+         motor.setOwnerId(id);
          motor.setProduction(motorDto.getProduction());
          motor.setModel(motorDto.getModel());
          motor.setPrice(motorDto.getPrice());

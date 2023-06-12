@@ -41,7 +41,7 @@ public class MotorController {
                                                 @RequestHeader("token") String token) throws AuthenticationFailException {
         authenticationService.authenticate(token);
         User user = authenticationService.getUser(token);
-        Motor motorRes = motorService.save(motorDto, user);
+        Motor motorRes = motorService.save(motorDto, user.getId());
         return new ResponseEntity<>(motorRes, HttpStatus.CREATED);
     }
 
@@ -77,7 +77,7 @@ public class MotorController {
     public ResponseEntity<Object> getByUser(@RequestHeader("token") String token) {
         try {
             User user = authenticationService.getUser(token);
-            List<Motor> motors = motorService.findByOwner(user);
+            List<Motor> motors = motorService.findByOwner(user.getId());
             if (motors.isEmpty()) {
                 return new ResponseEntity<>(motors, HttpStatus.NO_CONTENT);
             }

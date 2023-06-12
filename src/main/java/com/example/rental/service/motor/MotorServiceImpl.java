@@ -38,8 +38,8 @@ public class MotorServiceImpl implements MotorService {
     }
 
     @Override
-    public Motor save(MotorDto motorDto, User owner) {
-        return motorRepository.save(Motor.getInstance(motorDto, owner));
+    public Motor save(MotorDto motorDto, String ownerId) {
+        return motorRepository.save(Motor.getInstance(motorDto, ownerId));
     }
 
     @Override
@@ -68,7 +68,7 @@ public class MotorServiceImpl implements MotorService {
     }
 
     @Override
-    public List<Motor> findByOwner(User owner) {
-        return motorRepository.findByOwner(owner);
+    public List<Motor> findByOwner(String ownerId) {
+        return motorRepository.findByOwnerId(ownerId);
     }
 }

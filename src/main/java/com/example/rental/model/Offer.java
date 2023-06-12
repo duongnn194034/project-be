@@ -11,16 +11,15 @@ import java.util.Date;
 public class Offer {
     @Id
     private String id;
-    @JsonIgnore
-    private User user;
-    @JsonIgnore
-    private Vehicle vehicle;
+    private String userId;
+    private String vehicleId;
+    private String sessionId;
     private Date startTime;
 
     private Date endTime;
 
-    public Offer(Vehicle vehicle, Date startTime, Date endTime) {
-        this.vehicle = vehicle;
+    public Offer(String vehicleId, Date startTime, Date endTime) {
+        this.vehicleId = vehicleId;
         this.startTime = startTime;
         this.endTime = endTime;
     }
@@ -33,20 +32,28 @@ public class Offer {
         this.id = id;
     }
 
-    public User getUser() {
-        return user;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
-    public Vehicle getVehicle() {
-        return vehicle;
+    public String getVehicleId() {
+        return vehicleId;
     }
 
-    public void setVehicle(Vehicle vehicle) {
-        this.vehicle = vehicle;
+    public void setVehicleId(String vehicleId) {
+        this.vehicleId = vehicleId;
+    }
+
+    public String getSessionId() {
+        return sessionId;
+    }
+
+    public void setSessionId(String sessionId) {
+        this.sessionId = sessionId;
     }
 
     public Date getStartTime() {

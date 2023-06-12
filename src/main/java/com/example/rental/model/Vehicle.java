@@ -17,8 +17,7 @@ public abstract class Vehicle {
     protected String id;
     protected String production;
     protected String model;
-    @JsonIgnore
-    protected User owner;
+    protected String ownerId;
     protected VehicleType type;
     protected List<String> imageUrl = new ArrayList<>();
     protected String note;
@@ -58,12 +57,12 @@ public abstract class Vehicle {
         this.model = model;
     }
 
-    public User getOwner() {
-        return owner;
+    public String getOwnerId() {
+        return ownerId;
     }
 
-    public void setOwner(User owner) {
-        this.owner = owner;
+    public void setOwnerId(String ownerId) {
+        this.ownerId = ownerId;
     }
 
     public VehicleType getType() {

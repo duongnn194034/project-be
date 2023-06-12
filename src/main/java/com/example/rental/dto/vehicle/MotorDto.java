@@ -2,12 +2,7 @@ package com.example.rental.dto.vehicle;
 
 import com.example.rental.enums.VehicleType;
 import com.example.rental.model.Feature;
-import com.example.rental.model.User;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.springframework.data.geo.Point;
-import org.springframework.data.mongodb.core.index.GeoSpatialIndexed;
 
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 

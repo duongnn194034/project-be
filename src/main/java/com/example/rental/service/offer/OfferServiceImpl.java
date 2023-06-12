@@ -38,8 +38,8 @@ public class OfferServiceImpl implements OfferService {
         if (!list.isEmpty()) {
             throw new OfferException("Vehicle is busy this time.");
         }
-        Offer offer = new Offer(motor.get(),startDate, endDate);
-        offer.setUser(user);
+        Offer offer = new Offer(motor.get().getId(),startDate, endDate);
+        offer.setUserId(user.getId());
         return offerRepository.save(offer);
     }
 

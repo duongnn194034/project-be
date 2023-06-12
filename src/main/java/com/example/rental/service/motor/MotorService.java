@@ -11,7 +11,7 @@ import java.util.List;
 public interface MotorService {
     Motor getById(String id);
 
-    Motor save(MotorDto motorDto, User owner);
+    Motor save(MotorDto motorDto, String ownerId);
 
     List<Motor> getTopRating(int limit);
 
@@ -19,5 +19,5 @@ public interface MotorService {
 
     void rateMotor(String id, Rate rate);
 
-    List<Motor> findByOwner(User owner);
+    List<Motor> findByOwner(String id);
 }
