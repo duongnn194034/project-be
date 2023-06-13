@@ -2,17 +2,21 @@ package com.example.rental.controller;
 
 import com.example.rental.common.ApiResponse;
 import com.example.rental.dto.rental.OfferDto;
+import com.example.rental.dto.rental.StripeResponse;
 import com.example.rental.exception.OfferException;
 import com.example.rental.model.Offer;
 import com.example.rental.model.User;
 import com.example.rental.service.token.AuthenticationService;
 import com.example.rental.service.offer.OfferService;
+import com.stripe.exception.StripeException;
+import com.stripe.model.checkout.Session;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
+
 import java.util.List;
 
 @RequestMapping("/offer")
@@ -24,12 +28,20 @@ public class OfferController {
     @Autowired
     AuthenticationService authenticationService;
 
-    @PostMapping
+    @PostMapping("/create-checkout-session")
+    public ResponseEntity<StripeResponse> checkoutList(@RequestBody OfferDto offerDto, @RequestHeader("token") String token) throws StripeException {
+        // create the stripe session
+        Session session = offerService.createSession(offerDto);
+        StripeResponse stripeResponse = new StripeResponse(session.getId());
+        return new ResponseEntity<>(stripeResponse, HttpStatus.OK);
+    }
+
+    @PostMapping("add")
     public ResponseEntity<Object> saveOffer(@RequestHeader("token") String token, @RequestBody OfferDto offerDto) {
         try {
             authenticationService.authenticate(token);
             User user = authenticationService.getUser(token);
-            Offer offer = offerService.save(user, offerDto);
+            Offer offer = offerService.save(user, offerDto, offerDto.getSessionId());
             return new ResponseEntity<>(offer, HttpStatus.CREATED);
         } catch (OfferException e) {
             return  new ResponseEntity<>(new ApiResponse(false, e.getMessage()), HttpStatus.FORBIDDEN);

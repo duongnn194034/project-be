@@ -51,12 +51,11 @@ public class OfferServiceImpl implements OfferService {
         return SessionCreateParams.LineItem.builder()
                 // set price for each product
                 .setPriceData(createPriceData(offerDto))
-                // set quantity for each product
                 .setQuantity(1L)
                 .build();
     }
 
-    public Session createSession(List<OfferDto> offerDtos) throws StripeException {
+    public Session createSession(OfferDto offerDto) throws StripeException {
 
         // supply success and failure url for stripe
         String successURL = baseURL + "payment/success";
@@ -65,19 +64,14 @@ public class OfferServiceImpl implements OfferService {
         // set the private key
         Stripe.apiKey = apiKey;
 
-        List<SessionCreateParams.LineItem> sessionItemsList = new ArrayList<>();
-
-        // for each product compute SessionCreateParams.LineItem
-        for (OfferDto offerDto : offerDtos) {
-            sessionItemsList.add(createSessionLineItem(offerDto));
-        }
+        SessionCreateParams.LineItem sessionItems = createSessionLineItem(offerDto);
 
         // build the session param
         SessionCreateParams params = SessionCreateParams.builder()
                 .addPaymentMethodType(SessionCreateParams.PaymentMethodType.CARD)
                 .setMode(SessionCreateParams.Mode.PAYMENT)
                 .setCancelUrl(failedURL)
-                .addAllLineItem(sessionItemsList)
+                .addLineItem(sessionItems)
                 .setSuccessUrl(successURL)
                 .setCurrency("VND")
                 .build();
@@ -85,7 +79,7 @@ public class OfferServiceImpl implements OfferService {
     }
 
     @Override
-    public Offer save(User user, OfferDto offerDto) {
+    public Offer save(User user, OfferDto offerDto, String sessionId) {
         Optional<Motor> motor = motorRepository.findById(offerDto.getVehicleId());
         if (motor.isEmpty()) {
             throw new OfferException("Motor id is not found.");
@@ -102,13 +96,14 @@ public class OfferServiceImpl implements OfferService {
         }
         Offer offer = new Offer(motor.get().getId(),startDate, endDate);
         offer.setUserId(user.getId());
+        offer.setSessionId(sessionId);
         return offerRepository.save(offer);
     }
 
     @Override
     public List<Offer> getOffer(String motorId) {
         Optional<Motor> motor = motorRepository.findById(motorId);
-        return motor.map(value -> offerRepository.findAllByVehicle(value)).orElse(Collections.emptyList());
+        return motor.map(value -> offerRepository.findAllByVehicleId(value.getId())).orElse(Collections.emptyList());
     }
 
     @Override

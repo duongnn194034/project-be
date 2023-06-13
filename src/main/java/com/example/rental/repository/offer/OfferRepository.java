@@ -11,5 +11,5 @@ import java.util.List;
 
 @Repository
 public interface OfferRepository extends MongoRepository<Offer, String> {
-    List<Offer> findAllByVehicle(Vehicle vehicle);
+    List<Offer> findAllByVehicleId(String vehicleId);
 }

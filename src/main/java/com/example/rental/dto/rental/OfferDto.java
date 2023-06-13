@@ -3,6 +3,7 @@ package com.example.rental.dto.rental;
 public class OfferDto {
     private String vehicleId;
     private String name;
+    private String sessionId;
     private long start;
     private long end;
     private long price;
@@ -13,6 +14,14 @@ public class OfferDto {
 
     public void setVehicleId(String vehicleId) {
         this.vehicleId = vehicleId;
+    }
+
+    public String getSessionId() {
+        return sessionId;
+    }
+
+    public void setSessionId(String sessionId) {
+        this.sessionId = sessionId;
     }
 
     public String getName() {
