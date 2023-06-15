@@ -136,7 +136,7 @@ public abstract class Vehicle {
     }
 
     public double getRatingScore() {
-        if (ratings.size() == 0) {
+        if (ratings.isEmpty()) {
             return 0;
         }
         double sum = 0;

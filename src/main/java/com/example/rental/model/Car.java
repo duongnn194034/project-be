@@ -59,4 +59,12 @@ public class Car extends Vehicle {
     public void setSeats(int seats) {
         this.seats = seats;
     }
+
+    public boolean isAirBag() {
+        return airBag;
+    }
+
+    public void setAirBag(boolean airBag) {
+        this.airBag = airBag;
+    }
 }

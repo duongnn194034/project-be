@@ -12,26 +12,21 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 
 @ControllerAdvice
 public class ExceptionHandlerAdvice {
+
+	private static final String DETAIL = "Detail:";
 	
 	@ExceptionHandler(DataIntegrityViolationException.class)
 	public ResponseEntity<ApiResponse> conflict(DataIntegrityViolationException ex){
 		String message = getMostSpecificMessage(ex);
 		
-		return new ResponseEntity<ApiResponse>(new ApiResponse(false, message), HttpStatus.CONFLICT);
+		return new ResponseEntity<>(new ApiResponse(false, message), HttpStatus.CONFLICT);
 	}
-	
-//	@ExceptionHandler(AccessDeniedException.class)
-//	public ResponseEntity<ApiResponse> accessDenied(AccessDeniedException ex){
-//		String message = ex.getMessage();
-//		
-//		return new ResponseEntity<ApiResponse>(new ApiResponse(false, message), HttpStatus.FORBIDDEN);
-//	}
 	
 	@ExceptionHandler(ValidationException.class)
 	public ResponseEntity<ApiResponse> validationException(ValidationException ex){
 		String message = ex.getMessage();
 		
-		return new ResponseEntity<ApiResponse>(new ApiResponse(false, message), HttpStatus.UNPROCESSABLE_ENTITY);
+		return new ResponseEntity<>(new ApiResponse(false, message), HttpStatus.UNPROCESSABLE_ENTITY);
 	}
 	
 	@ExceptionHandler(MethodArgumentTypeMismatchException.class)
@@ -39,7 +34,7 @@ public class ExceptionHandlerAdvice {
 		ex.printStackTrace();
 		
 		String message = ex.getMessage();
-		return new ResponseEntity<ApiResponse>(new ApiResponse(false, message), HttpStatus.INTERNAL_SERVER_ERROR);
+		return new ResponseEntity<>(new ApiResponse(false, message), HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
 	@ExceptionHandler(Exception.class)
@@ -48,14 +43,14 @@ public class ExceptionHandlerAdvice {
 		
 		ex.printStackTrace();
 		
-		return new ResponseEntity<ApiResponse>(new ApiResponse(false, message), HttpStatus.INTERNAL_SERVER_ERROR);
+		return new ResponseEntity<>(new ApiResponse(false, message), HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
 	private String getMostSpecificMessage(DataIntegrityViolationException ex) {
 		String message = NestedExceptionUtils.getMostSpecificCause(ex).getMessage();
 		
-		if(message.contains("Detail:")) {
-			message = message.substring(message.indexOf("Detail:")+"Detail:".length());
+		if (message.contains(DETAIL)) {
+			message = message.substring(message.indexOf(DETAIL)+DETAIL.length());
 		}
 		
 		return message;

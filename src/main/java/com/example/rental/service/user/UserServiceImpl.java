@@ -28,7 +28,7 @@ import static com.example.rental.exception.AuthenticationFailException.WRONG_PAS
 public class UserServiceImpl implements UserService {
 
     Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
-    private final String UPDATE_MESSAGE = "User has been updated";
+    private static final String UPDATE_MESSAGE = "User has been updated";
     @Autowired
     private final UserRepository userRepository;
     @Autowired

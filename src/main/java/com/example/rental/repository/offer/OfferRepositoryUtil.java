@@ -30,7 +30,6 @@ public class OfferRepositoryUtil {
             query.addCriteria(criteria);
             return this.mongoTemplate.find(query, Offer.class);
         } catch (OfferException ex) {
-            ex.printStackTrace();
             throw new OfferException("Error in query!");
         }
     }
@@ -43,9 +42,8 @@ public class OfferRepositoryUtil {
                     Criteria.where("endTime").gte(startDate).lte(endDate));
             query.addCriteria(criteria);
             List<Motor> motors = mongoTemplate.findDistinct(query, "vehicle", Offer.class, Motor.class);
-            return motors.stream().map(motor -> motor.getId()).collect(Collectors.toList());
+            return motors.stream().map(Vehicle::getId).collect(Collectors.toList());
         } catch (OfferException e) {
-            e.printStackTrace();
             throw new OfferException("Error in query!");
         }
     }

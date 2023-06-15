@@ -10,7 +10,7 @@ public class UserUpdateDto {
     private String biography;
     private Role role;
 
-    public UserUpdateDto(String fullname, String address, String phoneNumber, String email, Role role) {
+    public UserUpdateDto(String fullname, String phoneNumber, String email, Role role) {
         this.fullname = fullname;
         this.phoneNumber = phoneNumber;
         this.email = email;

@@ -17,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RequestMapping("/offer")
@@ -52,7 +53,7 @@ public class OfferController {
     public ResponseEntity<List<Offer>> getOffer(@PathVariable("id") String id) throws OfferException {
         List<Offer> offers = offerService.getOffer(id);
         if (offers.isEmpty()) {
-            return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(new ArrayList<>(), HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(offers, HttpStatus.OK);
     }

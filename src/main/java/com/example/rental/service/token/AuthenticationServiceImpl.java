@@ -29,10 +29,9 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     @Override
     public User getUser(String token) {
         AuthenticationToken authenticationToken = repository.findTokenByToken(token);
-        if (authenticationToken != null) {
-            if (authenticationToken.getUser() != null) {
+        if (authenticationToken != null && authenticationToken.getUser() != null) {
                 return authenticationToken.getUser();
-            }
+
         }
         return null;
     }
