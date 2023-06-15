@@ -4,7 +4,6 @@ import com.example.rental.dto.vehicle.MotorDto;
 import com.example.rental.exception.MotorException;
 import com.example.rental.model.Motor;
 import com.example.rental.model.Rate;
-import com.example.rental.model.User;
 import com.example.rental.repository.motor.MotorRepository;
 import com.example.rental.repository.motor.MotorRepositoryUtil;
 import com.example.rental.repository.offer.OfferRepositoryUtil;

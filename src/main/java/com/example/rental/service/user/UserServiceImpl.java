@@ -28,6 +28,7 @@ import static com.example.rental.exception.AuthenticationFailException.WRONG_PAS
 public class UserServiceImpl implements UserService {
 
     Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
+    private final String UPDATE_MESSAGE = "User has been updated";
     @Autowired
     private final UserRepository userRepository;
     @Autowired
@@ -48,7 +49,7 @@ public class UserServiceImpl implements UserService {
 
     public User getUserById(String id) {
         Optional<User> u = userRepository.findById(id);
-        return u.isEmpty() ? new User() : u.get();
+        return u.orElseGet(User::new);
     }
 
     @Override
@@ -60,9 +61,8 @@ public class UserServiceImpl implements UserService {
         MessageDigest md = MessageDigest.getInstance("MD5");
         md.update(password.getBytes());
         byte[] digest = md.digest();
-        String myHash = DatatypeConverter
+        return DatatypeConverter
                 .printHexBinary(digest).toUpperCase();
-        return myHash;
     }
 
     @Override
@@ -108,7 +108,6 @@ public class UserServiceImpl implements UserService {
                 throw new AuthenticationFailException(WRONG_PASSWORD);
             }
         } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
             logger.error("hashing password failed {}", e.getMessage());
             throw new CustomException(e.getMessage());
         }
@@ -149,7 +148,7 @@ public class UserServiceImpl implements UserService {
             userRepository.save(user);
             authenticationToken.setUser(user);
             authenticationService.saveConfirmationToken(authenticationToken);
-            return new ApiResponse(true, "User has been updated");
+            return new ApiResponse(true, UPDATE_MESSAGE);
         } catch (Exception e) {
             return new ApiResponse(false, e.getMessage());
         }
@@ -164,7 +163,7 @@ public class UserServiceImpl implements UserService {
             userRepository.save(user);
             authenticationToken.setUser(user);
             authenticationService.saveConfirmationToken(authenticationToken);
-            return new ApiResponse(true, "User has been updated");
+            return new ApiResponse(true, UPDATE_MESSAGE);
         } catch (Exception e) {
             return new ApiResponse(false, e.getMessage());
         }
@@ -179,7 +178,7 @@ public class UserServiceImpl implements UserService {
             userRepository.save(user);
             authenticationToken.setUser(user);
             authenticationService.saveConfirmationToken(authenticationToken);
-            return new ApiResponse(true, "User has been updated");
+            return new ApiResponse(true, UPDATE_MESSAGE);
         } catch (Exception e) {
             return new ApiResponse(false, e.getMessage());
         }
@@ -194,7 +193,7 @@ public class UserServiceImpl implements UserService {
             userRepository.save(user);
             authenticationToken.setUser(user);
             authenticationService.saveConfirmationToken(authenticationToken);
-            return new ApiResponse(true, "User has been updated");
+            return new ApiResponse(true, UPDATE_MESSAGE);
         } catch (Exception e) {
             return new ApiResponse(false, e.getMessage());
         }
@@ -209,7 +208,7 @@ public class UserServiceImpl implements UserService {
             userRepository.save(user);
             authenticationToken.setUser(user);
             authenticationService.saveConfirmationToken(authenticationToken);
-            return new ApiResponse(true, "User has been updated");
+            return new ApiResponse(true, UPDATE_MESSAGE);
         } catch (Exception e) {
             return new ApiResponse(false, e.getMessage());
         }

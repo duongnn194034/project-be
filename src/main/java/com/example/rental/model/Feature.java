@@ -1,8 +1,6 @@
 package com.example.rental.model;
 
 import java.io.Serializable;
-import java.time.Duration;
-import java.util.Date;
 import java.util.List;
 
 public class Feature implements Serializable {

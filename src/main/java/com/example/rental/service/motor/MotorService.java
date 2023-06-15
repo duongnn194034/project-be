@@ -3,7 +3,6 @@ package com.example.rental.service.motor;
 import com.example.rental.dto.vehicle.MotorDto;
 import com.example.rental.model.Motor;
 import com.example.rental.model.Rate;
-import com.example.rental.model.User;
 import org.springframework.data.geo.GeoResults;
 
 import java.util.List;

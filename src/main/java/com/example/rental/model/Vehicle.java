@@ -1,12 +1,10 @@
 package com.example.rental.model;
 
 import com.example.rental.enums.VehicleType;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.geo.Point;
 import org.springframework.data.mongodb.core.index.GeoSpatialIndexType;
 import org.springframework.data.mongodb.core.index.GeoSpatialIndexed;
-import org.springframework.data.mongodb.core.index.Indexed;
 
 import java.time.Duration;
 import java.util.ArrayList;
