@@ -206,38 +206,16 @@ public abstract class Vehicle {
         this.minDriving = minDriving;
     }
 
-    private String durToString(Duration duration) {
-        if (duration == null) {
-            return "0 hour";
-        }
-        StringBuilder stringBuilder = new StringBuilder();
-        long days = duration.toDays();
-        if (days > 1) {
-            stringBuilder.append(days).append(" days ");
-        } else if (days > 0) {
-            stringBuilder.append(days).append(" day ");
-        }
-        long hours = duration.minusDays(days).toHours();
-        if (hours > 1) {
-            stringBuilder.append(hours).append(" hours");
-        } else if (hours > 0) {
-            stringBuilder.append(hours).append(" hour");
-        } else if (days == 0) {
-            stringBuilder.append("0 hour");
-        }
-        return stringBuilder.toString();
-    }
-
-    public String getMinDur() {
-        return durToString(minDur);
+    public long getMinDur() {
+        return minDur.toMillis();
     }
 
     public void setMinDur(Duration minDur) {
         this.minDur = minDur;
     }
 
-    public String getMaxDur() {
-        return durToString(maxDur);
+    public long getMaxDur() {
+        return maxDur.toMillis();
     }
 
     public void setMaxDur(Duration maxDur) {
