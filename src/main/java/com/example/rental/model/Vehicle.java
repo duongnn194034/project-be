@@ -231,7 +231,7 @@ public abstract class Vehicle {
 
     public long getMaxDur() {
         if (maxDur == null) {
-            return Long.MAX_VALUE;
+            return 0;
         }
         return maxDur.toMillis();
     }
