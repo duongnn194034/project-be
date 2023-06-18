@@ -85,7 +85,7 @@ public class OfferServiceImpl implements OfferService {
             throw new OfferException("Motor id is not found.");
         }
         long span = offerDto.getEnd() - offerDto.getStart();
-        if (span < motor.get().toMinDur() || (motor.get().toMaxDur() > 0 && span > motor.get().toMaxDur())) {
+        if (span < motor.get().getMinDur() || (motor.get().getMaxDur() > 0 && span > motor.get().getMaxDur())) {
             throw new OfferException("Duration length is not valid.");
         }
         Date startDate = new Date(offerDto.getStart());

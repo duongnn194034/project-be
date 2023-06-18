@@ -206,30 +206,30 @@ public abstract class Vehicle {
         this.minDriving = minDriving;
     }
 
-    public long getMinDur() {
-        return minDur.toMillis();
+    public Duration toMinDur() {
+        return minDur;
     }
 
     public void setMinDur(Duration minDur) {
         this.minDur = minDur;
     }
 
-    public long getMaxDur() {
-        return maxDur.toMillis();
+    public Duration toMaxDur() {
+        return maxDur;
     }
 
     public void setMaxDur(Duration maxDur) {
         this.maxDur = maxDur;
     }
 
-    public long toMinDur() {
+    public long getMinDur() {
         if (minDur == null) {
             return 0;
         }
         return minDur.toMillis();
     }
 
-    public long toMaxDur() {
+    public long getMaxDur() {
         if (maxDur == null) {
             return Long.MAX_VALUE;
         }
