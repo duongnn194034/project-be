@@ -41,7 +41,7 @@ public class OfferServiceImpl implements OfferService {
                 .setUnitAmount(offerDto.getPrice())
                 .setProductData(
                         SessionCreateParams.LineItem.PriceData.ProductData.builder()
-                                .setName(offerDto.getName())
+                                .setName(offerDto.getUserId())
                                 .build())
                 .build();
     }
