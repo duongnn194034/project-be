@@ -38,7 +38,7 @@ public class OfferServiceImpl implements OfferService {
     SessionCreateParams.LineItem.PriceData createPriceData(OfferDto offerDto) {
         return SessionCreateParams.LineItem.PriceData.builder()
                 .setCurrency("VND")
-                .setUnitAmount(offerDto.getPrice())
+                .setUnitAmount((long) offerDto.getPrice())
                 .setProductData(
                         SessionCreateParams.LineItem.PriceData.ProductData.builder()
                                 .setName(offerDto.getUserId())
@@ -97,6 +97,7 @@ public class OfferServiceImpl implements OfferService {
         Offer offer = new Offer(motor.get().getId(),startDate, endDate);
         offer.setUserId(user.getId());
         offer.setSessionId(sessionId);
+        offer.setPrice(offerDto.getPrice());
         return offerRepository.save(offer);
     }
 

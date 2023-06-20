@@ -6,7 +6,7 @@ public class OfferDto {
     private String sessionId;
     private long start;
     private long end;
-    private long price;
+    private double price;
 
     public String getVehicleId() {
         return vehicleId;
@@ -48,11 +48,11 @@ public class OfferDto {
         this.end = end;
     }
 
-    public long getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(long price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 }

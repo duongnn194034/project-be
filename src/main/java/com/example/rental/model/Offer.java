@@ -12,7 +12,7 @@ public class Offer {
     private String id;
     private String userId;
     private String vehicleId;
-    private long price;
+    private double price;
     private String sessionId;
     private Date startTime;
     private Date endTime;
@@ -72,11 +72,11 @@ public class Offer {
         this.endTime = endTime;
     }
 
-    public long getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(long price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
