@@ -36,6 +36,11 @@ public class UserController {
         return authenticationService.getUser(token);
     }
 
+    @GetMapping("/get/{id}")
+    public User getUser(@PathVariable("id") String userId) {
+        return userService.getUserById(userId);
+    }
+
     @PostMapping("/signUp")
     public ResponseDto signUp(@RequestBody SignupDto signupDto) throws Exception {
         return userService.signUp(signupDto);

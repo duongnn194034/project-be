@@ -47,6 +47,7 @@ public class UserServiceImpl implements UserService {
         return this.userRepository.save(user);
     }
 
+    @Override
     public User getUserById(String id) {
         Optional<User> u = userRepository.findById(id);
         return u.orElseGet(User::new);

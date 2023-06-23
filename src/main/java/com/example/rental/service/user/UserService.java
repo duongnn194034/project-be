@@ -12,6 +12,8 @@ import java.util.List;
 public interface UserService {
     List<User> findAll();
 
+    User getUserById(String id);
+
     ResponseDto signUp(SignupDto signupDto)  throws CustomException;
 
     SignInResponseDto signIn(SignInDto signInDto) throws CustomException;
