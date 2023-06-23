@@ -1,6 +1,7 @@
 package com.example.rental.service.motor;
 
 import com.example.rental.dto.vehicle.MotorDto;
+import com.example.rental.dto.vehicle.MotorResponseDto;
 import com.example.rental.model.Motor;
 import com.example.rental.model.Rate;
 import org.springframework.data.geo.GeoResults;
@@ -8,7 +9,8 @@ import org.springframework.data.geo.GeoResults;
 import java.util.List;
 
 public interface MotorService {
-    Motor getById(String id);
+    Motor findById(String id);
+    MotorResponseDto getById(String id);
 
     Motor save(MotorDto motorDto, String ownerId);
 

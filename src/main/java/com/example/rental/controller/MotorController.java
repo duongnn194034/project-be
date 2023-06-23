@@ -2,6 +2,7 @@ package com.example.rental.controller;
 
 import com.example.rental.common.ApiResponse;
 import com.example.rental.dto.vehicle.MotorDto;
+import com.example.rental.dto.vehicle.MotorResponseDto;
 import com.example.rental.exception.AuthenticationFailException;
 import com.example.rental.exception.MotorException;
 import com.example.rental.model.Motor;
@@ -27,9 +28,9 @@ public class MotorController {
     AuthenticationService authenticationService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<Motor> getMotor(@PathVariable("id") String id) {
+    public ResponseEntity<MotorResponseDto> getMotor(@PathVariable("id") String id) {
         try {
-            Motor motor = motorService.getById(id);
+            MotorResponseDto motor = motorService.getById(id);
             return new ResponseEntity<>(motor, HttpStatus.OK);
         } catch (MotorException e) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);

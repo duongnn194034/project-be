@@ -1,12 +1,15 @@
 package com.example.rental.service.motor;
 
 import com.example.rental.dto.vehicle.MotorDto;
+import com.example.rental.dto.vehicle.MotorResponseDto;
 import com.example.rental.exception.MotorException;
 import com.example.rental.model.Motor;
 import com.example.rental.model.Rate;
+import com.example.rental.model.User;
 import com.example.rental.repository.motor.MotorRepository;
 import com.example.rental.repository.motor.MotorRepositoryUtil;
 import com.example.rental.repository.offer.OfferRepositoryUtil;
+import com.example.rental.repository.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.geo.GeoResults;
@@ -25,15 +28,31 @@ public class MotorServiceImpl implements MotorService {
     MotorRepositoryUtil motorRepositoryUtil;
     @Autowired
     OfferRepositoryUtil offerRepositoryUtil;
+    @Autowired
+    UserRepository userRepository;
 
 
     @Override
-    public Motor getById(String id) throws MotorException {
+    public Motor findById(String id) {
         Optional<Motor> motor = motorRepository.findById(id);
         if (motor.isEmpty()) {
             throw new MotorException("Id is not exist.");
         }
         return motor.get();
+    }
+
+    @Override
+    public MotorResponseDto getById(String id) throws MotorException {
+        Optional<Motor> motor = motorRepository.findById(id);
+        if (motor.isEmpty()) {
+            throw new MotorException("Id is not exist.");
+        }
+        Optional<User> user = userRepository.findById(motor.get().getOwnerId());
+        if (user.isEmpty()) {
+            throw new MotorException("Owner is not exists");
+        }
+        MotorResponseDto motorResponseDto = MotorResponseDto.getInstance(motor.get(), user.get());
+        return motorResponseDto;
     }
 
     @Override
@@ -60,7 +79,7 @@ public class MotorServiceImpl implements MotorService {
 
     @Override
     public void rateMotor(String id, Rate rate) throws MotorException {
-        Motor motor = getById(id);
+        Motor motor = findById(id);
         motor.addRating(rate);
         motor.setId(id);
         motorRepository.save(motor);
