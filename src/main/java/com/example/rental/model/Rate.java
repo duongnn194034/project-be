@@ -1,20 +1,48 @@
 package com.example.rental.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import java.util.Date;
+
 public class Rate {
-    private User user;
+    @JsonIgnore
+    private String userId;
+    private String username;
     private int rating;
     private String comment;
 
+    private Date createdDate;
+
+    public Rate(String userId, String username, int rating, String comment) {
+        this.userId = userId;
+        this.username = username;
+        this.rating = rating;
+        this.comment = comment;
+        this.createdDate = new Date();
+    }
+
     public String getUserId() {
-        return user.getId();
+        return userId;
     }
 
-    public String getUserName() {
-        return user.getFullName();
+    public String getUsername() {
+        return username;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public Date getCreatedDate() {
+        return createdDate;
     }
 
     public int getRating() {

@@ -3,16 +3,22 @@ package com.example.rental.controller;
 
 import com.example.rental.common.ApiResponse;
 import com.example.rental.dto.ResponseDto;
+import com.example.rental.dto.rate.RateResponseDto;
 import com.example.rental.dto.user.*;
 import com.example.rental.exception.AuthenticationFailException;
 import com.example.rental.exception.CustomException;
 import com.example.rental.model.*;
+import com.example.rental.service.motor.MotorService;
 import com.example.rental.service.token.AuthenticationService;
 import com.example.rental.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.List;
 
 @RequestMapping("/user")
@@ -23,6 +29,9 @@ public class UserController {
     AuthenticationService authenticationService;
     @Autowired
     UserService userService;
+    @Lazy
+    @Autowired
+    MotorService motorService;
 
     @GetMapping("/all")
     public List<User> findAllUser(@RequestHeader("token") String token) throws AuthenticationFailException {
@@ -88,6 +97,15 @@ public class UserController {
     public ApiResponse updateUser(@RequestHeader("token") String token, @RequestBody License license) throws AuthenticationFailException {
         authenticationService.authenticate(token);
         return userService.updateUser(token, license);
+    }
+
+    @GetMapping("/get/{id}/rating")
+    public ResponseEntity<List<RateResponseDto>> getUserRating (@PathVariable("id") String userId) {
+        List<RateResponseDto> rates = motorService.getAllUserRating(userId);
+        if (rates.isEmpty()) {
+            return new ResponseEntity<>(new ArrayList<>(), HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(rates, HttpStatus.OK);
     }
 
 }

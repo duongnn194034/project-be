@@ -1,12 +1,12 @@
 package com.example.rental.controller;
 
 import com.example.rental.common.ApiResponse;
+import com.example.rental.dto.rate.RateDto;
 import com.example.rental.dto.vehicle.MotorDto;
 import com.example.rental.dto.vehicle.MotorResponseDto;
 import com.example.rental.exception.AuthenticationFailException;
 import com.example.rental.exception.MotorException;
 import com.example.rental.model.Motor;
-import com.example.rental.model.Rate;
 import com.example.rental.model.User;
 import com.example.rental.service.token.AuthenticationService;
 import com.example.rental.service.motor.MotorService;
@@ -61,12 +61,11 @@ public class MotorController {
     }
 
     @PatchMapping("/{id}")
-    public ApiResponse rateMotor(@PathVariable("id") String id, @RequestHeader("token") String token, @RequestBody Rate rate) {
+    public ApiResponse rateMotor(@PathVariable("id") String motorId, @RequestHeader("token") String token, @RequestBody RateDto rateDto) {
         try {
             authenticationService.authenticate(token);
             User user = authenticationService.getUser(token);
-            rate.setUser(user);
-            motorService.rateMotor(id, rate);
+            motorService.rateMotor(motorId, user, rateDto);
             return new ApiResponse(true, "Rated.");
         } catch (Exception e) {
             e.printStackTrace();

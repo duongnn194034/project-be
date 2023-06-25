@@ -1,5 +1,7 @@
 package com.example.rental.service.motor;
 
+import com.example.rental.dto.rate.RateDto;
+import com.example.rental.dto.rate.RateResponseDto;
 import com.example.rental.dto.vehicle.MotorDto;
 import com.example.rental.dto.vehicle.MotorResponseDto;
 import com.example.rental.exception.MotorException;
@@ -15,10 +17,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.geo.GeoResults;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class MotorServiceImpl implements MotorService {
@@ -62,7 +62,7 @@ public class MotorServiceImpl implements MotorService {
 
     @Override
     public List<Motor> getTopRating(int limit) {
-        List<Motor> motors = motorRepository.findAll(Sort.by(Sort.Direction.DESC, "rating"));
+        List<Motor> motors = motorRepository.findAll(Sort.by(Sort.Direction.DESC, "ratings"));
         return motors.subList(0, Math.min(limit, motors.size()));
     }
 
@@ -78,15 +78,28 @@ public class MotorServiceImpl implements MotorService {
     }
 
     @Override
-    public void rateMotor(String id, Rate rate) throws MotorException {
-        Motor motor = findById(id);
+    public void rateMotor(String motorId, User user, RateDto rateDto) throws MotorException {
+        Motor motor = findById(motorId);
+        Rate rate = new Rate(user.getId(), user.getFullName(), rateDto.getRating(), rateDto.getComment());
         motor.addRating(rate);
-        motor.setId(id);
+        motor.setId(motorId);
         motorRepository.save(motor);
     }
 
     @Override
     public List<Motor> findByOwner(String ownerId) {
         return motorRepository.findByOwnerId(ownerId);
+    }
+
+    @Override
+    public List<RateResponseDto> getAllUserRating(String userId) {
+        List<Motor> motors = findByOwner(userId);
+        List<RateResponseDto> result = new ArrayList<>();
+        motors.forEach(motor -> {
+            result.addAll(motor.getRatings().stream()
+                    .map(rate -> RateResponseDto.getInstance(rate, motor.getModel()))
+                    .collect(Collectors.toList()));
+        });
+        return result;
     }
 }
