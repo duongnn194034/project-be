@@ -1,5 +1,6 @@
 package com.example.rental.model;
 
+import com.example.rental.enums.Status;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -16,6 +17,7 @@ public class Offer {
     private String sessionId;
     private Date startTime;
     private Date endTime;
+    private Status status;
     private Date createdDate;
 
     public Offer(String vehicleId, Date startTime, Date endTime) {
@@ -86,5 +88,13 @@ public class Offer {
 
     public void setCreatedDate(Date createdDate) {
         this.createdDate = createdDate;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 }

@@ -1,6 +1,7 @@
 package com.example.rental.service.offer;
 
 import com.example.rental.dto.rental.OfferDto;
+import com.example.rental.enums.Status;
 import com.example.rental.exception.OfferException;
 import com.example.rental.model.Motor;
 import com.example.rental.model.Offer;
@@ -98,6 +99,7 @@ public class OfferServiceImpl implements OfferService {
         offer.setUserId(user.getId());
         offer.setSessionId(sessionId);
         offer.setPrice(offerDto.getPrice());
+        offer.setStatus(Status.IN_BOOKING);
         return offerRepository.save(offer);
     }
 
