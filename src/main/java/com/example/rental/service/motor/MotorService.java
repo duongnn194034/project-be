@@ -23,7 +23,7 @@ public interface MotorService {
 
     void rateMotor(String id, User user, RateDto rateDto);
 
-    List<Motor> findByOwner(String id);
+    List<Motor> findByOwner(String id, int limit);
 
     List<RateResponseDto> getAllUserRating(String userId);
 }

@@ -7,14 +7,14 @@ import java.util.Date;
 public class RateResponseDto {
     private String username;
     private String vehicleName;
-    private int score;
+    private int rating;
     private String comment;
     private Date createdDate;
 
-    public RateResponseDto(String username, String vehicleName, int score, String comment, Date createdDate) {
+    public RateResponseDto(String username, String vehicleName, int rating, String comment, Date createdDate) {
         this.username = username;
         this.vehicleName = vehicleName;
-        this.score = score;
+        this.rating = rating;
         this.comment = comment;
         this.createdDate = createdDate;
     }
@@ -39,12 +39,12 @@ public class RateResponseDto {
         this.vehicleName = vehicleName;
     }
 
-    public int getScore() {
-        return score;
+    public int getRating() {
+        return rating;
     }
 
-    public void setScore(int score) {
-        this.score = score;
+    public void setRating(int rating) {
+        this.rating = rating;
     }
 
     public String getComment() {

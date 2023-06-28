@@ -74,10 +74,11 @@ public class MotorController {
     }
 
     @GetMapping("/list")
-    public ResponseEntity<Object> getByUser(@RequestHeader("token") String token) {
+    public ResponseEntity<Object> getByUser(@RequestHeader("token") String token,
+                                            @RequestParam(name = "limit", defaultValue = "-1") int limit) {
         try {
             User user = authenticationService.getUser(token);
-            List<Motor> motors = motorService.findByOwner(user.getId());
+            List<Motor> motors = motorService.findByOwner(user.getId(), limit);
             if (motors.isEmpty()) {
                 return new ResponseEntity<>(motors, HttpStatus.NO_CONTENT);
             }

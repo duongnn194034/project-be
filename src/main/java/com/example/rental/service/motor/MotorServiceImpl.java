@@ -13,6 +13,7 @@ import com.example.rental.repository.motor.MotorRepositoryUtil;
 import com.example.rental.repository.offer.OfferRepositoryUtil;
 import com.example.rental.repository.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.geo.GeoResults;
 import org.springframework.stereotype.Service;
@@ -87,13 +88,18 @@ public class MotorServiceImpl implements MotorService {
     }
 
     @Override
-    public List<Motor> findByOwner(String ownerId) {
-        return motorRepository.findByOwnerId(ownerId);
+    public List<Motor> findByOwner(String ownerId, int limit) {
+        if (limit < 0) {
+            return motorRepository.findByOwnerId(ownerId);
+        } else {
+            return motorRepository.findByOwnerId(ownerId, PageRequest.ofSize(limit));
+        }
+
     }
 
     @Override
     public List<RateResponseDto> getAllUserRating(String userId) {
-        List<Motor> motors = findByOwner(userId);
+        List<Motor> motors = findByOwner(userId, -1);
         List<RateResponseDto> result = new ArrayList<>();
         motors.forEach(motor -> {
             result.addAll(motor.getRatings().stream()
