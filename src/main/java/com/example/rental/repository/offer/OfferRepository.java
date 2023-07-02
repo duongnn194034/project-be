@@ -10,4 +10,6 @@ import java.util.List;
 @Repository
 public interface OfferRepository extends MongoRepository<Offer, String> {
     List<Offer> findAllByVehicleId(String vehicleId);
+
+    List<Offer> findAllByUserId(String userId);
 }

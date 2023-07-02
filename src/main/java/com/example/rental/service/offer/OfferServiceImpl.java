@@ -1,6 +1,7 @@
 package com.example.rental.service.offer;
 
-import com.example.rental.dto.rental.OfferDto;
+import com.example.rental.dto.offer.OfferDto;
+import com.example.rental.dto.offer.OfferResponseDto;
 import com.example.rental.enums.Status;
 import com.example.rental.exception.OfferException;
 import com.example.rental.model.Motor;
@@ -110,7 +111,18 @@ public class OfferServiceImpl implements OfferService {
     }
 
     @Override
-    public List<String> test(long start, long end) {
-        return offerRepositoryUtil.findIdsByDateBetween(new Date(start), new Date(end));
+    public List<OfferResponseDto> getOfferByUserId(String userId) {
+        List<Offer> offerList = offerRepository.findAllByUserId(userId);
+        List<OfferResponseDto> offerLists = new ArrayList<>();
+        for (Offer offer : offerList) {
+            Optional<Motor> motor = motorRepository.findById(offer.getVehicleId());
+            if (motor.isEmpty()) {
+                continue;
+            }
+            OfferResponseDto offerResponseDto = new OfferResponseDto(motor.get(), offer.getStartTime(), offer.getEndTime(),
+                    offer.getStatus(), offer.getCreatedDate());
+            offerLists.add(offerResponseDto);
+        }
+        return offerLists;
     }
 }

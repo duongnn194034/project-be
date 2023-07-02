@@ -1,4 +1,4 @@
-package com.example.rental.dto.rental;
+package com.example.rental.dto.offer;
 
 public class StripeResponse {
     private String sessionId;

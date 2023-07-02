@@ -1,8 +1,10 @@
 package com.example.rental.controller;
 
 import com.example.rental.common.ApiResponse;
-import com.example.rental.dto.rental.OfferDto;
-import com.example.rental.dto.rental.StripeResponse;
+import com.example.rental.dto.offer.OfferDto;
+import com.example.rental.dto.offer.OfferResponseDto;
+import com.example.rental.dto.offer.StripeResponse;
+import com.example.rental.exception.AuthenticationFailException;
 import com.example.rental.exception.OfferException;
 import com.example.rental.model.Offer;
 import com.example.rental.model.User;
@@ -58,8 +60,14 @@ public class OfferController {
         return new ResponseEntity<>(offers, HttpStatus.OK);
     }
 
-    @GetMapping("/test")
-    public ResponseEntity<Object> test(@RequestParam("start") long start, @RequestParam("end") long end) {
-        return new ResponseEntity<>(offerService.test(start, end), HttpStatus.OK);
+    @GetMapping("/list")
+    public ResponseEntity<List<OfferResponseDto>> getListOffer(@RequestHeader("token") String token) throws AuthenticationFailException {
+        authenticationService.authenticate(token);
+        User user = authenticationService.getUser(token);
+        List<OfferResponseDto> offers = offerService.getOfferByUserId(user.getId());
+        if (offers.isEmpty()) {
+            return new ResponseEntity<>(new ArrayList<>(), HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(offers, HttpStatus.OK);
     }
 }

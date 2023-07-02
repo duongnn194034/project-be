@@ -1,6 +1,7 @@
 package com.example.rental.service.offer;
 
-import com.example.rental.dto.rental.OfferDto;
+import com.example.rental.dto.offer.OfferDto;
+import com.example.rental.dto.offer.OfferResponseDto;
 import com.example.rental.model.Offer;
 import com.example.rental.model.User;
 import com.stripe.exception.StripeException;
@@ -14,7 +15,7 @@ public interface OfferService {
 
     List<Offer> getOffer(String motorId);
 
-    List<String> test(long start, long end);
+    List<OfferResponseDto> getOfferByUserId(String userId);
 
     Session createSession(OfferDto offerDto) throws StripeException;
 }

@@ -24,6 +24,7 @@ public class Offer {
         this.vehicleId = vehicleId;
         this.startTime = startTime;
         this.endTime = endTime;
+        this.createdDate = new Date();
     }
 
     public String getId() {
