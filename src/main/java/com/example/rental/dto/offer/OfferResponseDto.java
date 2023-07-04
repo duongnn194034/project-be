@@ -6,18 +6,28 @@ import com.example.rental.enums.Status;
 import java.util.Date;
 
 public class OfferResponseDto {
+    private String id;
     private Vehicle vehicle;
     private Date startTime;
     private Date endTime;
     private Status status;
     private Date createdDate;
 
-    public OfferResponseDto(Vehicle vehicle, Date startTime, Date endTime, Status status, Date createdDate) {
+    public OfferResponseDto(String id, Vehicle vehicle, Date startTime, Date endTime, Status status, Date createdDate) {
+        this.id = id;
         this.vehicle = vehicle;
         this.startTime = startTime;
         this.endTime = endTime;
         this.status = status;
         this.createdDate = createdDate;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public Vehicle getVehicle() {

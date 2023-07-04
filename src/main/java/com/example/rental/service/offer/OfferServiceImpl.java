@@ -111,6 +111,20 @@ public class OfferServiceImpl implements OfferService {
     }
 
     @Override
+    public OfferResponseDto getOfferById(String id) {
+        Optional<Offer> offer = offerRepository.findById(id);
+        if (offer.isEmpty()) {
+            throw new RuntimeException("Offer does not exist");
+        }
+        Optional<Motor> motor = motorRepository.findById(offer.get().getVehicleId());
+        if (motor.isEmpty()) {
+            throw new RuntimeException("Motor does not exist.");
+        }
+        return new OfferResponseDto(offer.get().getId(), motor.get(),
+                offer.get().getStartTime(), offer.get().getEndTime(), offer.get().getStatus(), offer.get().getCreatedDate());
+    }
+
+    @Override
     public List<OfferResponseDto> getOfferByUserId(String userId) {
         List<Offer> offerList = offerRepository.findAllByUserId(userId);
         List<OfferResponseDto> offerLists = new ArrayList<>();
@@ -119,8 +133,8 @@ public class OfferServiceImpl implements OfferService {
             if (motor.isEmpty()) {
                 continue;
             }
-            OfferResponseDto offerResponseDto = new OfferResponseDto(motor.get(), offer.getStartTime(), offer.getEndTime(),
-                    offer.getStatus(), offer.getCreatedDate());
+            OfferResponseDto offerResponseDto = new OfferResponseDto(offer.getId(), motor.get(),
+                    offer.getStartTime(), offer.getEndTime(), offer.getStatus(), offer.getCreatedDate());
             offerLists.add(offerResponseDto);
         }
         return offerLists;

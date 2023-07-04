@@ -39,7 +39,7 @@ public class OfferController {
         return new ResponseEntity<>(stripeResponse, HttpStatus.OK);
     }
 
-    @PostMapping("add")
+    @PostMapping("/add")
     public ResponseEntity<Object> saveOffer(@RequestHeader("token") String token, @RequestBody OfferDto offerDto) {
         try {
             authenticationService.authenticate(token);
@@ -52,7 +52,13 @@ public class OfferController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<List<Offer>> getOffer(@PathVariable("id") String id) throws OfferException {
+    public ResponseEntity<OfferResponseDto> getOfferById(@PathVariable("id") String id) throws OfferException {
+        OfferResponseDto offerResponseDto = offerService.getOfferById(id);
+        return new ResponseEntity<>(offerResponseDto, HttpStatus.OK);
+    }
+
+    @GetMapping("/motor/{id}")
+    public ResponseEntity<List<Offer>> getOfferByMotor(@PathVariable("id") String id) throws OfferException {
         List<Offer> offers = offerService.getOffer(id);
         if (offers.isEmpty()) {
             return new ResponseEntity<>(new ArrayList<>(), HttpStatus.NO_CONTENT);

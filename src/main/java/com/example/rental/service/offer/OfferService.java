@@ -14,6 +14,7 @@ public interface OfferService {
     Offer save(User user, OfferDto offerDto, String sessionId);
 
     List<Offer> getOffer(String motorId);
+    OfferResponseDto getOfferById(String id);
 
     List<OfferResponseDto> getOfferByUserId(String userId);
 
