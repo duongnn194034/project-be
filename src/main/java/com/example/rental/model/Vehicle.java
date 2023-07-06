@@ -21,6 +21,7 @@ public abstract class Vehicle {
     protected String note;
     protected String engineSize;
     protected String fuel;
+    protected double deposit;
     protected double price;
     protected String licensePlate;
     protected List<Rate> ratings = new ArrayList<>();
@@ -97,6 +98,14 @@ public abstract class Vehicle {
 
     public void setNote(String note) {
         this.note = note;
+    }
+
+    public double getDeposit() {
+        return deposit;
+    }
+
+    public void setDeposit(double deposit) {
+        this.deposit = deposit;
     }
 
     public double getPrice() {

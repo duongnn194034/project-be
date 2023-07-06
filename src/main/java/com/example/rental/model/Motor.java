@@ -14,6 +14,7 @@ public class Motor extends Vehicle {
          motor.setOwnerId(id);
          motor.setProduction(motorDto.getProduction());
          motor.setModel(motorDto.getModel());
+         motor.setDeposit(motorDto.getDeposit());
          motor.setPrice(motorDto.getPrice());
          motor.setEngineSize(motorDto.getEngineSize());
          motor.setNote(motorDto.getNote());

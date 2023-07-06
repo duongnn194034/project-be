@@ -15,6 +15,7 @@ public class MotorDto {
     private String engineSize;
     private String fuel;
     private String license;
+    private double deposit;
     private double price;
     private double lng;
     private double lat;
@@ -74,6 +75,14 @@ public class MotorDto {
 
     public void setEngineSize(String engineSize) {
         this.engineSize = engineSize;
+    }
+
+    public double getDeposit() {
+        return deposit;
+    }
+
+    public void setDeposit(double deposit) {
+        this.deposit = deposit;
     }
 
     public double getPrice() {
