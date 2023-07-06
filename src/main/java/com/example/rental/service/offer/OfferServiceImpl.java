@@ -122,8 +122,8 @@ public class OfferServiceImpl implements OfferService {
         if (motor.isEmpty()) {
             throw new RuntimeException("Motor does not exist.");
         }
-        return new OfferResponseDto(offer.get().getId(), motor.get(),
-                offer.get().getStartTime(), offer.get().getEndTime(), offer.get().getStatus(), offer.get().getCreatedDate());
+        return new OfferResponseDto(offer.get().getId(), motor.get(), offer.get().getStartTime(), offer.get().getEndTime(),
+                offer.get().getStatus(), offer.get().getPrice(), offer.get().getCreatedDate());
     }
 
     @Override
@@ -135,8 +135,8 @@ public class OfferServiceImpl implements OfferService {
             if (motor.isEmpty()) {
                 continue;
             }
-            OfferResponseDto offerResponseDto = new OfferResponseDto(offer.getId(), motor.get(),
-                    offer.getStartTime(), offer.getEndTime(), offer.getStatus(), offer.getCreatedDate());
+            OfferResponseDto offerResponseDto = new OfferResponseDto(offer.getId(), motor.get(), offer.getStartTime(),
+                    offer.getEndTime(), offer.getStatus(), offer.getPrice(), offer.getCreatedDate());
             offerLists.add(offerResponseDto);
         }
         return offerLists;
@@ -150,7 +150,8 @@ public class OfferServiceImpl implements OfferService {
         List<OfferResponseDto> offerResponseDtos = new ArrayList<>();
         for (int i = 0; i < offers.size(); i++) {
             offerResponseDtos.add(new OfferResponseDto(offers.get(i).getId(), motors.get(i),
-                    offers.get(i).getStartTime(), offers.get(i).getEndTime(), offers.get(i).getStatus(), offers.get(i).getCreatedDate()));
+                    offers.get(i).getStartTime(), offers.get(i).getEndTime(), offers.get(i).getStatus(),
+                    offers.get(i).getPrice(), offers.get(i).getCreatedDate()));
         }
         return offerResponseDtos;
     }

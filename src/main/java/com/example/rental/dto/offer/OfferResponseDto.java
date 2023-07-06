@@ -11,13 +11,15 @@ public class OfferResponseDto {
     private Date startTime;
     private Date endTime;
     private Status status;
+    private double price;
     private Date createdDate;
 
-    public OfferResponseDto(String id, Vehicle vehicle, Date startTime, Date endTime, Status status, Date createdDate) {
+    public OfferResponseDto(String id, Vehicle vehicle, Date startTime, Date endTime, Status status, double price, Date createdDate) {
         this.id = id;
         this.vehicle = vehicle;
         this.startTime = startTime;
         this.endTime = endTime;
+        this.price = price;
         this.status = status;
         this.createdDate = createdDate;
     }
@@ -60,6 +62,14 @@ public class OfferResponseDto {
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     public Date getCreatedDate() {
