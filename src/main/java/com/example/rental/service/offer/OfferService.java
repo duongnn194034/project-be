@@ -16,7 +16,19 @@ public interface OfferService {
     List<Offer> getOffer(String motorId);
     OfferResponseDto getOfferById(String id);
 
+    /**
+     * get offers which user offer
+     * @param userId offering userId
+     * @return list offer
+     */
     List<OfferResponseDto> getOfferByUserId(String userId);
+
+    /**
+     * get offers which user's vehicle are offered
+     * @param userId offered userId
+     * @return list offer
+     */
+    List<OfferResponseDto> getOfferVehicleByUserId(String userId);
 
     Session createSession(OfferDto offerDto) throws StripeException;
 }

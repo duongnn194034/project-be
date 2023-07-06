@@ -76,4 +76,15 @@ public class OfferController {
         }
         return new ResponseEntity<>(offers, HttpStatus.OK);
     }
+
+    @GetMapping("/listRev")
+    public ResponseEntity<List<OfferResponseDto>> getListVehicleOffer(@RequestHeader("token") String token) throws AuthenticationFailException {
+        authenticationService.authenticate(token);
+        User user = authenticationService.getUser(token);
+        List<OfferResponseDto> offers = offerService.getOfferVehicleByUserId(user.getId());
+        if (offers.isEmpty()) {
+            return new ResponseEntity<>(new ArrayList<>(), HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(offers, HttpStatus.OK);
+    }
 }

@@ -19,14 +19,29 @@ public class OfferRepositoryUtil {
     @Autowired
     MongoTemplate mongoTemplate;
 
-    public List<Offer> findByVehicleAndDateBetween(Vehicle vehicle, Date startDate, Date endDate) throws OfferException {
+    public List<Offer> findByVehicleAndDateBetween(String vehicleId, Date startDate, Date endDate) throws OfferException {
         try {
             Query query = new Query();
             Criteria criteria = new Criteria();
             Criteria dateCriteria = new Criteria();
             dateCriteria.orOperator(Criteria.where("startTime").gte(startDate).lte(endDate),
                     Criteria.where("endTime").gte(startDate).lte(endDate));
-            criteria.andOperator(Criteria.where("vehicle").is(vehicle), dateCriteria);
+            criteria.andOperator(Criteria.where("vehicleId").is(vehicleId), dateCriteria);
+            query.addCriteria(criteria);
+            return this.mongoTemplate.find(query, Offer.class);
+        } catch (OfferException ex) {
+            throw new OfferException("Error in query!");
+        }
+    }
+
+    public List<Offer> findByVehiclesAndDateBetween(List<String> vehicleIds, Date startDate, Date endDate) throws OfferException {
+        try {
+            Query query = new Query();
+            Criteria criteria = new Criteria();
+            Criteria dateCriteria = new Criteria();
+            dateCriteria.orOperator(Criteria.where("startTime").gte(startDate).lte(endDate),
+                    Criteria.where("endTime").gte(startDate).lte(endDate));
+            criteria.andOperator(Criteria.where("vehicleId").in(vehicleIds), dateCriteria);
             query.addCriteria(criteria);
             return this.mongoTemplate.find(query, Offer.class);
         } catch (OfferException ex) {

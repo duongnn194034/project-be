@@ -7,6 +7,7 @@ import com.example.rental.exception.OfferException;
 import com.example.rental.model.Motor;
 import com.example.rental.model.Offer;
 import com.example.rental.model.User;
+import com.example.rental.model.Vehicle;
 import com.example.rental.repository.motor.MotorRepository;
 import com.example.rental.repository.offer.OfferRepository;
 import com.example.rental.repository.offer.OfferRepositoryUtil;
@@ -20,6 +21,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -92,7 +94,7 @@ public class OfferServiceImpl implements OfferService {
         }
         Date startDate = new Date(offerDto.getStart());
         Date endDate = new Date(offerDto.getEnd());
-        List<Offer> list = offerRepositoryUtil.findByVehicleAndDateBetween(motor.get(), startDate, endDate);
+        List<Offer> list = offerRepositoryUtil.findByVehicleAndDateBetween(motor.get().getId(), startDate, endDate);
         if (!list.isEmpty()) {
             throw new OfferException("Vehicle is busy this time.");
         }
@@ -138,5 +140,18 @@ public class OfferServiceImpl implements OfferService {
             offerLists.add(offerResponseDto);
         }
         return offerLists;
+    }
+
+    @Override
+    public List<OfferResponseDto> getOfferVehicleByUserId(String userId) {
+        List<Motor> motors = motorRepository.findByOwnerId(userId);
+        List<String> motorIds = motors.stream().map(Vehicle::getId).collect(Collectors.toList());
+        List<Offer> offers = offerRepositoryUtil.findByVehiclesAndDateBetween(motorIds, new Date(0), new Date());
+        List<OfferResponseDto> offerResponseDtos = new ArrayList<>();
+        for (int i = 0; i < offers.size(); i++) {
+            offerResponseDtos.add(new OfferResponseDto(offers.get(i).getId(), motors.get(i),
+                    offers.get(i).getStartTime(), offers.get(i).getEndTime(), offers.get(i).getStatus(), offers.get(i).getCreatedDate()));
+        }
+        return offerResponseDtos;
     }
 }
