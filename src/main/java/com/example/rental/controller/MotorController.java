@@ -60,7 +60,7 @@ public class MotorController {
         return new ResponseEntity<>(motorGeoResults, HttpStatus.OK);
     }
 
-    @PatchMapping("/{id}")
+    @PatchMapping("/rate/{id}")
     public ApiResponse rateMotor(@PathVariable("id") String motorId, @RequestHeader("token") String token, @RequestBody RateDto rateDto) {
         try {
             authenticationService.authenticate(token);

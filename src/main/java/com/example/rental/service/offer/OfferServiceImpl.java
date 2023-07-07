@@ -102,7 +102,7 @@ public class OfferServiceImpl implements OfferService {
         offer.setUserId(user.getId());
         offer.setSessionId(sessionId);
         offer.setPrice(offerDto.getPrice());
-        offer.setStatus(Status.IN_BOOKING);
+        offer.setStatus(Status.BOOKING);
         return offerRepository.save(offer);
     }
 

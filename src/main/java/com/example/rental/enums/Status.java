@@ -1,10 +1,11 @@
 package com.example.rental.enums;
 
 public enum Status {
-    IN_BOOKING("booking"),
+    BOOKING("booking"),
     CANCELED("canceled"),
     OUTDATED("outdated"),
-    RETURNED("returned")
+    RETURNED("returned"),
+    COMPLETED("completed")
     ;
 
     Status(String name) {
