@@ -2,6 +2,7 @@ package com.example.rental.service.offer;
 
 import com.example.rental.dto.offer.OfferDto;
 import com.example.rental.dto.offer.OfferResponseDto;
+import com.example.rental.enums.Status;
 import com.example.rental.model.Offer;
 import com.example.rental.model.User;
 import com.stripe.exception.StripeException;
@@ -14,7 +15,8 @@ public interface OfferService {
     Offer save(User user, OfferDto offerDto, String sessionId);
 
     List<Offer> getOffer(String motorId);
-    OfferResponseDto getOfferById(String id);
+    OfferResponseDto changeOfferStatus(String offerId, String userId, Status status);
+    OfferResponseDto getOfferById(String id, String userId);
 
     /**
      * get offers which user offer

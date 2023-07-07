@@ -113,10 +113,30 @@ public class OfferServiceImpl implements OfferService {
     }
 
     @Override
-    public OfferResponseDto getOfferById(String id) {
+    public OfferResponseDto changeOfferStatus(String offerId, String userId, Status status) {
+        Optional<Offer> offer = offerRepository.findById(offerId);
+        if (offer.isEmpty()) {
+            throw new OfferException("OfferId is not exist");
+        } else if (!offer.get().getUserId().equals(userId)) {
+            throw new OfferException("Not user offer");
+        }
+        offer.get().setStatus(status);
+        offerRepository.save(offer.get());
+        Optional<Motor> motor = motorRepository.findById(offer.get().getVehicleId());
+        if (motor.isEmpty()) {
+            throw new RuntimeException("Motor does not exist.");
+        }
+        return new OfferResponseDto(offer.get().getId(), motor.get(), offer.get().getStartTime(), offer.get().getEndTime(),
+                offer.get().getStatus(), offer.get().getPrice(), offer.get().getCreatedDate());
+    }
+
+    @Override
+    public OfferResponseDto getOfferById(String id, String userId) {
         Optional<Offer> offer = offerRepository.findById(id);
         if (offer.isEmpty()) {
-            throw new RuntimeException("Offer does not exist");
+            throw new OfferException("Offer does not exist");
+        } else if (!offer.get().getUserId().equals(userId)) {
+            throw new OfferException("Forbidden");
         }
         Optional<Motor> motor = motorRepository.findById(offer.get().getVehicleId());
         if (motor.isEmpty()) {

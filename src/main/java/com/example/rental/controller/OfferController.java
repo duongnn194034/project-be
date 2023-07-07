@@ -1,9 +1,12 @@
 package com.example.rental.controller;
 
 import com.example.rental.common.ApiResponse;
+import com.example.rental.dto.ResponseDto;
 import com.example.rental.dto.offer.OfferDto;
 import com.example.rental.dto.offer.OfferResponseDto;
+import com.example.rental.dto.offer.StatusDto;
 import com.example.rental.dto.offer.StripeResponse;
+import com.example.rental.enums.Status;
 import com.example.rental.exception.AuthenticationFailException;
 import com.example.rental.exception.OfferException;
 import com.example.rental.model.Offer;
@@ -52,9 +55,23 @@ public class OfferController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<OfferResponseDto> getOfferById(@PathVariable("id") String id) throws OfferException {
-        OfferResponseDto offerResponseDto = offerService.getOfferById(id);
+    public ResponseEntity<OfferResponseDto> getOfferById(@RequestHeader("token") String token, @PathVariable("id") String id) throws OfferException {
+        authenticationService.authenticate(token);
+        User user = authenticationService.getUser(token);
+        OfferResponseDto offerResponseDto = offerService.getOfferById(id, user.getId());
         return new ResponseEntity<>(offerResponseDto, HttpStatus.OK);
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<Object> updateOfferStatus(@RequestHeader("token") String token, @PathVariable("id") String id, @RequestBody StatusDto statusDto) {
+        try {
+            authenticationService.authenticate(token);
+            User user = authenticationService.getUser(token);
+            OfferResponseDto offerResponseDto = offerService.changeOfferStatus(id, user.getId(), statusDto.getStatus());
+            return new ResponseEntity<>(offerResponseDto, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(new ApiResponse(false, e.getMessage()), HttpStatus.BAD_REQUEST);
+        }
     }
 
     @GetMapping("/motor/{id}")
