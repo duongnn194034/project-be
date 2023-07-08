@@ -16,6 +16,9 @@ public interface MotorService {
     MotorResponseDto getById(String id);
 
     Motor save(MotorDto motorDto, String ownerId);
+    Motor patch(MotorDto motorDto, String motorId, String ownerId);
+
+    void delete(String motorId, String ownerId);
 
     List<Motor> getTopRating(int limit);
 

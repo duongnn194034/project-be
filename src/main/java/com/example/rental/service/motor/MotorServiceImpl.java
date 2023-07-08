@@ -4,6 +4,7 @@ import com.example.rental.dto.rate.RateDto;
 import com.example.rental.dto.rate.RateResponseDto;
 import com.example.rental.dto.vehicle.MotorDto;
 import com.example.rental.dto.vehicle.MotorResponseDto;
+import com.example.rental.exception.AuthenticationFailException;
 import com.example.rental.exception.MotorException;
 import com.example.rental.model.Motor;
 import com.example.rental.model.Rate;
@@ -16,8 +17,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.geo.GeoResults;
+import org.springframework.data.geo.Point;
 import org.springframework.stereotype.Service;
 
+import java.time.Duration;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -59,6 +62,51 @@ public class MotorServiceImpl implements MotorService {
     @Override
     public Motor save(MotorDto motorDto, String ownerId) {
         return motorRepository.save(Motor.getInstance(motorDto, ownerId));
+    }
+
+    @Override
+    public Motor patch(MotorDto motorDto, String motorId, String ownerId) {
+        Optional<Motor> motorOptional = motorRepository.findById(motorId);
+        if (motorOptional.isEmpty()) {
+            throw new MotorException("Motor is not exist");
+        } else if (!motorOptional.get().getOwnerId().equals(ownerId)) {
+            throw new AuthenticationFailException("Not motor owner");
+        }
+        Motor motor = motorOptional.get();
+
+        motor.setProduction(motorDto.getProduction());
+        motor.setModel(motorDto.getModel());
+        motor.setDeposit(motorDto.getDeposit());
+        motor.setPrice(motorDto.getPrice());
+        motor.setEngineSize(motorDto.getEngineSize());
+        motor.setNote(motorDto.getNote());
+        motor.setImageUrl(motorDto.getImageUrl());
+        motor.setFuel(motorDto.getFuel());
+        motor.setLicensePlate(motorDto.getLicense());
+        motor.setLocation(new Point(motorDto.getLng(), motorDto.getLat()));
+        motor.setAddress(motorDto.getAddress());
+        motor.setYear(motorDto.getYear());
+        motor.setRadius(motorDto.getRadius());
+        motor.setFeature(motorDto.getFeature());
+        motor.setType(motorDto.getType());
+        motor.setMinAge(motorDto.getMinAge());
+        motor.setMinDriving(motorDto.getMinDriving());
+        motor.setMinDur(Duration.ofMillis(motorDto.getMinDur()));
+        motor.setMaxDur(Duration.ofMillis(motorDto.getMaxDur()));
+
+        motorRepository.save(motor);
+        return motor;
+    }
+
+    @Override
+    public void delete(String motorId, String ownerId) {
+        Optional<Motor> motorOptional = motorRepository.findById(motorId);
+        if (motorOptional.isEmpty()) {
+            throw new MotorException("Motor is not exist");
+        } else if (!motorOptional.get().getOwnerId().equals(ownerId)) {
+            throw new AuthenticationFailException("Not motor owner");
+        }
+        motorRepository.deleteById(motorId);
     }
 
     @Override

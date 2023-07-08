@@ -46,6 +46,32 @@ public class MotorController {
         return new ResponseEntity<>(motorRes, HttpStatus.CREATED);
     }
 
+    @PatchMapping("/{id}")
+    public ResponseEntity<Object> editMotor(@RequestBody MotorDto motorDto, @PathVariable("id") String motorId,
+                                           @RequestHeader("token") String token) throws AuthenticationFailException {
+        try {
+            authenticationService.authenticate(token);
+            User user = authenticationService.getUser(token);
+            Motor motor = motorService.patch(motorDto, motorId, user.getId());
+            return new ResponseEntity<>(motor, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(new ApiResponse(false, e.getMessage()), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ApiResponse deleteMotor(@PathVariable("id") String motorId, @RequestHeader("token") String token)
+            throws AuthenticationFailException {
+        try {
+            authenticationService.authenticate(token);
+            User user = authenticationService.getUser(token);
+            motorService.delete(motorId, user.getId());
+            return new ApiResponse(true, "Delete successfully");
+        } catch (Exception e) {
+            return new ApiResponse(false, e.getMessage());
+        }
+    }
+
     @GetMapping("")
     public ResponseEntity<List<Motor>> getByRating(@RequestParam(name = "limit", defaultValue = "100") int limit) {
         List<Motor> motors = motorService.getTopRating(limit);
