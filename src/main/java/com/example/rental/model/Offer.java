@@ -12,6 +12,7 @@ public class Offer {
     @Id
     private String id;
     private String userId;
+    private String userName;
     private String vehicleId;
     private double price;
     private String sessionId;
@@ -41,6 +42,14 @@ public class Offer {
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getVehicleId() {

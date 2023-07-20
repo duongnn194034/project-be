@@ -11,6 +11,7 @@ import com.example.rental.model.Rate;
 import com.example.rental.model.User;
 import com.example.rental.repository.motor.MotorRepository;
 import com.example.rental.repository.motor.MotorRepositoryUtil;
+import com.example.rental.repository.offer.OfferRepository;
 import com.example.rental.repository.offer.OfferRepositoryUtil;
 import com.example.rental.repository.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,8 @@ public class MotorServiceImpl implements MotorService {
     MotorRepository motorRepository;
     @Autowired
     MotorRepositoryUtil motorRepositoryUtil;
+    @Autowired
+    OfferRepository offerRepository;
     @Autowired
     OfferRepositoryUtil offerRepositoryUtil;
     @Autowired
@@ -106,6 +109,7 @@ public class MotorServiceImpl implements MotorService {
         } else if (!motorOptional.get().getOwnerId().equals(ownerId)) {
             throw new AuthenticationFailException("Not motor owner");
         }
+        offerRepository.deleteAllByVehicleId(motorId);
         motorRepository.deleteById(motorId);
     }
 

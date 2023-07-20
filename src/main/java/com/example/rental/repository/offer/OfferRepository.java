@@ -12,4 +12,6 @@ public interface OfferRepository extends MongoRepository<Offer, String> {
     List<Offer> findAllByVehicleId(String vehicleId);
 
     List<Offer> findAllByUserId(String userId);
+
+    void deleteAllByVehicleId(String vehicleId);
 }

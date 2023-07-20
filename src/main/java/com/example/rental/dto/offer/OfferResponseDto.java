@@ -7,6 +7,7 @@ import java.util.Date;
 
 public class OfferResponseDto {
     private String id;
+    private String userName;
     private Vehicle vehicle;
     private Date startTime;
     private Date endTime;
@@ -30,6 +31,14 @@ public class OfferResponseDto {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public Vehicle getVehicle() {

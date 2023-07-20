@@ -100,6 +100,7 @@ public class OfferServiceImpl implements OfferService {
         }
         Offer offer = new Offer(motor.get().getId(),startDate, endDate);
         offer.setUserId(user.getId());
+        offer.setUserName(user.getFullName());
         offer.setSessionId(sessionId);
         offer.setPrice(offerDto.getPrice());
         offer.setStatus(Status.BOOKING);
@@ -169,9 +170,11 @@ public class OfferServiceImpl implements OfferService {
         List<Offer> offers = offerRepositoryUtil.findByVehiclesAndDateBetween(motorIds, new Date(0), new Date());
         List<OfferResponseDto> offerResponseDtos = new ArrayList<>();
         for (int i = 0; i < offers.size(); i++) {
-            offerResponseDtos.add(new OfferResponseDto(offers.get(i).getId(), motors.get(i),
+            OfferResponseDto offerResponseDto = new OfferResponseDto(offers.get(i).getId(), motors.get(i),
                     offers.get(i).getStartTime(), offers.get(i).getEndTime(), offers.get(i).getStatus(),
-                    offers.get(i).getPrice(), offers.get(i).getCreatedDate()));
+                    offers.get(i).getPrice(), offers.get(i).getCreatedDate());
+            offerResponseDto.setUserName(offers.get(i).getUserName());
+            offerResponseDtos.add(offerResponseDto);
         }
         return offerResponseDtos;
     }
