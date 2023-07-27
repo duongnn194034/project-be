@@ -26,7 +26,7 @@ public interface MotorService {
 
     void rateMotor(String id, User user, RateDto rateDto);
 
-    List<Motor> findByOwner(String id, int limit);
+    List<MotorResponseDto> findByOwner(User user, int limit);
 
-    List<RateResponseDto> getAllUserRating(String userId);
+    List<RateResponseDto> getAllUserRating(User user);
 }

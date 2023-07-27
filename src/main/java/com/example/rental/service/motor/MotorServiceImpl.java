@@ -140,18 +140,26 @@ public class MotorServiceImpl implements MotorService {
     }
 
     @Override
-    public List<Motor> findByOwner(String ownerId, int limit) {
+    public List<MotorResponseDto> findByOwner(User owner, int limit) {
+        List<Motor> motors;
         if (limit < 0) {
-            return motorRepository.findByOwnerId(ownerId);
+            motors = motorRepository.findByOwnerId(owner.getId());
         } else {
-            return motorRepository.findByOwnerId(ownerId, PageRequest.ofSize(limit));
+            motors = motorRepository.findByOwnerId(owner.getId(), PageRequest.ofSize(limit));
         }
 
+        List<MotorResponseDto> motorResponseDtos = new ArrayList<>();
+        for (Motor motor : motors) {
+            MotorResponseDto motorResponseDto = MotorResponseDto.getInstance(motor, owner);
+            motorResponseDto.setOfferNum(offerRepositoryUtil.getCountOfferByMotor(motor.getId()));
+            motorResponseDtos.add(motorResponseDto);
+        }
+        return motorResponseDtos;
     }
 
     @Override
-    public List<RateResponseDto> getAllUserRating(String userId) {
-        List<Motor> motors = findByOwner(userId, -1);
+    public List<RateResponseDto> getAllUserRating(User user) {
+        List<MotorResponseDto> motors = findByOwner(user, -1);
         List<RateResponseDto> result = new ArrayList<>();
         motors.forEach(motor -> {
             result.addAll(motor.getRatings().stream()

@@ -101,7 +101,11 @@ public class UserController {
 
     @GetMapping("/get/{id}/rating")
     public ResponseEntity<List<RateResponseDto>> getUserRating (@PathVariable("id") String userId) {
-        List<RateResponseDto> rates = motorService.getAllUserRating(userId);
+        User user = userService.getUserById(userId);
+        if (user == null) {
+            return new ResponseEntity<>(new ArrayList<>(), HttpStatus.BAD_REQUEST);
+        }
+        List<RateResponseDto> rates = motorService.getAllUserRating(user);
         if (rates.isEmpty()) {
             return new ResponseEntity<>(new ArrayList<>(), HttpStatus.NO_CONTENT);
         }

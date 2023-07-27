@@ -35,6 +35,8 @@ public class MotorResponseDto {
     private int minDriving;
     private long minDur;
     private long maxDur;
+    private int ratingTotal;
+    private long offerNum;
 
     public static MotorResponseDto getInstance(Vehicle vehicle, User owner) {
         MotorResponseDto motorResponseDto = new MotorResponseDto();
@@ -59,6 +61,7 @@ public class MotorResponseDto {
         motorResponseDto.setNote(vehicle.getNote());
         motorResponseDto.setRadius(vehicle.getRadius());
         motorResponseDto.setRatings(vehicle.getRatings());
+        motorResponseDto.setRatingTotal(vehicle.getRatingTotal());
         return motorResponseDto;
     }
 
@@ -228,5 +231,21 @@ public class MotorResponseDto {
 
     public void setMaxDur(long maxDur) {
         this.maxDur = maxDur;
+    }
+
+    public long getOfferNum() {
+        return offerNum;
+    }
+
+    public void setOfferNum(long offerNum) {
+        this.offerNum = offerNum;
+    }
+
+    public int getRatingTotal() {
+        return ratingTotal;
+    }
+
+    public void setRatingTotal(int ratingTotal) {
+        this.ratingTotal = ratingTotal;
     }
 }

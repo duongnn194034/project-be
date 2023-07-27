@@ -104,7 +104,7 @@ public class MotorController {
                                             @RequestParam(name = "limit", defaultValue = "-1") int limit) {
         try {
             User user = authenticationService.getUser(token);
-            List<Motor> motors = motorService.findByOwner(user.getId(), limit);
+            List<MotorResponseDto> motors = motorService.findByOwner(user, limit);
             if (motors.isEmpty()) {
                 return new ResponseEntity<>(motors, HttpStatus.NO_CONTENT);
             }
