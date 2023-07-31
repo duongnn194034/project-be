@@ -8,6 +8,7 @@ public class Feature implements Serializable {
     private boolean stolenInsurance;
     private boolean orderCanceling;
     private boolean fuelCost;
+    private boolean noDeposit;
     private boolean adjust;
     private List<String> others;
 
@@ -49,6 +50,14 @@ public class Feature implements Serializable {
 
     public void setAdjust(boolean adjust) {
         this.adjust = adjust;
+    }
+
+    public boolean isNoDeposit() {
+        return noDeposit;
+    }
+
+    public void setNoDeposit(boolean noDeposit) {
+        this.noDeposit = noDeposit;
     }
 
     public List<String> getOthers() {
