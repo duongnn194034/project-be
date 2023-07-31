@@ -8,6 +8,9 @@ public class UserUpdateDto {
     private String email;
     private String avatarUrl;
     private String biography;
+    private String fbUrl;
+    private String zaloUrl;
+    private String twitterUrl;
     private Role role;
 
     public UserUpdateDto(String fullname, String phoneNumber, String email, Role role) {
@@ -73,5 +76,29 @@ public class UserUpdateDto {
 
     public void setBiography(String biography) {
         this.biography = biography;
+    }
+
+    public String getFbUrl() {
+        return fbUrl;
+    }
+
+    public void setFbUrl(String fbUrl) {
+        this.fbUrl = fbUrl;
+    }
+
+    public String getZaloUrl() {
+        return zaloUrl;
+    }
+
+    public void setZaloUrl(String zaloUrl) {
+        this.zaloUrl = zaloUrl;
+    }
+
+    public String getTwitterUrl() {
+        return twitterUrl;
+    }
+
+    public void setTwitterUrl(String twitterUrl) {
+        this.twitterUrl = twitterUrl;
     }
 }

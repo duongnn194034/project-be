@@ -18,6 +18,9 @@ public class User {
     private String phoneNumber;
     private Role role;
     private String avatarUrl;
+    private String zaloUrl;
+    private String facebookUrl;
+    private String twitterUrl;
     private String biography;
     private boolean verified;
     private Address address;
@@ -154,5 +157,29 @@ public class User {
 
     public void setBank(Bank bank) {
         this.bank = bank;
+    }
+
+    public String getZaloUrl() {
+        return zaloUrl;
+    }
+
+    public void setZaloUrl(String zaloUrl) {
+        this.zaloUrl = zaloUrl;
+    }
+
+    public String getFacebookUrl() {
+        return facebookUrl;
+    }
+
+    public void setFacebookUrl(String facebookUrl) {
+        this.facebookUrl = facebookUrl;
+    }
+
+    public String getTwitterUrl() {
+        return twitterUrl;
+    }
+
+    public void setTwitterUrl(String twitterUrl) {
+        this.twitterUrl = twitterUrl;
     }
 }

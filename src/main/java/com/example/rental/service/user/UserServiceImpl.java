@@ -143,6 +143,9 @@ public class UserServiceImpl implements UserService {
             user.setAvatarUrl(userUpdateDto.getAvatarUrl() != null ? userUpdateDto.getAvatarUrl() : user.getAvatarUrl());
             user.setRole(userUpdateDto.getRole() != null ? userUpdateDto.getRole() : user.getRole());
             user.setBiography(userUpdateDto.getBiography() != null ? userUpdateDto.getBiography() : user.getBiography());
+            user.setFacebookUrl(userUpdateDto.getFbUrl() != null ? userUpdateDto.getFbUrl() : user.getFacebookUrl());
+            user.setTwitterUrl(userUpdateDto.getTwitterUrl() != null ? userUpdateDto.getTwitterUrl() : user.getTwitterUrl());
+            user.setZaloUrl(userUpdateDto.getZaloUrl() != null ? userUpdateDto.getZaloUrl() : user.getZaloUrl());
             userRepository.save(user);
             authenticationToken.setUser(user);
             authenticationService.saveConfirmationToken(authenticationToken);
