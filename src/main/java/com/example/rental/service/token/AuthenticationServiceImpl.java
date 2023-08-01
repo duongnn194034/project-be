@@ -1,5 +1,6 @@
 package com.example.rental.service.token;
 
+import com.example.rental.enums.Role;
 import com.example.rental.exception.AuthenticationFailException;
 import com.example.rental.model.AuthenticationToken;
 import com.example.rental.model.User;
@@ -44,5 +45,18 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         if (getUser(token) == null) {
             throw new AuthenticationFailException(AUTH_TOEKN_NOT_VALID);
         }
+    }
+
+    @Override
+    public void authenticateAdmin(String token) throws AuthenticationFailException {
+        if (token == null) {
+            throw new AuthenticationFailException(AUTH_TOEKN_NOT_PRESENT);
+        }
+        if (getUser(token) == null) {
+            throw new AuthenticationFailException(AUTH_TOEKN_NOT_VALID);
+        } else if (getUser(token).getRole() != Role.ADMIN) {
+            throw new AuthenticationFailException("Forbidden");
+        }
+
     }
 }

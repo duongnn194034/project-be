@@ -12,4 +12,6 @@ public interface AuthenticationService {
     User getUser(String token);
 
     void authenticate(String token) throws AuthenticationFailException;
+
+    void authenticateAdmin(String token) throws AuthenticationFailException;
 }

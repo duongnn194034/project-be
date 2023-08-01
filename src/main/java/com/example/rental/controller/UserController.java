@@ -35,7 +35,7 @@ public class UserController {
 
     @GetMapping("/all")
     public List<User> findAllUser(@RequestHeader("token") String token) throws AuthenticationFailException {
-        authenticationService.authenticate(token);
+        authenticationService.authenticateAdmin(token);
         return userService.findAll();
     }
 
