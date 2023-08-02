@@ -4,9 +4,8 @@ import com.example.rental.dto.rate.RateDto;
 import com.example.rental.dto.rate.RateResponseDto;
 import com.example.rental.dto.vehicle.MotorDto;
 import com.example.rental.dto.vehicle.MotorResponseDto;
-import com.example.rental.model.Motor;
-import com.example.rental.model.Rate;
-import com.example.rental.model.User;
+import com.example.rental.model.motor.Motor;
+import com.example.rental.model.user.User;
 import org.springframework.data.geo.GeoResults;
 
 import java.util.List;

@@ -4,7 +4,7 @@ import com.example.rental.common.ApiResponse;
 import com.example.rental.dto.ResponseDto;
 import com.example.rental.dto.user.*;
 import com.example.rental.exception.CustomException;
-import com.example.rental.model.*;
+import com.example.rental.model.user.*;
 
 import java.security.NoSuchAlgorithmException;
 import java.util.List;

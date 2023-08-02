@@ -1,6 +1,6 @@
 package com.example.rental.dto.rate;
 
-import com.example.rental.model.Rate;
+import com.example.rental.model.motor.Rate;
 
 import java.util.Date;
 

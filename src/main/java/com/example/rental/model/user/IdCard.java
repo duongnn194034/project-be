@@ -1,4 +1,4 @@
-package com.example.rental.model;
+package com.example.rental.model.user;
 
 import java.io.Serializable;
 import java.util.Date;

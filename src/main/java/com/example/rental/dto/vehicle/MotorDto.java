@@ -1,7 +1,7 @@
 package com.example.rental.dto.vehicle;
 
 import com.example.rental.enums.VehicleType;
-import com.example.rental.model.Feature;
+import com.example.rental.model.motor.Feature;
 
 import java.util.ArrayList;
 import java.util.List;

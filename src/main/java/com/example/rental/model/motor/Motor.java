@@ -1,4 +1,4 @@
-package com.example.rental.model;
+package com.example.rental.model.motor;
 
 import com.example.rental.dto.vehicle.MotorDto;
 import org.springframework.data.geo.Point;

@@ -1,6 +1,6 @@
 package com.example.rental.repository.user;
 
-import com.example.rental.model.User;
+import com.example.rental.model.user.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;

@@ -1,6 +1,6 @@
 package com.example.rental.repository.motor;
 
-import com.example.rental.model.Motor;
+import com.example.rental.model.motor.Motor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.geo.*;
 import org.springframework.data.mongodb.core.MongoTemplate;

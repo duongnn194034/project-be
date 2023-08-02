@@ -1,9 +1,9 @@
 package com.example.rental.repository.offer;
 
 import com.example.rental.exception.OfferException;
-import com.example.rental.model.Motor;
-import com.example.rental.model.Offer;
-import com.example.rental.model.Vehicle;
+import com.example.rental.model.motor.Motor;
+import com.example.rental.model.offer.Offer;
+import com.example.rental.model.motor.Vehicle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;

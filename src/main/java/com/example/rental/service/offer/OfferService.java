@@ -3,8 +3,8 @@ package com.example.rental.service.offer;
 import com.example.rental.dto.offer.OfferDto;
 import com.example.rental.dto.offer.OfferResponseDto;
 import com.example.rental.enums.Status;
-import com.example.rental.model.Offer;
-import com.example.rental.model.User;
+import com.example.rental.model.offer.Offer;
+import com.example.rental.model.user.User;
 import com.stripe.exception.StripeException;
 import com.stripe.model.checkout.Session;
 

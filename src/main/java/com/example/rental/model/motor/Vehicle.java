@@ -1,4 +1,4 @@
-package com.example.rental.model;
+package com.example.rental.model.motor;
 
 import com.example.rental.enums.VehicleType;
 import org.springframework.data.annotation.Id;

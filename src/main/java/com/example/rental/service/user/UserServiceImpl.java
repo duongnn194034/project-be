@@ -7,14 +7,12 @@ import com.example.rental.enums.Response;
 import com.example.rental.enums.Role;
 import com.example.rental.exception.AuthenticationFailException;
 import com.example.rental.exception.CustomException;
-import com.example.rental.model.*;
-import com.example.rental.repository.motor.MotorRepository;
+import com.example.rental.model.user.*;
 import com.example.rental.repository.user.UserRepository;
 import com.example.rental.service.token.AuthenticationServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import javax.xml.bind.DatatypeConverter;

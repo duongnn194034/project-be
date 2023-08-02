@@ -1,16 +1,14 @@
 package com.example.rental.controller;
 
 import com.example.rental.common.ApiResponse;
-import com.example.rental.dto.ResponseDto;
 import com.example.rental.dto.offer.OfferDto;
 import com.example.rental.dto.offer.OfferResponseDto;
 import com.example.rental.dto.offer.StatusDto;
 import com.example.rental.dto.offer.StripeResponse;
-import com.example.rental.enums.Status;
 import com.example.rental.exception.AuthenticationFailException;
 import com.example.rental.exception.OfferException;
-import com.example.rental.model.Offer;
-import com.example.rental.model.User;
+import com.example.rental.model.offer.Offer;
+import com.example.rental.model.user.User;
 import com.example.rental.service.token.AuthenticationService;
 import com.example.rental.service.offer.OfferService;
 import com.stripe.exception.StripeException;

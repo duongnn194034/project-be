@@ -1,6 +1,6 @@
 package com.example.rental.dto.offer;
 
-import com.example.rental.model.Vehicle;
+import com.example.rental.model.motor.Vehicle;
 import com.example.rental.enums.Status;
 
 import java.util.Date;

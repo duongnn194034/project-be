@@ -1,4 +1,4 @@
-package com.example.rental.model;
+package com.example.rental.model.motor;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 

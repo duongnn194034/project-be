@@ -1,6 +1,6 @@
 package com.example.rental.repository.offer;
 
-import com.example.rental.model.Offer;
+import com.example.rental.model.offer.Offer;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;

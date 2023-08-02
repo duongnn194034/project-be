@@ -1,8 +1,8 @@
 package com.example.rental.repository.token;
 
 
-import com.example.rental.model.AuthenticationToken;
-import com.example.rental.model.User;
+import com.example.rental.model.user.AuthenticationToken;
+import com.example.rental.model.user.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,4 +1,4 @@
-package com.example.rental.model;
+package com.example.rental.model.user;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 

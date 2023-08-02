@@ -7,7 +7,7 @@ import com.example.rental.dto.rate.RateResponseDto;
 import com.example.rental.dto.user.*;
 import com.example.rental.exception.AuthenticationFailException;
 import com.example.rental.exception.CustomException;
-import com.example.rental.model.*;
+import com.example.rental.model.user.*;
 import com.example.rental.service.motor.MotorService;
 import com.example.rental.service.token.AuthenticationService;
 import com.example.rental.service.user.UserService;

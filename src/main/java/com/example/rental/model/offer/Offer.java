@@ -1,4 +1,4 @@
-package com.example.rental.model;
+package com.example.rental.model.offer;
 
 import com.example.rental.enums.Status;
 import org.springframework.data.annotation.Id;

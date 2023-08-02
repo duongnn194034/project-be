@@ -1,4 +1,4 @@
-package com.example.rental.model;
+package com.example.rental.model.user;
 
 import com.example.rental.enums.Role;
 import com.fasterxml.jackson.annotation.JsonIgnore;
