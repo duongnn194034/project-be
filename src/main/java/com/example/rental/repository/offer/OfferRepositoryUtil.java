@@ -56,8 +56,8 @@ public class OfferRepositoryUtil {
             criteria.orOperator(Criteria.where("startTime").gte(startDate).lte(endDate),
                     Criteria.where("endTime").gte(startDate).lte(endDate));
             query.addCriteria(criteria);
-            List<Motor> motors = mongoTemplate.findDistinct(query, "vehicleId", Offer.class, Motor.class);
-            return motors.stream().map(Vehicle::getId).collect(Collectors.toList());
+            List<String> motorIds = mongoTemplate.findDistinct(query, "vehicleId", Offer.class, String.class);
+            return motorIds;
         } catch (Exception e) {
             throw new OfferException(e.getMessage());
         }
