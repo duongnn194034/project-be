@@ -10,6 +10,7 @@ import com.example.rental.model.motor.Motor;
 import com.example.rental.model.user.User;
 import com.example.rental.service.token.AuthenticationService;
 import com.example.rental.service.motor.MotorService;
+import com.example.rental.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.geo.GeoResults;
 import org.springframework.http.HttpStatus;
@@ -26,6 +27,8 @@ public class MotorController {
     MotorService motorService;
     @Autowired
     AuthenticationService authenticationService;
+    @Autowired
+    UserService userService;
 
     @GetMapping("/{id}")
     public ResponseEntity<MotorResponseDto> getMotor(@PathVariable("id") String id) {
@@ -100,7 +103,7 @@ public class MotorController {
     }
 
     @GetMapping("/list")
-    public ResponseEntity<Object> getByUser(@RequestHeader("token") String token,
+    public ResponseEntity<Object> getByToken(@RequestHeader("token") String token,
                                             @RequestParam(name = "limit", defaultValue = "-1") int limit) {
         try {
             User user = authenticationService.getUser(token);
@@ -114,4 +117,18 @@ public class MotorController {
         }
     }
 
+    @GetMapping("/list/{id}")
+    public ResponseEntity<Object> getByUser(@PathVariable("id") String userId,
+                                            @RequestParam(name = "limit", defaultValue = "-1") int limit) {
+        try {
+            User user = userService.getUserById(userId);
+            List<MotorResponseDto> motors = motorService.findByOwner(user, limit);
+            if (motors.isEmpty()) {
+                return new ResponseEntity<>(motors, HttpStatus.NO_CONTENT);
+            }
+            return new ResponseEntity<>(motors, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>("You must log in first.", HttpStatus.BAD_REQUEST);
+        }
+    }
 }
