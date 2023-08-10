@@ -1,5 +1,6 @@
 package com.example.rental.dto.offer;
 
+import com.example.rental.dto.user.MiniUserDto;
 import com.example.rental.model.motor.Vehicle;
 import com.example.rental.enums.Status;
 
@@ -8,12 +9,24 @@ import java.util.Date;
 public class OfferResponseDto {
     private String id;
     private String userName;
+
+    private MiniUserDto user;
     private Vehicle vehicle;
     private Date startTime;
     private Date endTime;
     private Status status;
     private double price;
     private Date createdDate;
+
+    public OfferResponseDto(String id, Date startTime, Date endTime, Status status, double price, Date createdDate) {
+        this.id = id;
+        this.vehicle = vehicle;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.price = price;
+        this.status = status;
+        this.createdDate = createdDate;
+    }
 
     public OfferResponseDto(String id, Vehicle vehicle, Date startTime, Date endTime, Status status, double price, Date createdDate) {
         this.id = id;
@@ -87,5 +100,13 @@ public class OfferResponseDto {
 
     public void setCreatedDate(Date createdDate) {
         this.createdDate = createdDate;
+    }
+
+    public MiniUserDto getUser() {
+        return user;
+    }
+
+    public void setUser(MiniUserDto user) {
+        this.user = user;
     }
 }

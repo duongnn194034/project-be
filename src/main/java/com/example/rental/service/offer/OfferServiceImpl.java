@@ -2,6 +2,7 @@ package com.example.rental.service.offer;
 
 import com.example.rental.dto.offer.OfferDto;
 import com.example.rental.dto.offer.OfferResponseDto;
+import com.example.rental.dto.user.MiniUserDto;
 import com.example.rental.enums.Status;
 import com.example.rental.exception.OfferException;
 import com.example.rental.model.motor.Motor;
@@ -11,6 +12,7 @@ import com.example.rental.model.motor.Vehicle;
 import com.example.rental.repository.motor.MotorRepository;
 import com.example.rental.repository.offer.OfferRepository;
 import com.example.rental.repository.offer.OfferRepositoryUtil;
+import com.example.rental.repository.user.UserRepository;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.checkout.Session;
@@ -32,6 +34,8 @@ public class OfferServiceImpl implements OfferService {
     OfferRepositoryUtil offerRepositoryUtil;
     @Autowired
     MotorRepository motorRepository;
+    @Autowired
+    UserRepository userRepository;
 
     @Value("${BASE_URL}")
     private String baseURL;
@@ -108,9 +112,22 @@ public class OfferServiceImpl implements OfferService {
     }
 
     @Override
-    public List<Offer> getOffer(String motorId) {
-        Optional<Motor> motor = motorRepository.findById(motorId);
-        return motor.map(value -> offerRepository.findAllByVehicleId(value.getId())).orElse(Collections.emptyList());
+    public List<OfferResponseDto> getOffer(String motorId) {
+        List<Offer> offerList = offerRepository.findAllByVehicleId(motorId);
+        List<OfferResponseDto> offerLists = new ArrayList<>();
+        for (Offer offer : offerList) {
+            Optional<User> owner = userRepository.findById(offer.getUserId());
+            if (owner.isEmpty()) {
+                continue;
+            }
+            OfferResponseDto offerResponseDto = new OfferResponseDto(offer.getId(), offer.getStartTime(),
+                    offer.getEndTime(), offer.getStatus(), offer.getPrice(), offer.getCreatedDate());
+            MiniUserDto userDto = new MiniUserDto(owner.get().getFullName(), owner.get().getEmail(),
+                    owner.get().getPhoneNumber(), owner.get().getAvatarUrl());
+            offerResponseDto.setUser(userDto);
+            offerLists.add(offerResponseDto);
+        }
+        return offerLists;
     }
 
     @Override

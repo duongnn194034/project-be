@@ -73,8 +73,8 @@ public class OfferController {
     }
 
     @GetMapping("/motor/{id}")
-    public ResponseEntity<List<Offer>> getOfferByMotor(@PathVariable("id") String id) throws OfferException {
-        List<Offer> offers = offerService.getOffer(id);
+    public ResponseEntity<List<OfferResponseDto>> getOfferByMotor(@PathVariable("id") String id) throws OfferException {
+        List<OfferResponseDto> offers = offerService.getOffer(id);
         if (offers.isEmpty()) {
             return new ResponseEntity<>(new ArrayList<>(), HttpStatus.NO_CONTENT);
         }

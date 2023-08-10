@@ -13,7 +13,7 @@ import java.util.List;
 public interface OfferService {
 
     Offer save(User user, OfferDto offerDto, String sessionId);
-    List<Offer> getOffer(String motorId);
+    List<OfferResponseDto> getOffer(String motorId);
     OfferResponseDto changeOfferStatus(String offerId, String userId, Status status);
     OfferResponseDto getOfferById(String id, String userId);
 
