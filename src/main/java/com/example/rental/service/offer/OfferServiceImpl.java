@@ -135,15 +135,15 @@ public class OfferServiceImpl implements OfferService {
         Optional<Offer> offer = offerRepository.findById(offerId);
         if (offer.isEmpty()) {
             throw new OfferException("OfferId is not exist");
-        } else if (!offer.get().getUserId().equals(userId)) {
-            throw new OfferException("Not user offer");
         }
-        offer.get().setStatus(status);
-        offerRepository.save(offer.get());
         Optional<Motor> motor = motorRepository.findById(offer.get().getVehicleId());
         if (motor.isEmpty()) {
             throw new RuntimeException("Motor does not exist.");
+        }  else if (!offer.get().getUserId().equals(userId) && !userId.equals(motor.get().getOwnerId())) {
+            throw new OfferException("Unauthorized User");
         }
+        offer.get().setStatus(status);
+        offerRepository.save(offer.get());
         return new OfferResponseDto(offer.get().getId(), motor.get(), offer.get().getStartTime(), offer.get().getEndTime(),
                 offer.get().getStatus(), offer.get().getPrice(), offer.get().getCreatedDate());
     }

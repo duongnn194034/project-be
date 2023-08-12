@@ -8,6 +8,9 @@ public class IdCard implements Serializable {
     private String number;
     private Date issuedOn;
     private String issuedWhere;
+    private String front;
+    private String back;
+    private String selfie;
 
     public String getName() {
         return name;
@@ -39,5 +42,29 @@ public class IdCard implements Serializable {
 
     public void setIssuedWhere(String issuedWhere) {
         this.issuedWhere = issuedWhere;
+    }
+
+    public String getFront() {
+        return front;
+    }
+
+    public void setFront(String front) {
+        this.front = front;
+    }
+
+    public String getBack() {
+        return back;
+    }
+
+    public void setBack(String back) {
+        this.back = back;
+    }
+
+    public String getSelfie() {
+        return selfie;
+    }
+
+    public void setSelfie(String selfie) {
+        this.selfie = selfie;
     }
 }
