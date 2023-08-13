@@ -57,6 +57,10 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         } else if (getUser(token).getRole() != Role.ADMIN) {
             throw new AuthenticationFailException("Forbidden");
         }
+    }
 
+    @Override
+    public void deleteToken(User user) throws AuthenticationFailException {
+        repository.deleteByUser(user);
     }
 }

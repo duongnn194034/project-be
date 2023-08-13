@@ -9,6 +9,7 @@ import com.example.rental.exception.AuthenticationFailException;
 import com.example.rental.exception.CustomException;
 import com.example.rental.model.user.*;
 import com.example.rental.repository.user.UserRepository;
+import com.example.rental.repository.user.UserRepositoryUtil;
 import com.example.rental.service.token.AuthenticationServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,6 +33,8 @@ public class UserServiceImpl implements UserService {
     @Autowired
     UserRepository userRepository;
     @Autowired
+    UserRepositoryUtil userRepositoryUtil;
+    @Autowired
     AuthenticationServiceImpl authenticationService;
 
     public Optional<User> findByEmail(String email) {
@@ -51,6 +54,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> findAll() {
         return userRepository.findAll();
+    }
+
+    @Override
+    public List<User> findUserToVerify() {
+        return userRepositoryUtil.getUserToVerify();
     }
 
     public String hashPassword(String password) throws NoSuchAlgorithmException {
@@ -206,6 +214,74 @@ public class UserServiceImpl implements UserService {
             user.setIdCard(idCard);
             userRepository.save(user);
             authenticationToken.setUser(user);
+            authenticationService.saveConfirmationToken(authenticationToken);
+            return new ApiResponse(true, UPDATE_MESSAGE);
+        } catch (Exception e) {
+            return new ApiResponse(false, e.getMessage());
+        }
+    }
+
+    @Override
+    public ApiResponse addNotification(String id, String notify) {
+        try {
+            Optional<User> user = userRepository.findById(id);
+            if (user.isEmpty()) {
+                throw new CustomException("User is not exist.");
+            }
+            AuthenticationToken authenticationToken = authenticationService.getToken(user.get());
+            Notification notification = user.get().getNotification();
+            if (notification == null) {
+                notification = new Notification();
+            }
+            notification.addNotify(notify);
+            notification.addNewNotify();
+            user.get().setNotification(notification);
+            userRepository.save(user.get());
+            authenticationToken.setUser(user.get());
+            authenticationService.saveConfirmationToken(authenticationToken);
+            return new ApiResponse(true, UPDATE_MESSAGE);
+        } catch (Exception e) {
+            return new ApiResponse(false, e.getMessage());
+        }
+    }
+
+    @Override
+    public ApiResponse promote(String id, Role role) {
+        try {
+            Optional<User> user = userRepository.findById(id);
+            if (user.isEmpty()) {
+                throw new CustomException("User is not exist.");
+            }
+            AuthenticationToken authenticationToken = authenticationService.getToken(user.get());
+            user.get().setRole(role);
+            userRepository.save(user.get());
+            authenticationToken.setUser(user.get());
+            authenticationService.saveConfirmationToken(authenticationToken);
+            return new ApiResponse(true, UPDATE_MESSAGE);
+        } catch (Exception e) {
+            return new ApiResponse(false, e.getMessage());
+        }
+    }
+
+    @Override
+    public ApiResponse deleteUser(String id) {
+        User user = getUserById(id);
+        userRepository.deleteById(id);
+        authenticationService.deleteToken(user);
+        return new ApiResponse(true, "Deleted.");
+    }
+
+    @Override
+    public ApiResponse verifyUser(String id) {
+        try {
+            Optional<User> user = userRepository.findById(id);
+            if (user.isEmpty()) {
+                throw new CustomException("User is not exist.");
+            }
+            AuthenticationToken authenticationToken = authenticationService.getToken(user.get());
+            user.get().setVerified(true);
+            userRepository.save(user.get());
+            authenticationToken.setUser(user.get());
             authenticationService.saveConfirmationToken(authenticationToken);
             return new ApiResponse(true, UPDATE_MESSAGE);
         } catch (Exception e) {

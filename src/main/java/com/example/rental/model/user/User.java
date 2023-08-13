@@ -29,6 +29,8 @@ public class User {
     private Bank bank;
     private Date createdAt;
 
+    private Notification notification;
+
     public User() {
         this.createdAt = new Date(System.currentTimeMillis());
     }
@@ -157,6 +159,14 @@ public class User {
 
     public void setBank(Bank bank) {
         this.bank = bank;
+    }
+
+    public Notification getNotification() {
+        return notification;
+    }
+
+    public void setNotification(Notification notification) {
+        this.notification = notification;
     }
 
     public String getZaloUrl() {
