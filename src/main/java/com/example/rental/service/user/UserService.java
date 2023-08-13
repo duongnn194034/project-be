@@ -38,5 +38,5 @@ public interface UserService {
 
     ApiResponse deleteUser(String id);
 
-    ApiResponse verifyUser(String id);
+    ApiResponse verifyUser(String id, IdCard idCard);
 }

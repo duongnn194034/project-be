@@ -21,6 +21,7 @@ public class MotorResponseDto {
     protected String engineSize;
     protected String fuel;
     protected double price;
+    protected double deposit;
     protected String licensePlate;
     protected List<Rate> ratings = new ArrayList<>();
     protected Point location;
@@ -50,6 +51,7 @@ public class MotorResponseDto {
         motorResponseDto.setModel(vehicle.getModel());
         motorResponseDto.setProduction(vehicle.getProduction());
         motorResponseDto.setPrice(vehicle.getPrice());
+        motorResponseDto.setDeposit(vehicle.getDeposit());
         motorResponseDto.setMinAge(vehicle.getMinAge());
         motorResponseDto.setMinDriving(vehicle.getMinDriving());
         motorResponseDto.setMinDur(vehicle.toMinDur());
@@ -244,5 +246,13 @@ public class MotorResponseDto {
 
     public void setRatingTotal(int ratingTotal) {
         this.ratingTotal = ratingTotal;
+    }
+
+    public double getDeposit() {
+        return deposit;
+    }
+
+    public void setDeposit(double deposit) {
+        this.deposit = deposit;
     }
 }

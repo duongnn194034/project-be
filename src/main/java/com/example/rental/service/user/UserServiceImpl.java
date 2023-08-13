@@ -213,6 +213,7 @@ public class UserServiceImpl implements UserService {
             User user = authenticationService.getUser(token);
             AuthenticationToken authenticationToken = authenticationService.getToken(user);
             user.setIdCard(idCard);
+            user.setVerified(false);
             userRepository.save(user);
             authenticationToken.setUser(user);
             authenticationService.saveConfirmationToken(authenticationToken);
@@ -273,7 +274,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ApiResponse verifyUser(String id) {
+    public ApiResponse verifyUser(String id, IdCard idCard) {
         try {
             Optional<User> user = userRepository.findById(id);
             if (user.isEmpty()) {
@@ -281,6 +282,10 @@ public class UserServiceImpl implements UserService {
             }
             AuthenticationToken authenticationToken = authenticationService.getToken(user.get());
             user.get().setVerified(true);
+            user.get().getIdCard().setName(idCard.getName());
+            user.get().getIdCard().setNumber(idCard.getNumber());
+            user.get().getIdCard().setIssuedOn(idCard.getIssuedOn());
+            user.get().getIdCard().setIssuedWhere(idCard.getIssuedWhere());
             userRepository.save(user.get());
             authenticationToken.setUser(user.get());
             authenticationService.saveConfirmationToken(authenticationToken);

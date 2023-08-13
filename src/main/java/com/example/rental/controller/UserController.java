@@ -144,9 +144,10 @@ public class UserController {
 
     @PatchMapping("/admin/verify")
     public ApiResponse verify(@RequestParam("user") String userId,
-                              @RequestHeader("token") String token) throws AuthenticationFailException {
+                              @RequestHeader("token") String token,
+                              @RequestBody IdCard idCard) throws AuthenticationFailException {
         authenticationService.authenticateAdmin(token);
-        return userService.verifyUser(userId);
+        return userService.verifyUser(userId, idCard);
     }
 
     @DeleteMapping("/admin/delete")
