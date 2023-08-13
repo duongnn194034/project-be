@@ -135,6 +135,13 @@ public class UserController {
         return userService.promote(userId, Role.ADMIN);
     }
 
+    @PatchMapping("/admin/demote")
+    public ApiResponse demote(@RequestParam("user") String userId,
+                               @RequestHeader("token") String token) throws AuthenticationFailException {
+        authenticationService.authenticateAdmin(token);
+        return userService.promote(userId, Role.USER);
+    }
+
     @PatchMapping("/admin/verify")
     public ApiResponse verify(@RequestParam("user") String userId,
                               @RequestHeader("token") String token) throws AuthenticationFailException {

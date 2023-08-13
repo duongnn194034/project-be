@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Notification implements Serializable {
     private int newNotify = 0;
-    private final List<String> notifyList = new ArrayList<>();
+    private List<String> notifyList = new ArrayList<>();
 
     public int getNewNotify() {
         return newNotify;
@@ -30,5 +30,13 @@ public class Notification implements Serializable {
 
     public int getSize() {
         return notifyList.size();
+    }
+
+    public List<String> getNotifyList() {
+        return notifyList;
+    }
+
+    public void setNotifyList(List<String> notifyList) {
+        this.notifyList = notifyList;
     }
 }
