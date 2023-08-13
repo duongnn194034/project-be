@@ -5,7 +5,8 @@ public enum Status {
     CANCELED("canceled"),
     OUTDATED("outdated"),
     RETURNED("returned"),
-    COMPLETED("completed")
+    COMPLETED("completed"),
+    PAID("paid")
     ;
 
     Status(String name) {

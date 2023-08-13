@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Repository
@@ -38,10 +39,15 @@ public class OfferRepositoryUtil {
         try {
             Query query = new Query();
             Criteria criteria = new Criteria();
+            Criteria statusCriteria = new Criteria();
             Criteria dateCriteria = new Criteria();
-            dateCriteria.orOperator(Criteria.where("startTime").gte(startDate).lte(endDate),
+            statusCriteria.andOperator(Criteria.where("status").is("COMPLETED"),
+                    Criteria.where("endTime").gte(new Date(System.currentTimeMillis() - 7 * 24 * 3600 * 1000)));
+            dateCriteria.andOperator(Criteria.where("startTime").gte(startDate).lte(endDate),
                     Criteria.where("endTime").gte(startDate).lte(endDate));
-            criteria.andOperator(Criteria.where("vehicleId").in(vehicleIds), dateCriteria);
+            criteria.andOperator(Criteria.where("vehicleId").in(vehicleIds),
+                    statusCriteria,
+                    dateCriteria);
             query.addCriteria(criteria);
             return this.mongoTemplate.find(query, Offer.class);
         } catch (Exception e) {
@@ -58,6 +64,19 @@ public class OfferRepositoryUtil {
             query.addCriteria(criteria);
             List<String> motorIds = mongoTemplate.findDistinct(query, "vehicleId", Offer.class, String.class);
             return motorIds;
+        } catch (Exception e) {
+            throw new OfferException(e.getMessage());
+        }
+    }
+
+    public List<Offer> findOffersByDateBetween(Date startDate, Date endDate) throws OfferException {
+        try {
+            Query query = new Query();
+            Criteria criteria = new Criteria();
+            criteria.orOperator(Criteria.where("startTime").gte(startDate).lte(endDate),
+                    Criteria.where("endTime").gte(startDate).lte(endDate));
+            query.addCriteria(criteria);
+            return mongoTemplate.find(query, Offer.class);
         } catch (Exception e) {
             throw new OfferException(e.getMessage());
         }

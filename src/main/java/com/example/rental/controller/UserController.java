@@ -36,10 +36,10 @@ public class UserController {
 
     @GetMapping("/all")
     public List<User> findAllUser(@RequestHeader("token") String token,
-                                  @RequestParam(name = "query", required = false, defaultValue = "") String query) throws AuthenticationFailException {
+                                  @RequestParam(name = "cost", required = false, defaultValue = "") String query) throws AuthenticationFailException {
         authenticationService.authenticateAdmin(token);
         switch (query) {
-            case "verify":
+            case "price":
                 return userService.findUserToVerify();
             default:
                 return userService.findAll();
