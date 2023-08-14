@@ -109,4 +109,13 @@ public class OfferResponseDto {
     public void setUser(MiniUserDto user) {
         this.user = user;
     }
+
+    public double calcIncome() {
+        double income = this.price;
+        long delta = System.currentTimeMillis() - this.endTime.getTime();
+        if (delta > 6 * 3600 * 1000 && this.status != Status.COMPLETED) {
+            income += Math.floor(delta / 3600000) * vehicle.getPrice() * 1.5;
+        }
+        return income;
+    }
 }

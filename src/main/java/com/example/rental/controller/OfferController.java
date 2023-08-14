@@ -5,6 +5,7 @@ import com.example.rental.dto.offer.OfferDto;
 import com.example.rental.dto.offer.OfferResponseDto;
 import com.example.rental.dto.offer.StatusDto;
 import com.example.rental.dto.offer.StripeResponse;
+import com.example.rental.dto.user.UserPriceDto;
 import com.example.rental.exception.AuthenticationFailException;
 import com.example.rental.exception.OfferException;
 import com.example.rental.model.offer.Offer;
@@ -92,11 +93,10 @@ public class OfferController {
         return new ResponseEntity<>(offers, HttpStatus.OK);
     }
 
-    @GetMapping("/listRev")
-    public ResponseEntity<List<OfferResponseDto>> getListVehicleOffer(@RequestHeader("token") String token) throws AuthenticationFailException {
-        authenticationService.authenticate(token);
-        User user = authenticationService.getUser(token);
-        List<OfferResponseDto> offers = offerService.getOfferVehicleByUserId(user.getId());
+    @GetMapping("/listPrice")
+    public ResponseEntity<List<UserPriceDto>> getListVehicleOffer(@RequestHeader("token") String token) throws AuthenticationFailException {
+        authenticationService.authenticateAdmin(token);
+        List<UserPriceDto> offers = offerService.statistic();
         if (offers.isEmpty()) {
             return new ResponseEntity<>(new ArrayList<>(), HttpStatus.NO_CONTENT);
         }

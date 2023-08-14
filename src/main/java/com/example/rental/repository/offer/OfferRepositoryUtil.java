@@ -35,7 +35,7 @@ public class OfferRepositoryUtil {
         }
     }
 
-    public List<Offer> findByVehiclesAndDateBetween(List<String> vehicleIds, Date startDate, Date endDate) throws OfferException {
+    public List<Offer> findByVehiclesAndDateBetween(List<String> vehicleIds) throws OfferException {
         try {
             Query query = new Query();
             Criteria criteria = new Criteria();
@@ -43,8 +43,6 @@ public class OfferRepositoryUtil {
             Criteria dateCriteria = new Criteria();
             statusCriteria.andOperator(Criteria.where("status").is("COMPLETED"),
                     Criteria.where("endTime").gte(new Date(System.currentTimeMillis() - 7 * 24 * 3600 * 1000)));
-            dateCriteria.andOperator(Criteria.where("startTime").gte(startDate).lte(endDate),
-                    Criteria.where("endTime").gte(startDate).lte(endDate));
             criteria.andOperator(Criteria.where("vehicleId").in(vehicleIds),
                     statusCriteria,
                     dateCriteria);

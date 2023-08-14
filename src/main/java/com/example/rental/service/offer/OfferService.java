@@ -2,6 +2,7 @@ package com.example.rental.service.offer;
 
 import com.example.rental.dto.offer.OfferDto;
 import com.example.rental.dto.offer.OfferResponseDto;
+import com.example.rental.dto.user.UserPriceDto;
 import com.example.rental.enums.Status;
 import com.example.rental.model.offer.Offer;
 import com.example.rental.model.user.User;
@@ -32,4 +33,6 @@ public interface OfferService {
     List<OfferResponseDto> getOfferVehicleByUserId(String userId);
 
     Session createSession(OfferDto offerDto) throws StripeException;
+
+    List<UserPriceDto> statistic();
 }

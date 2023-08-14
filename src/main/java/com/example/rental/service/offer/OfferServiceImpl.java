@@ -1,8 +1,10 @@
 package com.example.rental.service.offer;
 
+import com.example.rental.common.PriceComparator;
 import com.example.rental.dto.offer.OfferDto;
 import com.example.rental.dto.offer.OfferResponseDto;
 import com.example.rental.dto.user.MiniUserDto;
+import com.example.rental.dto.user.UserPriceDto;
 import com.example.rental.enums.Status;
 import com.example.rental.exception.OfferException;
 import com.example.rental.model.motor.Motor;
@@ -184,7 +186,7 @@ public class OfferServiceImpl implements OfferService {
     public List<OfferResponseDto> getOfferVehicleByUserId(String userId) {
         List<Motor> motors = motorRepository.findByOwnerId(userId);
         List<String> motorIds = motors.stream().map(Vehicle::getId).collect(Collectors.toList());
-        List<Offer> offers = offerRepositoryUtil.findByVehiclesAndDateBetween(motorIds, new Date(0), new Date());
+        List<Offer> offers = offerRepositoryUtil.findByVehiclesAndDateBetween(motorIds);
         List<OfferResponseDto> offerResponseDtos = new ArrayList<>();
         for (int i = 0; i < offers.size(); i++) {
             OfferResponseDto offerResponseDto = new OfferResponseDto(offers.get(i).getId(), motors.get(i),
@@ -194,5 +196,30 @@ public class OfferServiceImpl implements OfferService {
             offerResponseDtos.add(offerResponseDto);
         }
         return offerResponseDtos;
+    }
+
+    @Override
+    public List<UserPriceDto> statistic() {
+        List<User> users = userRepository.findAll();
+        List<UserPriceDto> list = new ArrayList<>();
+        for (User user : users) {
+            List<OfferResponseDto> dtos = getOfferVehicleByUserId(user.getId());
+            int num = dtos.size();
+            double income = dtos.stream().mapToDouble(OfferResponseDto::calcIncome).sum();
+            UserPriceDto userPriceDto = new UserPriceDto();
+            userPriceDto.setUserId(user.getId());
+            userPriceDto.setFullName(user.getFullName());
+            userPriceDto.setEmail(user.getEmail());
+            userPriceDto.setPhoneNumber(user.getPhoneNumber());
+            userPriceDto.setIncome(income);
+            userPriceDto.setOfferNum(num);
+            if (user.getBank() != null) {
+                userPriceDto.setBank(user.getBank().getBankName());
+                userPriceDto.setBankNumber(user.getBank().getAccountNumber());
+            }
+            list.add(userPriceDto);
+        }
+        list.sort(new PriceComparator());
+        return list;
     }
 }
